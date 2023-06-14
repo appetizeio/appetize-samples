@@ -4,7 +4,7 @@ Welcome to the [Appetize](https://www.appetize.io) Sample Collection!
 
 This repository contains a diverse range of samples that demonstrate various use-cases for integrating Appetize into your workflow. Each sample includes an interactive demo and a brief description.
 
-> **Note** 
+> **Note**  
 > This collection is a work in progress and will continue to grow as we add more samples. Stay tuned for future updates!
 
 ## :rocket: Samples
