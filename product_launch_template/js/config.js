@@ -9,7 +9,7 @@ const config = {
         {
             name: "Product 1",
             ios: {
-                publicKey: "demo",
+                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
                 device: "iphone14pro",
             },
             android: {
@@ -21,7 +21,7 @@ const config = {
         {
             name: "Product 2",
             ios: {
-                publicKey: "demo",
+                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
                 device: "iphone14",
             }
         },
