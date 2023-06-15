@@ -7,7 +7,7 @@ const config = {
     // Start of product configuration
     products: [
         {
-            name: "Product 1",
+            name: "Wiki (Explore)",
             ios: {
                 publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
                 device: "iphone14pro",
@@ -15,18 +15,28 @@ const config = {
             android: {
                 publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
                 device: "pixel6",
-                customActions: product1AndroidCustomActions
             }
         },
         {
-            name: "Product 2",
+            name: "Wiki (Places)",
             ios: {
                 publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
-                device: "iphone14",
+                device: "iphone14pro",
+                customActions: wikiPlacesIosCustomActions
             }
         },
         {
-            name: "Product 3",
+            name: "Wiki (Search)",
+            ios: {
+                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                device: "iphone14pro",
+                customActions: wikiSearchIosCustomActions
+            },
+            android: {
+                publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+                device: "pixel6",
+                customActions: wikiSearchAndroidCustomActions
+            }
         },
         {
             name: "Product 4",
@@ -38,20 +48,71 @@ const config = {
 // Start of Custom Actions
 
 /**
- * Runs custom actions for Product 1 on Android.
+ * Runs custom actions for Wikipedia on iOS to navigate to the places tab.
  * @param client The client to run the custom actions on.
  * @param session The session to run the custom actions on.
  * @returns {Promise<void>} A promise that resolves when the custom actions are complete.
  */
-async function product1AndroidCustomActions(client, session) {
-    console.log('Product 1 custom action called');
-    /* await session.tap({
+async function wikiPlacesIosCustomActions(client, session) {
+    console.log('Wiki Places iOS custom action called');
+    await session.tap({
             element: {
                 attributes: {
-                    "resource-id": "id_username"
+                    "accessibilityLabel": "Places"
                 }
             }
         }
     );
-    */
+    await session.tap({
+            element: {
+                attributes: {
+                    "accessibilityLabel": "Enable location"
+                }
+            }
+        }
+    );
+    await session.tap({
+            element: {
+                attributes: {
+                    "accessibilityLabel": "Allow Once"
+                }
+            }
+        }
+    );
+}
+
+/**
+ * Runs custom actions for Wikipedia on iOS to navigate to the search tab.
+ * @param client The client to run the custom actions on.
+ * @param session The session to run the custom actions on.
+ * @returns {Promise<void>} A promise that resolves when the custom actions are complete.
+ */
+async function wikiSearchIosCustomActions(client, session) {
+    console.log('Wiki Search iOS custom action called');
+    await session.tap({
+            element: {
+                attributes: {
+                    "accessibilityLabel": "Search"
+                }
+            }
+        }
+    );
+}
+
+/**
+ * Runs custom actions for Wikipedia on Android to navigate to the search tab.
+ * @param client The client to run the custom actions on.
+ * @param session The session to run the custom actions on.
+ * @returns {Promise<void>} A promise that resolves when the custom actions are complete.
+ */
+async function wikiSearchAndroidCustomActions(client, session) {
+    console.log('Wiki Search Android custom action called');
+    await session.tap({
+            element: {
+                attributes: {
+                    "content-desc": "Search"
+                }
+            }
+        }
+    );
 }
