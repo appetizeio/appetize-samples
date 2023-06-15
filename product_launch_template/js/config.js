@@ -21,7 +21,7 @@ const config = {
             name: "Wiki (Places)",
             ios: {
                 publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
-                device: "iphone14pro",
+                device: "iphone14",
                 customActions: wikiPlacesIosCustomActions
             }
         },
@@ -68,6 +68,9 @@ async function wikiPlacesIosCustomActions(client, session) {
                 attributes: {
                     "accessibilityLabel": "Enable location"
                 }
+            },
+            options: {
+                matchIndex: 0
             }
         }
     );
