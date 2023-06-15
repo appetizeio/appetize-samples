@@ -6,8 +6,8 @@ const platformButtons = document.querySelectorAll('.androidButton, .iosButton');
 const appActionsContainer = document.getElementById('appActions');
 
 let selection = {
-    platform: "android",
-    product: config.products[0],
+    platform: null,
+    product: null,
     app: function () {
         return this.product[this.platform];
     }
@@ -76,7 +76,7 @@ async function initClient() {
 // Event Handlers
 
 /**
- * Selects the preferred platform.
+ * Selects the preferred platform if it hasn't been selected already and is available.
  * @param button The platform button that was clicked.
  * @param shouldUpdateSession Whether or not to update the session after selecting the platform.
  */
@@ -86,8 +86,15 @@ async function selectPlatform(button, shouldUpdateSession = true) {
         selection.platform = null;
         return;
     }
-    console.log(`selecting platform ${button.text}`);
-    selection.platform = button.text.toLowerCase().trim();
+
+    const preferredPlatform = button.text.toLowerCase().trim();
+    if(selection.platform === preferredPlatform) {
+        console.log(`Already selected ${preferredPlatform}`);
+        return;
+    }
+
+    console.log(`selecting platform ${preferredPlatform}`);
+    selection.platform = preferredPlatform;
     toggleButtonActive(platformButtons, button);
     if (shouldUpdateSession) {
         await updateSession();
@@ -95,12 +102,17 @@ async function selectPlatform(button, shouldUpdateSession = true) {
 }
 
 /**
- * Selects the app at the given index.
+ * Selects the app at the given index if it hasn't already been selected.
  * @param index The index of the app to select.
  * @param shouldUpdateSession Whether or not to update the session after selecting the app.
  */
 async function selectApp(index, shouldUpdateSession = true) {
     const product = config.products[index];
+    if(selection.product === product) {
+        console.log(`Already selected ${product.name}`)
+        return;
+    }
+
     selection.product = product;
     console.log(`Selecting ${product.name}`);
 
@@ -128,10 +140,6 @@ async function updateSession() {
 
     const newUrl = `https://appetize.io/embed/${selectedApp.publicKey}?device=${selectedApp.device}&toast=${config.toast}&scale=auto&centered=both&autoplay=${config.autoPlay}`;
 
-    if (iFrame.src === newUrl) {
-        return;
-    }
-
     console.log(`Updating session with ${selectedApp.publicKey}`);
     iFrame.src = newUrl;
 
@@ -151,7 +159,7 @@ async function checkPlatformAvailability() {
     platformButtons.forEach((button) => {
         const platformName = button.text.toLowerCase().trim();
         const isDisabled = !(platformName in selectedProduct);
-        console.log(`Checking if ${platformName} is available for ${selectedProduct.publicKey}: ${!isDisabled}`);
+        console.log(`Checking if ${platformName} is available for ${selectedProduct.name}: ${!isDisabled}`);
         setButtonDisabled(button, isDisabled);
     });
 
