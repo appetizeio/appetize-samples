@@ -68,11 +68,8 @@ async function wikiPlacesIosCustomActions(client, session) {
                 attributes: {
                     "accessibilityLabel": "Enable location"
                 }
-            },
-            options: {
-                matchIndex: 0
             }
-        }
+        }, {matchIndex: 0}
     );
     await session.tap({
             element: {
