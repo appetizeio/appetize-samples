@@ -54,17 +54,29 @@ function updatePrimaryForegroundColor() {
  */
 function updateLogo() {
     console.log("Updating logo")
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        const logoValue = event.target.result;
-        updateSampleLinksQueryStrings((url) => {
-            updateQueryStringParameter(url, "logo", logoValue);
-        });
-    };
-
-    // Read the image file as a data URL
-    reader.readAsDataURL(logoInput.files[0]);
+    const logoValue = logoInput.value;
+    if(!isValidURL(logoValue)) {
+        console.log("Invalid URL");
+        return;
+    }
+    updateSampleLinksQueryStrings((url) => {
+        updateQueryStringParameter(url, "logo", logoValue);
+    });
 }
+
+/**
+ * Checks if a URL is valid.
+ * @param url
+ * @returns {boolean}
+ */
+const isValidURL = (url) => {
+    try {
+        new URL(url);
+        return true;
+    } catch (error) {
+        return false;
+    }
+};
 
 /**
  * Updates the query strings in the sample links.
