@@ -8,8 +8,9 @@ const updateLogoFromQueryParam = () => {
     const queryParams = new URLSearchParams(window.location.search);
     const logoValue = queryParams.get('logo');
     if (logoValue && frontpageLogo) {
-        console.log(`Updating logo`);
+        console.log(`Updating logo to ${logoValue}`);
         frontpageLogo.src = logoValue;
+        frontpageLogo.srcset = logoValue;
     }
 };
 
