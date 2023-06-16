@@ -6,6 +6,7 @@
     --bs-primary: #FAEB73;
     --bs-primary-dark: #e1d367;
     --bs-foreground: #090909;
+    --bs-secondary: #65E5A6;
     --bs-outline-background: #FFFFFF;
     --bs-nav-foreground: #FFFFFF;
     --bs-nav-background: #393939;
@@ -145,6 +146,25 @@ h2, .h2 {
 #appActions > * {
     margin-left: 1.25rem;
     margin-bottom: 1em;
+}
+
+.accordion-header {
+    margin-top: 0;
+}
+
+.accordion-button:not(.collapsed) {
+    color: var(--bs-foreground);
+    background-color: var(--bs-secondary);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+}
+
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e")!important;
+}
+
+.accordion-button {
+    font-weight: 500;
+    font-family: var(--bs-body-font-family);
 }
 
 @font-face {

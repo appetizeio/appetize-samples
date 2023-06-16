@@ -40,6 +40,40 @@
 </nav>
 <section class="py-10 py-lg-20 bg-bg-3 text-center text-md-start">
     <div class="container">
+
+        <div class="accordion mt-3" id="accordionStyling">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="setStyleHeader">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Personalize your Sample Experience
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="setStyleHeader" data-bs-parent="#accordionStyling">
+                    <div class="accordion-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="logoUpload" class="form-label">Brand Logo</label>
+                                <input type="file" class="form-control" id="logoUpload">
+                                <small class="form-text text-muted" style="height: 400px">Hint: Upload a logo image with a height of ~400 pixels and no padding.</small>
+                            </div>
+                            <div class="mb-3">
+                                <label for="primaryColor" class="form-label">Primary Color</label>
+                                <input type="color" class="form-control" id="primaryColor" pattern="#[A-Fa-f0-9]{6}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
+                                <input type="color" class="form-control" id="primaryColorDark" pattern="#[A-Fa-f0-9]{6}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="primaryForegroundColor" class="form-label">Primary Foreground Color</label>
+                                <input type="color" class="form-control" id="primaryForegroundColor" pattern="#[A-Fa-f0-9]{6}">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6">
                 <div class="card bg-light h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
@@ -49,7 +83,7 @@
                             embedding Appetize to showcase the different apps and/or product features available in your
                             business.</p>
                         <div class="d-grid gap-2">
-                            <a class="btn btn-primary" href="product_launch_page/launch.html" target="_blank">
+                            <a class="btn btn-primary sampleLink" href="product_launch_page/launch.html" target="_blank">
                                 Sample
                             </a>
                             <a class="btn btn-outline-primary"
