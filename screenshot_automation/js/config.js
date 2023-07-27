@@ -7,7 +7,7 @@ const config = {
     apps: [
         {
             name: "Wikipedia iOS",
-            publicKey: "br5maalpifnd645entluves3oi",
+            publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
 
             /**
              * The devices to generate screenshots for.
@@ -126,7 +126,7 @@ const config = {
         },
         {
             name: "Wikipedia Android",
-            publicKey: "mxiz2hqjh6rrhtngt6mcy2qlnu",
+            publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
             devices: [
                 {
                     displayName: "Pixel 7",

@@ -4,6 +4,7 @@
 const appetizeIframeName = 'appetize';
 const startSessionButton = document.getElementById('start_session');
 const imagesContainer = document.getElementById('images-container');
+const imageModalElement = document.getElementById('imageModal');
 const appetizeIframe = document.getElementById(appetizeIframeName);
 
 let activeSession = {
@@ -32,6 +33,7 @@ function initAnimations() {
 
 /**
  * Initializes the client.
+ * @param config The initial config to use for the client.
  * @returns {Promise<void>} A promise that resolves when the client is loaded.
  */
 async function initClient(config) {
@@ -48,14 +50,16 @@ async function initClient(config) {
  * Updates the session with the provided public key, and device.
  * @param publicKey The public key for the app.
  * @param device The device and osVersion to use for the session.
+ * @param language The language to use for the session.
  * @returns {Promise<void>} A promise that resolves when the session is updated.
  */
-async function updateSession(publicKey, device) {
+async function updateSession(publicKey, device, language) {
     try {
         const sessionConfig = {
             publicKey: publicKey,
             device: device.device,
             osVersion: device.osVersion,
+            language: language,
             centered: "both",
             scale: "auto",
         }
@@ -68,13 +72,17 @@ async function updateSession(publicKey, device) {
 
         window.session = await window.client.startSession(sessionConfig);
         console.log('session started!')
+        return window.session;
     } catch (error) {
         console.error(error);
+        return null;
     }
 }
 
 /**
- * Starts a session for each device in each app in the config. Waits until all session screenshots are complete before returning.
+ * Starts a session for each device in each app in the config.
+ * Waits until all session screenshots are complete before returning.
+ * NOTE: Any previous session data will be cleared.
  * @returns {Promise<void>} A promise that resolves when all sessions are complete.
  */
 async function startSessionForDevices() {
@@ -93,15 +101,13 @@ async function startSessionForDevices() {
 
         // Loop through each device
         for (const device of app.devices) {
-            await updateSession(app.publicKey, device);
-
             const title = `${device.displayName} - ${device.osVersion}`
             console.log(title);
             const deviceHeader = createH3Header(title);
             imagesContainer.appendChild(deviceHeader);
 
-            console.log(`Starting screenshot automation for ${app.name}`)
-            await startScreenshotAutomation(window.session, app, device);
+            console.log(`Starting screenshot automation for ${app.name}: ${device.device.displayName} - ${device.osVersion}`);
+            await startScreenshotAutomation(app, device);
         }
     }
 
@@ -116,18 +122,20 @@ async function startSessionForDevices() {
 
 /**
  * Starts the screenshot automation for the provided session, app, and device.
- * @param session The session to use for the screenshot automation.
  * @param app The app to use for the screenshot automation.
  * @param device The device to use for the screenshot automation.
  * @returns {Promise<void>} A promise that resolves when the screenshot automation is complete.
  */
-async function startScreenshotAutomation(session, app, device) {
+async function startScreenshotAutomation(app, device) {
     try {
         // Loop through each language
         for (const language of app.languages) {
             console.log(`Language: ${language}`);
-            await session.setLanguage(language);
-            await session.restartApp();
+            const session = await updateSession(app.publicKey, device, language);
+            if (!session) {
+                console.error('Session not found');
+                return;
+            }
 
             const imageCollectionCard = createImageCollectionCard(language.toUpperCase());
             imagesContainer.appendChild(imageCollectionCard.cardDiv);
@@ -212,8 +220,6 @@ function downloadAllImages() {
     imageData.forEach((image, index) => {
         const filename = `${image.name}.jpg`;
         const blob = base64ToBlob(image.data);
-
-        // Add the image file to the zip
         zip.file(filename, blob);
 
         // Check if all images have been processed
@@ -237,7 +243,7 @@ function openModal(imageSrc) {
     const modalImage = document.querySelector('#imageModal .modal-image');
     modalImage.src = imageSrc;
 
-    const imageModal = new bootstrap.Modal(document.getElementById('imageModal'));
+    const imageModal = new bootstrap.Modal(imageModalElement);
     imageModal.show();
 }
 
@@ -274,6 +280,11 @@ function createGrid() {
     return imageGrid;
 }
 
+/**
+ * Creates a card element with a header and image grid.
+ * @param title The title of the card.
+ * @returns {{cardDiv: HTMLDivElement, grid: HTMLDivElement}} The card element and the grid element.
+ */
 function createImageCollectionCard(title) {
     const cardDiv = document.createElement('div');
     cardDiv.classList.add('card', 'mb-3');
@@ -326,6 +337,10 @@ function setStartSessionButtonIsEnabled(enabled) {
     }
 }
 
+/**
+ * Sets the visibility of the Appetize iframe.
+ * @param visible {boolean} - Whether the iframe should be visible or not.
+ */
 function setAppetizerVisibility(visible) {
     if (visible) {
         appetizeIframe.classList.remove('d-none');
@@ -347,6 +362,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         }, 100)
     });
 });
+
+// Event Listeners
 
 startSessionButton.addEventListener('click', async function (event) {
     try {

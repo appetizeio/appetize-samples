@@ -1,7 +1,14 @@
-# Product Launch Page
-This sample page demonstrates how to create a custom launch page by
-embedding Appetize to showcase the different apps and/or product features available in your
-business.
+# Screenshot Automation
+This sample launch showcases how to use the Appetize JS SDK to automate screenshots of your app.
+
+When customizing this sample, it is important to determine the criteria for the screenshot generation. For example:
+ - Do you want to capture all of your app's features or a subset of features?
+ - Which devices and OS versions do you want to generate screenshots for?
+ - Which languages do you want to generate screenshots for?
+ - Which orientations do you want to generate screenshots for?
+ - Any other scenarios?
+
+For this sample (and illustrative purposes) we have chosen to generate screenshots for both the Android and iOS versions of the app, on multiple device types, and in English and French. 
 
 ## :hammer: Getting Started
 
@@ -18,29 +25,86 @@ business.
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your product configuration. The following options are available:
+Open the [config.js](js/config.js) file and update the `config` object to match your expected apps and screenshot steps. By default, the following options are available:
 
 ```js
     const config = {
-    autoPlay: false,    // Set to true to autoplay the session when a product/platform is selected.
-    toast: "top",       // Set to "top" or "bottom" to change the position of the toast message.
+   /***
+    * The apps to generate screenshots for. Each app will be launched on each device and each language.
+    */
+   apps: [
+      {
+         name: "{Display name of app 1}",
+         publicKey: "{publicKey of app 1}",
 
-    // Start of product configuration
-    products: [ 
-        {
-            name: "{Product Name}",
-            ios: {
-                publicKey: "{app public key}",
-                device: "{preferred device e.g. iphone14pro}",
-                customActions: function(client, session) {
-                    // Add optional custom actions here that can interact with the session and client.
-                }
+         /**
+          * The devices to generate screenshots for.
+          */
+         devices: [
+            {
+               displayName: "iPhone 14 Pro",
+               device: "iphone14pro",
+               osVersion: "16.2",
             },
-            android: {
-                publicKey: "{app public key}",
-                device: "{preferred device e.g. pixel6 }",
+            {
+               displayName: "iPhone 12",
+               device: "iphone12",
+               osVersion: "16.2",
             }
-        }
-    ]
-}
+         ],
+         /**
+          * The languages to generate screenshots for.
+          */
+         languages: [
+            "en", "fr"
+         ],
+
+         /**
+          * The screens to generate screenshots for. Each screen will be navigated to and a screenshot will be taken.
+          * Assume that the app might already be launched and that you need to re-navigate to the screen.
+          */
+         screens: [
+            {
+               displayName: "{Screen 1}",
+               playbackActions: async (client, session, language) => {
+                  await automateStepsToGetToThisScreen();
+               }
+            },
+            {
+               displayName: "{Screen 2}",
+               playbackActions: async (client, session, language) => {
+                  await automateStepsToGetToThisScreen();
+               }
+            }
+         ]
+      },
+      {
+         name: "{Display name of app 2}",
+         publicKey: "{publicKey of app 2}",
+         devices: [
+            {
+               displayName: "Pixel 7",
+               device: "pixel7",
+               osVersion: "13.0",
+            },
+            {
+               displayName: "Galaxy Tab S7",
+               device: "galaxytabs7",
+               osVersion: "13.0",
+            }
+         ],
+         languages: [
+            "en", "fr"
+         ],
+         screens: [
+            {
+               displayName: "Explore",
+               playbackActions: async (client, session, language) => {
+                  await automateStepsToGetToThisScreen();
+               }
+            }
+         ]
+      }
+   ],
+};
 ```
