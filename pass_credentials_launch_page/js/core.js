@@ -163,6 +163,15 @@ document.addEventListener("DOMContentLoaded", async function () {
     await initClient();
 });
 
+// Event Listeners
+
+passwordField.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        startSessionButton.click();
+    }
+});
+
 startSessionButton.addEventListener('click', async function(event) {
     if(!window.client) { return; }
     try {
