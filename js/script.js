@@ -2,6 +2,7 @@
 
 // Global Variables
 
+const queryParams = new URLSearchParams(window.location.search);
 const sampleLinks = document.querySelectorAll(`.sampleLink`);
 const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
@@ -83,12 +84,18 @@ const isValidURL = (url) => {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateSampleLinksQueryStrings(callback) {
+    // Update the sample links
     sampleLinks.forEach((link) => {
         const url = new URL(link.href);
         callback(url);
         link.href = url.toString();
         console.log(`Updated URL: ${link.href}`);
     });
+
+    // Update the main link
+    const mainUrl= new URL(window.location.href);
+    callback(mainUrl);
+    window.history.replaceState({}, document.title, mainUrl.toString());
 }
 
 /**
@@ -112,10 +119,34 @@ function updateQueryStringParameter(url, key, value) {
     return url.toString();
 }
 
+/**
+ * Updates the inputs from the query parameters.
+ */
+const updateInputsFromQueryParameters = () => {
+    updateValueIfQueryParameterExists(logoInput, 'logo', updateLogo);
+    updateValueIfQueryParameterExists(primaryColorInput, 'primaryColor', updatePrimaryColor);
+    updateValueIfQueryParameterExists(primaryColorDarkInput, 'primaryColorDark', updatePrimaryColorDark);
+    updateValueIfQueryParameterExists(primaryForegroundColorInput, 'primaryForegroundColor', updatePrimaryForegroundColor);
+};
+
+/**
+ * Updates the value of an input if the query parameter exists.
+ * @param input The input to update.
+ * @param queryParameter The query parameter to check for.
+ * @param action The action to perform if the query parameter exists.
+ */
+const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
+    if(queryParams.has(queryParameter)) {
+        input.value = queryParams.get(queryParameter);
+        action();
+    }
+}
+
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
+    updateInputsFromQueryParameters();
 });
 
 logoInput.addEventListener("change", updateLogo);
