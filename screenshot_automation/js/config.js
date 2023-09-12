@@ -152,7 +152,6 @@ const config = {
                                 'resource-id': "org.wikipedia:id/nav_tab_explore"
                             }
                         });
-                        console.log(session.getUI());
                         await session.waitForAnimations(defaultWaitForAnimationsConfig);
                         console.log("End of Explore Playback actions");
                     }
