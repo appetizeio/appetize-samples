@@ -60,7 +60,7 @@ const config = {
                                 'accessibilityLabel': "wikipedia"
                             }
                         });
-                        await waitForTimeout(5000);
+                        await session.waitForAnimations(defaultWaitForAnimationsConfig);
                     }
                 },
                 {
@@ -119,7 +119,7 @@ const config = {
                                 await allowLocationPermissions();
                             }
                         }
-                        await waitForTimeout(5000);
+                        await session.waitForAnimations(defaultWaitForAnimationsConfig);
                     }
                 }
             ]
@@ -152,7 +152,9 @@ const config = {
                                 'resource-id': "org.wikipedia:id/nav_tab_explore"
                             }
                         });
-                        await waitForTimeout(5000);
+                        console.log(session.getUI());
+                        await session.waitForAnimations(defaultWaitForAnimationsConfig);
+                        console.log("End of Explore Playback actions");
                     }
                 }
                 ]
@@ -163,7 +165,14 @@ const config = {
 };
 
 /**
- * For the demo app we don't control the accessibility Ids, so we use accessibility labels instead, however this means we need to
+ * The default wait for animations config.
+ */
+const defaultWaitForAnimationsConfig = {
+    imageThreshold: 0
+}
+
+/**
+ * For the demo app, we don't control the accessibility Ids, so we use accessibility labels instead, however, this means we need to
  * use different labels for different languages.
  */
 const languageStrings = {

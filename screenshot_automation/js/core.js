@@ -50,16 +50,14 @@ async function initClient(config) {
  * Updates the session with the provided public key, and device.
  * @param publicKey The public key for the app.
  * @param device The device and osVersion to use for the session.
- * @param language The language to use for the session.
  * @returns {Promise<void>} A promise that resolves when the session is updated.
  */
-async function updateSession(publicKey, device, language) {
+async function updateSession(publicKey, device) {
     try {
         const sessionConfig = {
             publicKey: publicKey,
             device: device.device,
             osVersion: device.osVersion,
-            language: language,
             centered: "both",
             scale: "auto",
         }
@@ -101,6 +99,7 @@ async function startSessionForDevices() {
 
         // Loop through each device
         for (const device of app.devices) {
+            await updateSession(app.publicKey, device);
             const title = `${device.displayName} - ${device.osVersion}`
             console.log(title);
             const deviceHeader = createH3Header(title);
@@ -131,11 +130,8 @@ async function startScreenshotAutomation(app, device) {
         // Loop through each language
         for (const language of app.languages) {
             console.log(`Language: ${language}`);
-            const session = await updateSession(app.publicKey, device, language);
-            if (!session) {
-                console.error('Session not found');
-                return;
-            }
+            await session.setLanguage(language);
+            await session.reinstallApp();
 
             const imageCollectionCard = createImageCollectionCard(language.toUpperCase());
             imagesContainer.appendChild(imageCollectionCard.cardDiv);
