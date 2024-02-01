@@ -5,7 +5,6 @@ const frontpageLogo = document.getElementById("frontpage_logo");
  * Updates the logo used on the frontpage.
  */
 const updateLogoFromQueryParam = () => {
-    const queryParams = new URLSearchParams(window.location.search);
     const logoValue = queryParams.get('logo');
     if (logoValue && frontpageLogo) {
         console.log(`Updating logo to ${logoValue}`);

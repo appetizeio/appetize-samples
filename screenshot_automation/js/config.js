@@ -206,10 +206,3 @@ function getString(language, key) {
 
     return key;
 }
-
-/**
- * Waits for a timeout.
- * @param ms The number of milliseconds to wait.
- * @returns {Promise<unknown>} A promise that resolves when the timeout is complete.
- */
-const waitForTimeout = (ms) => new Promise(r => setTimeout(r, ms))
