@@ -310,6 +310,8 @@ function getDisplayName(deviceName) {
         "iphone13promax": "iPhone 13 Pro Max",
         "iphone14pro": "iPhone 14 Pro",
         "iphone14promax": "iPhone 14 Pro Max",
+        "iphone15pro": "iPhone 15 Pro",
+        "iphone15promax": "iPhone 15 Pro Max",
         "ipadair4thgeneration": "iPad Air (4th Generation)",
         "ipadpro129inch5thgeneration": "iPad Pro 12.9-inch (5th Generation)",
         "ipad9thgeneration": "iPad (9th Generation)",
