@@ -1,4 +1,4 @@
-// Description: Core functions for the launch template.
+// Description: Core functions for the training template.
 // Variables
 
 const appetizeIframeName = '#appetize';
@@ -102,6 +102,10 @@ function resetUI() {
     showAndHideWithAnimation(tutorialSelection, tutorialContent);
 }
 
+/**
+ * Subscribes to the relevant session events for the given session.
+ * @param session The session to subscribe to.
+ */
 function subscribeToSessionEvents(session) {
     session.on('action', async (action) => {
         console.log('user action occurred');
@@ -113,6 +117,12 @@ function subscribeToSessionEvents(session) {
     });
 }
 
+/**
+ * Validates the given user action for the active step.
+ * @param session The session to validate the action for.
+ * @param action The action to validate.
+ * @returns {Promise<void>} A promise that resolves when the action is validated.
+ */
 async function validateUserAction(session, action) {
     const activeStepIndex = findActiveStepIndex();
     const activeStep = selection.tutorial.steps[activeStepIndex];
@@ -136,8 +146,6 @@ function findActiveStepIndex() {
     const stepsArray = Array.from(tutorialSteps.children);
     return stepsArray.findLastIndex(step => !step.classList.contains('disabled'));
 }
-
-// Event Handlers
 
 /**
  * Selects the tutorial at the given index if it hasn't already been selected.
@@ -285,8 +293,6 @@ async function updateSession() {
         console.error(error);
     }
 }
-
-// Helper Functions
 
 /**
  * Creates a button with the given text and onClick function.

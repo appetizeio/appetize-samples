@@ -49,7 +49,7 @@ const config = {
                     title: "Fill in your username",
                     description: "For this demo, let's fill in 'demo@appetize.io'.",
                     validate: async (session, action) => {
-                        return await validateTextInput(session, {
+                        return await validateText(session, {
                             class: 'android.widget.EditText',
                             text: 'demo@appetize.io'
                         }, 'demo@appetize.io');
@@ -59,7 +59,7 @@ const config = {
                     title: "Fill in your password",
                     description: "For this demo, let's fill in 'demo'.",
                     validate: async (session, action) => {
-                        return validateTextInput(session, {
+                        return validateText(session, {
                             class: 'android.widget.EditText',
                             text: 'demo'
                         }, 'demo');
@@ -103,7 +103,7 @@ const config = {
                     title: "Search for 'apple'",
                     description: "Type 'apple' in the search bar. This will show you a list of articles related to apples.",
                     validate: async (session, action) => {
-                        return validateTextInput(session, {
+                        return validateText(session, {
                             'resource-id': 'org.wikipedia:id/search_src_text',
                             text: 'apple'
                         }, 'apple');
@@ -158,7 +158,7 @@ const config = {
                     title: "Search for 'apple'",
                     description: "Type 'apple' in the search bar. This will show you a list of articles related to apples.",
                     validate: async (session, action) => {
-                        return validateTextInput(session, {
+                        return validateText(session, {
                             'resource-id': 'org.wikipedia:id/search_src_text',
                             text: 'apple'
                         }, 'apple');
@@ -187,17 +187,10 @@ const config = {
                     title: "Select the 'Save' button",
                     description: "This will save the article to your saved list.",
                     validate: async (session, action) => {
-                        try {
-                            await session.findElement({
-                                attributes: {
-                                    'text': 'Saved Apple. Do you want to add it to a list?',
-                                    'resource-id': 'org.wikipedia:id/snackbar_text'
-                                }
-                            });
-                            return true;
-                        } catch (e) {
-                            return false
-                        }
+                        return validateText(session, {
+                            'text': 'Saved Apple. Do you want to add it to a list?',
+                            'resource-id': 'org.wikipedia:id/snackbar_text'
+                        }, 'Saved Apple. Do you want to add it to a list?');
                     }
                 }
             ]
@@ -229,13 +222,13 @@ function validateTapAction(action, expectedAttributes) {
 }
 
 /**
- * Helper function to validate a type action.
+ * Helper function to validate the text of an element.
  * @param session The session to run the validation on.
- * @param textViewElementAttributes The attributes of the text view element to validate
- * @param expectedText The expected text of the text view element
- * @returns {Promise<boolean>} True if the text view element has the expected text, false otherwise.
+ * @param textViewElementAttributes The attributes of the element to validate
+ * @param expectedText The expected text of the element
+ * @returns {Promise<boolean>} True if the element has the expected text, false otherwise.
  */
-async function validateTextInput(session, textViewElementAttributes, expectedText) {
+async function validateText(session, textViewElementAttributes, expectedText) {
     try {
         const element = await session.findElement({
             attributes: textViewElementAttributes

@@ -1,7 +1,8 @@
-# Product Launch Page
-This sample page demonstrates how to create a custom launch page by
-embedding Appetize to showcase the different apps and/or product features available in your
-business.
+# Training Experience 
+This sample page demonstrates how to create a training experience for your product(s)
+by making use of Appetize's AppRecorder. 
+The page is designed
+to be a straightforward to use template that can be customized to match your branding and product configuration.
 
 ## :hammer: Getting Started
 
@@ -18,19 +19,35 @@ business.
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your product configuration. The following options are available:
+Open the [config.js](js/config.js) file and update the `config` object to match your product and training configuration.
+The following options are available:
 
 ```js
     const config = {
-    toast: "top",       // Set to "top" or "bottom" to change the position of the toast message.
-
-    // Start of product configuration
-    products: [
+   // Start of tutorial configuration
+   tutorials: [
       {
-         name: "{Product Name}",
-         publicKey: "{app public key}",
-         device: "{preferred device e.g. iphone14pro}"
+         title: "{Your Tutorial Title}",
+         description: "{Your Tutorial Description}",
+         buttonTitle: "{Your Button Title}",
+         publicKey: "{Your Appetize app publicKey}",
+         device: "{Your preferred device .e.g pixel7}",
+         osVersion: "{Your preferred os version .e.g 14}",
+         successTitle: "{Your Success Title used in the success modal}",
+         successDescription: "{Your Success Description used in the success modal}",
+         steps: [ // Steps to be completed in the tutorial.
+            {
+               title: "{Your Step Title}",
+               description: "{Your Step Description}",
+               validate: async (session, action) => { // session is the current session, action is the current action that was performed
+                    // Your validation logic here
+                    // return true if the step is completed, false otherwise.
+                    return true;
+               }
+            },
+            // ... Add more steps here
+         ]
       },
-   ]
-}
+      // ... Add more tutorials here
+    ]
 ```
