@@ -305,7 +305,7 @@ function createButton(text, onClick) {
     button.setAttribute('onClick', onClick);
     button.setAttribute('class', 'btn btn-primary material-button');
     button.setAttribute('role', 'button');
-    button.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span> ${text}`;
+    button.innerHTML = `<span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span> ${text}`;
     return button;
 }
 
@@ -331,7 +331,8 @@ function enableButton(button) {
  */
 function showSpinner(button) {
     const spinner = button.querySelector('.spinner-border');
-    spinner.style.display = 'inline-block';
+    spinner.classList.remove('d-none');
+    spinner.classList.add('d-inline-block');
 }
 
 /**
@@ -340,7 +341,8 @@ function showSpinner(button) {
  */
 function hideSpinner(button) {
     const spinner = button.querySelector('.spinner-border');
-    spinner.style.display = 'none';
+    spinner.classList.remove('d-inline-block');
+    spinner.classList.add('d-none');
 }
 
 /**
