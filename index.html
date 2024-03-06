@@ -7,8 +7,7 @@
     <link href="i/favicon.ico" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@next/dist/aos.css"
-          rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet"/>
 </head>
 
@@ -36,187 +35,250 @@
         </div>
     </div>
 </nav>
-<section class="py-10 py-lg-20 bg-bg-3 text-center text-md-start">
-    <div class="container">
 
-        <div class="accordion mt-3" id="accordionStyling">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="setStyleHeader">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                        Personalize your Sample Experience
-                    </button>
-                </h2>
-                <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="setStyleHeader"
-                     data-bs-parent="#accordionStyling">
-                    <div class="accordion-body">
-                        <form>
-                            <div class="mb-3">
-                                <label for="logoUpload" class="form-label">Brand Logo</label>
-                                <input type="text" class="form-control" id="logoUpload"
-                                       placeholder="Enter the URL of the logo">
-                                <small class="form-text text-muted" style="height: 400px">Hint: Try and use an image
-                                    with a height of ~400 pixels and no padding. Use one of the free image hosting sites
-                                    or your own site to host the image.</small>
-                            </div>
-                            <div class="mb-3">
-                                <label for="primaryColor" class="form-label">Primary Color</label>
-                                <input type="color" class="form-control" id="primaryColor" pattern="#[A-Fa-f0-9]{6}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
-                                <input type="color" class="form-control" id="primaryColorDark"
-                                       pattern="#[A-Fa-f0-9]{6}">
-                            </div>
-                            <div class="mb-3">
-                                <label for="primaryForegroundColor" class="form-label">Primary Foreground Color</label>
-                                <input type="color" class="form-control" id="primaryForegroundColor"
-                                       pattern="#[A-Fa-f0-9]{6}">
-                            </div>
-                        </form>
-                    </div>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <!-- Side Menu -->
+        <div class="col-md-2 bg-light">
+            <h3>Filter Samples</h3>
+            <!-- Search Bar -->
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        <i class="bi bi-search"></i>
+                    </span>
+                </div>
+                <label for="filter-input"></label>
+                <input class="form-control border" type="search" placeholder="Search..." id="filter-input">
+            </div>
+
+            <div class="mt-4">
+                <h4>Use Case</h4>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="engineering">
+                    <label class="form-check-label" for="engineering">
+                        Demo Engineering
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="testing">
+                    <label class="form-check-label" for="testing">
+                        Testing
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="training">
+                    <label class="form-check-label" for="training">
+                        Training
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="support">
+                    <label class="form-check-label" for="support">
+                        Support
+                    </label>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Product Launch Page</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Variant 1</h6>
-                        <p class="card-text">This sample page demonstrates how to create a custom launch page by
-                            embedding Appetize to showcase the different apps and/or product features available in your
-                            business.</p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="product_launch_page_variant_1/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_1"
-                               target="_blank">
-                                Source Code
-                            </a>
+        <div class="col-md-7">
+            <section class="container py-10 py-lg-20 bg-bg-3 text-center text-md-start">
+                <div class="accordion mt-3" id="accordionStyling">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="setStyleHeader">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseStyling" aria-expanded="false" aria-controls="collapseStyling">
+                                Personalize your Sample Experience
+                            </button>
+                        </h2>
+                        <div id="collapseStyling" class="accordion-collapse collapse" aria-labelledby="setStyleHeader"
+                             data-bs-parent="#accordionStyling">
+                            <div class="accordion-body">
+                                <form>
+                                    <div class="mb-3">
+                                        <label for="logoUpload" class="form-label">Brand Logo</label>
+                                        <input type="text" class="form-control" id="logoUpload"
+                                               placeholder="Enter the URL of the logo">
+                                        <small class="form-text text-muted" style="height: 400px">Hint: Try and use
+                                            an image
+                                            with a height of ~400 pixels and no padding. Use one of the free image
+                                            hosting sites
+                                            or your own site to host the image.</small>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="primaryColor" class="form-label">Primary Color</label>
+                                        <input type="color" class="form-control" id="primaryColor"
+                                               pattern="#[A-Fa-f0-9]{6}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
+                                        <input type="color" class="form-control" id="primaryColorDark"
+                                               pattern="#[A-Fa-f0-9]{6}">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="primaryForegroundColor" class="form-label">Primary Foreground
+                                            Color</label>
+                                        <input type="color" class="form-control" id="primaryForegroundColor"
+                                               pattern="#[A-Fa-f0-9]{6}">
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Product Launch Page</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Variant 2</h6>
-                        <p class="card-text">This sample page demonstrates how to create a custom launch page by
-                            embedding Appetize to showcase the different apps and/or product features available in your
-                            business.</p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="product_launch_page_variant_2/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_2"
-                               target="_blank">
-                                Source Code
-                            </a>
+
+                <div class="row">
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Product Launch Page</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Variant 1</h6>
+                                <p class="card-text">This sample page demonstrates how to create a custom launch
+                                    page by
+                                    embedding Appetize to showcase the different apps and/or product features
+                                    available in your
+                                    business.</p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink"
+                                       href="product_launch_page_variant_1/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_1"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Product Launch Page</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Variant 2</h6>
+                                <p class="card-text">This sample page demonstrates how to create a custom launch
+                                    page by
+                                    embedding Appetize to showcase the different apps and/or product features
+                                    available in your
+                                    business.</p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink"
+                                       href="product_launch_page_variant_2/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_2"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Device Configuration Experience</h5>
+                                <p class="card-text">This sample page demonstrates how you can fetch all the
+                                    available devices
+                                    Appetize has to offer as well as how you can specify device configurations
+                                    such as model, Operating System, orientation and much more!</p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink"
+                                       href="device_configuration_experience/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Pass Credentials Launch Page</h5>
+                                <p class="card-text">This sample page demonstrates how to create a custom launch
+                                    page that can
+                                    automatically pass in user credentials to any app and log in that
+                                    user.
+                                </p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink"
+                                       href="pass_credentials_launch_page/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/pass_credentials_launch_page"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Screenshot Automation</h5>
+                                <p class="card-text">This sample showcases how to use the Appetize JS SDK to
+                                    automate
+                                    screenshots of your app.
+                                </p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink" href="screenshot_automation/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/screenshot_automation"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-3">
+                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
+                            <div class="card-body d-flex flex-column">
+                                <h5 class="card-title">Training Experience</h5>
+                                <p class="card-text">This sample page demonstrates how to create a custom training
+                                    experience
+                                    that can be used to train users on how to use your app.
+                                </p>
+                                <div class="d-grid gap-2 mt-auto">
+                                    <a class="btn btn-primary sampleLink" href="training_experience/launch.html"
+                                       target="_blank">
+                                        Sample
+                                    </a>
+                                    <a class="btn btn-outline-primary"
+                                       href="https://github.com/appetizeio/appetize-samples/tree/main/training_experience"
+                                       target="_blank">
+                                        Source Code
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Device Configuration Experience</h5>
-                        <p class="card-text">This sample page demonstrates how you can fetch all the available devices
-                            Appetize has to offer as well as how you can specify device configurations
-                            such as model, Operating System, orientation and much more!</p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="device_configuration_experience/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience"
-                               target="_blank">
-                                Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Pass Credentials Launch Page</h5>
-                        <p class="card-text">This sample page demonstrates how to create a custom launch page that can
-                            automatically pass in user credentials to any app and log in that
-                            user.
-                        </p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="pass_credentials_launch_page/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/pass_credentials_launch_page"
-                               target="_blank">
-                                Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Screenshot Automation</h5>
-                        <p class="card-text">This sample showcases how to use the Appetize JS SDK to automate
-                            screenshots of your app.
-                        </p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="screenshot_automation/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/screenshot_automation"
-                               target="_blank">
-                                Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mt-3">
-                <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-aos="fade-up">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title">Training Experience</h5>
-                        <p class="card-text">This sample page demonstrates how to create a custom training experience
-                            that can be used to train users on how to use your app.
-                        </p>
-                        <div class="d-grid gap-2 mt-auto">
-                            <a class="btn btn-primary sampleLink" href="training_experience/launch.html"
-                               target="_blank">
-                                Sample
-                            </a>
-                            <a class="btn btn-outline-primary"
-                               href="https://github.com/appetizeio/appetize-samples/tree/main/training_experience"
-                               target="_blank">
-                                Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
     </div>
-</section>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
 <script src="js/script.js"></script>
 
 </body>

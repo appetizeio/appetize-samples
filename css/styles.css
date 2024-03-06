@@ -19,6 +19,7 @@
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 200;
     --bs-body-line-height: 1.5;
+    --bs-border-radius: 1rem;
 }
 
 /* End of brand colors and styles */
@@ -204,4 +205,8 @@ h2, .h2 {
     font-family: Maax;
     font-weight: 700;
     src: url(fonts/65c2a3cf883168b92786.woff2) format("woff2")
+}
+
+.input-group-prepend .input-group-text {
+    border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
 }

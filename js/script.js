@@ -8,17 +8,10 @@ const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
 const primaryColorDarkInput = document.getElementById("primaryColorDark");
 const primaryForegroundColorInput = document.getElementById("primaryForegroundColor");
+const searchFilterInput = document.getElementById("filter-input");
+const cards = Array.from(document.querySelectorAll(".card"));
 
 // Init Functions
-
-/**
- * Initializes animations for the page.
- */
-function initAnimations() {
-    AOS.init({
-        easing: 'ease-out-cubic', once: true, offset: 120, duration: 650
-    });
-}
 
 /**
  * Updates the primary color in the sample links.
@@ -142,13 +135,28 @@ const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
     }
 }
 
+/**
+ * Performs filtering on the cards based on the search input.
+ */
+function performFiltering() {
+    const query = searchFilterInput.value.toLowerCase();
+    cards.forEach((card) => {
+        const title = card.querySelector(".card-title").textContent.toLowerCase();
+        if (title.includes(query)) {
+            card.parentNode.classList.remove("d-none");
+        } else {
+            card.parentNode.classList.add("d-none");
+        }
+    });
+}
+
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
-    initAnimations();
     updateInputsFromQueryParameters();
 });
 
+searchFilterInput.addEventListener("input", performFiltering);
 logoInput.addEventListener("change", updateLogo);
 primaryColorInput.addEventListener("change", updatePrimaryColor);
 primaryColorDarkInput.addEventListener("change", updatePrimaryColorDark);
