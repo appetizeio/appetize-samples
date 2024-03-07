@@ -158,6 +158,7 @@ function performSearchFilter() {
 function performUseCaseFilter() {
     const checkedInputs = document.querySelectorAll('.form-check-input:checked');
     const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
+    console.log("Selected Tags: ", selectedTags);
     cards.forEach(card => {
         const tags = card.getAttribute('data-tags').split(',');
         if (selectedTags.length > 0) {
