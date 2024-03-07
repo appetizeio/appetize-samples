@@ -144,7 +144,8 @@ function performSearchFilter() {
     const query = searchFilterInput.value.toLowerCase();
     cards.forEach((card) => {
         const title = card.querySelector(".card-title").textContent.toLowerCase();
-        if (title.includes(query)) {
+        const text = card.querySelector(".card-text").textContent.toLowerCase();
+        if (title.includes(query) || text.includes(query)) {
             card.parentNode.classList.remove("d-none");
         } else {
             card.parentNode.classList.add("d-none");
