@@ -9,7 +9,8 @@
     --bs-secondary: #65E5A6;
     --bs-outline-background: #f3f3f3;
     --bs-nav-foreground: #FFFFFF;
-    --bs-nav-background: #393939;
+    --bs-nav-background: #090909FF;
+    --bs-sidemenu-background: #090909FF;
     --h2-color: #090909;
     --h2-top-margin: 0.5em;
     --logo-start-offset: 0;
@@ -209,4 +210,27 @@ h2, .h2 {
 
 .input-group-prepend .input-group-text {
     border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+.form-check-input:checked {
+    background-color: var(--bs-secondary);
+    border-color: var(--bs-secondary);
+}
+
+.bi.spinning {
+    animation: spinUp 0.4s linear infinite;
+}
+
+.sideMenu.bg-dark {
+    background-color: var(--bs-sidemenu-background)!important;
+}
+
+@keyframes spinUp {
+    0% { transform: rotate(-180deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes spinDown {
+    0% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
 }

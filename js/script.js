@@ -10,7 +10,9 @@ const primaryColorDarkInput = document.getElementById("primaryColorDark");
 const primaryForegroundColorInput = document.getElementById("primaryForegroundColor");
 const searchFilterInput = document.getElementById("filter-input");
 const cards = Array.from(document.querySelectorAll(".card"));
-
+const useCaseContent = document.getElementById('useCaseContent');
+const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
+const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
 // Init Functions
 
 /**
@@ -138,7 +140,7 @@ const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
 /**
  * Performs filtering on the cards based on the search input.
  */
-function performFiltering() {
+function performSearchFilter() {
     const query = searchFilterInput.value.toLowerCase();
     cards.forEach((card) => {
         const title = card.querySelector(".card-title").textContent.toLowerCase();
@@ -150,15 +152,60 @@ function performFiltering() {
     });
 }
 
+/**
+ * Performs filtering on the cards based on the selected tags.
+ */
+function performUseCaseFilter() {
+    const checkedInputs = document.querySelectorAll('.form-check-input:checked');
+    const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
+    cards.forEach(card => {
+        const tags = card.getAttribute('data-tags').split(',');
+        if (selectedTags.length > 0) {
+            const hasSelectedTag = tags.some(tag => selectedTags.includes(tag));
+            if (hasSelectedTag) {
+                card.parentNode.classList.remove("d-none");
+            } else {
+                card.parentNode.classList.add("d-none");
+            }
+        } else {
+            card.parentNode.classList.remove("d-none");
+        }
+    });
+}
+
+/**
+ * Handles the use case chevron animation.
+ * @param eventType The event type to handle.
+ * @param animationName The animation name to apply.
+ * @param oldClass The old class to replace.
+ * @param newClass The new class to replace with.
+ */
+function handleUseCaseAnimation(eventType, animationName, oldClass, newClass) {
+    useCaseContent.addEventListener(eventType, function () {
+        chevronIcon.style.animationName = animationName;
+        chevronIcon.classList.add('spinning');
+        chevronIcon.classList.replace(oldClass, newClass);
+    });
+
+    useCaseContent.addEventListener(eventType.replace('hide', 'hidden').replace('show', 'shown'), function () {
+        chevronIcon.classList.remove('spinning');
+    });
+}
+
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
     updateInputsFromQueryParameters();
 });
 
-searchFilterInput.addEventListener("input", performFiltering);
+searchFilterInput.addEventListener("input", performSearchFilter);
 logoInput.addEventListener("change", updateLogo);
 primaryColorInput.addEventListener("change", updatePrimaryColor);
 primaryColorDarkInput.addEventListener("change", updatePrimaryColorDark);
 primaryForegroundColorInput.addEventListener("change", updatePrimaryForegroundColor);
+useCaseCheckboxInputs.forEach(input => {
+    input.addEventListener('change', performUseCaseFilter);
+});
+handleUseCaseAnimation('show.bs.collapse', 'spinUp', 'bi-chevron-down', 'bi-chevron-up');
+handleUseCaseAnimation('hide.bs.collapse', 'spinDown', 'bi-chevron-up', 'bi-chevron-down');
 
