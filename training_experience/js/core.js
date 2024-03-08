@@ -35,7 +35,7 @@ async function initTutorials() {
         const cardBody = document.createElement('div');
         cardBody.classList.add('card-body');
 
-        const title = document.createElement('h5');
+        const title = document.createElement('h4');
         title.classList.add('card-title');
         title.innerText = tutorial.title;
         cardBody.appendChild(title);

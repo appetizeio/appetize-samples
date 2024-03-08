@@ -15,6 +15,7 @@
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
+    --bs-background-color: #f8f8f8;
 }
 
 /* End of brand colors and styles */
@@ -71,6 +72,7 @@
 
 body {
     margin: 0;
+    background-color: var(--bs-background-color);
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
@@ -103,5 +105,10 @@ h2, .h2 {
 
 .card-footer {
     background: transparent;
-    border-top: 0px;
+    border-top: 0;
+}
+
+.card {
+    border: 0 solid var(--bs-border-color);
+    border-radius: 1.25em;
 }

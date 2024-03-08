@@ -20,7 +20,7 @@ const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-i
  */
 function updatePrimaryColor() {
     const primaryColorValue = primaryColorInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryColor", primaryColorValue);
     });
 }
@@ -30,7 +30,7 @@ function updatePrimaryColor() {
  */
 function updatePrimaryColorDark() {
     const primaryColorDarkValue = primaryColorDarkInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryColorDark", primaryColorDarkValue);
     });
 }
@@ -40,7 +40,7 @@ function updatePrimaryColorDark() {
  */
 function updatePrimaryForegroundColor() {
     const primaryForegroundColor = primaryForegroundColorInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryForegroundColor", primaryForegroundColor);
     });
 }
@@ -55,7 +55,7 @@ function updateLogo() {
         console.log("Invalid URL");
         return;
     }
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "logo", logoValue);
     });
 }
@@ -79,18 +79,31 @@ const isValidURL = (url) => {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateSampleLinksQueryStrings(callback) {
-    // Update the sample links
     sampleLinks.forEach((link) => {
         const url = new URL(link.href);
         callback(url);
         link.href = url.toString();
         console.log(`Updated URL: ${link.href}`);
     });
+}
 
-    // Update the main link
+/**
+ * Updates the query strings in the main URL.
+ * @param callback A callback function that takes a URL object and updates it.
+ */
+function updateMainUrlQueryStrings(callback) {
     const mainUrl= new URL(window.location.href);
     callback(mainUrl);
     window.history.replaceState({}, document.title, mainUrl.toString());
+}
+
+/**
+ * Updates the query strings in both the sample links and the main URL.
+ * @param callback A callback function that takes a URL object and updates it.
+ */
+function updateAllQueryStrings(callback) {
+    updateSampleLinksQueryStrings(callback);
+    updateMainUrlQueryStrings(callback);
 }
 
 /**
@@ -122,6 +135,10 @@ const updateInputsFromQueryParameters = () => {
     updateValueIfQueryParameterExists(primaryColorInput, 'primaryColor', updatePrimaryColor);
     updateValueIfQueryParameterExists(primaryColorDarkInput, 'primaryColorDark', updatePrimaryColorDark);
     updateValueIfQueryParameterExists(primaryForegroundColorInput, 'primaryForegroundColor', updatePrimaryForegroundColor);
+    updateValueIfQueryParameterExists(searchFilterInput, 'search', performFilter);
+    useCaseCheckboxInputs.forEach(input => {
+        updateValueIfQueryParameterExists(input, 'usecase', performFilter);
+    });
 };
 
 /**
@@ -132,46 +149,44 @@ const updateInputsFromQueryParameters = () => {
  */
 const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
     if(queryParams.has(queryParameter)) {
-        input.value = queryParams.get(queryParameter);
+        const value = queryParams.get(queryParameter);
+        if (input.type === 'checkbox') {
+            const values = value.split(',');
+            input.checked = values.includes(input.value.toLowerCase());
+        } else {
+            input.value = value;
+        }
         action();
     }
 }
 
 /**
- * Performs filtering on the cards based on the search input.
+ * Performs filtering on the cards based on the search input and selected tags.
  */
-function performSearchFilter() {
+function performFilter() {
     const query = searchFilterInput.value.toLowerCase();
+    const checkedInputs = document.querySelectorAll('.form-check-input:checked');
+    const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
+
     cards.forEach((card) => {
         const title = card.querySelector(".card-title").textContent.toLowerCase();
         const text = card.querySelector(".card-text").textContent.toLowerCase();
-        if (title.includes(query) || text.includes(query)) {
+        const tags = card.getAttribute('data-tags').split(',');
+
+        const matchesSearch = title.includes(query) || text.includes(query);
+        const matchesTags = selectedTags.length === 0 || tags.some(tag => selectedTags.includes(tag));
+
+        if (matchesSearch && matchesTags) {
             card.parentNode.classList.remove("d-none");
         } else {
             card.parentNode.classList.add("d-none");
         }
     });
-}
 
-/**
- * Performs filtering on the cards based on the selected tags.
- */
-function performUseCaseFilter() {
-    const checkedInputs = document.querySelectorAll('.form-check-input:checked');
-    const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
-    console.log("Selected Tags: ", selectedTags);
-    cards.forEach(card => {
-        const tags = card.getAttribute('data-tags').split(',');
-        if (selectedTags.length > 0) {
-            const hasSelectedTag = tags.some(tag => selectedTags.includes(tag));
-            if (hasSelectedTag) {
-                card.parentNode.classList.remove("d-none");
-            } else {
-                card.parentNode.classList.add("d-none");
-            }
-        } else {
-            card.parentNode.classList.remove("d-none");
-        }
+    // Update the query parameters
+    updateMainUrlQueryStrings((url) => {
+        updateQueryStringParameter(url, "search", query);
+        updateQueryStringParameter(url, "usecase", selectedTags.join(','));
     });
 }
 
@@ -200,13 +215,13 @@ document.addEventListener("DOMContentLoaded", async function () {
     updateInputsFromQueryParameters();
 });
 
-searchFilterInput.addEventListener("input", performSearchFilter);
+searchFilterInput.addEventListener("input", performFilter);
 logoInput.addEventListener("change", updateLogo);
 primaryColorInput.addEventListener("change", updatePrimaryColor);
 primaryColorDarkInput.addEventListener("change", updatePrimaryColorDark);
 primaryForegroundColorInput.addEventListener("change", updatePrimaryForegroundColor);
 useCaseCheckboxInputs.forEach(input => {
-    input.addEventListener('change', performUseCaseFilter);
+    input.addEventListener('change', performFilter);
 });
 handleUseCaseAnimation('show.bs.collapse', 'spinUp', 'bi-chevron-down', 'bi-chevron-up');
 handleUseCaseAnimation('hide.bs.collapse', 'spinDown', 'bi-chevron-up', 'bi-chevron-down');
