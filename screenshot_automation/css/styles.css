@@ -3,8 +3,8 @@
 /* Update these variables to match your brand colors and styles */
 
 :root {
-    --bs-primary: #FAEB73;
-    --bs-primary-dark: #e1d367;
+    --bs-primary: #65E5A6;
+    --bs-primary-dark: #29cd7c;
     --bs-foreground: #090909;
     --h2-color: #090909;
     --h2-top-margin: 0.5em;
@@ -25,8 +25,8 @@
     border: none;
     border-radius: 0.65rem;
     padding: 0.8rem 1.2rem;
-    font-size: 1.125rem;
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 600;
     line-height: 1.2;
     vertical-align: middle;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);

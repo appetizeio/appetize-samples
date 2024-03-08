@@ -8,24 +8,19 @@ const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
 const primaryColorDarkInput = document.getElementById("primaryColorDark");
 const primaryForegroundColorInput = document.getElementById("primaryForegroundColor");
-
+const searchFilterInput = document.getElementById("filter-input");
+const cards = Array.from(document.querySelectorAll(".card"));
+const useCaseContent = document.getElementById('useCaseContent');
+const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
+const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
 // Init Functions
-
-/**
- * Initializes animations for the page.
- */
-function initAnimations() {
-    AOS.init({
-        easing: 'ease-out-cubic', once: true, offset: 120, duration: 650
-    });
-}
 
 /**
  * Updates the primary color in the sample links.
  */
 function updatePrimaryColor() {
     const primaryColorValue = primaryColorInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryColor", primaryColorValue);
     });
 }
@@ -35,7 +30,7 @@ function updatePrimaryColor() {
  */
 function updatePrimaryColorDark() {
     const primaryColorDarkValue = primaryColorDarkInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryColorDark", primaryColorDarkValue);
     });
 }
@@ -45,7 +40,7 @@ function updatePrimaryColorDark() {
  */
 function updatePrimaryForegroundColor() {
     const primaryForegroundColor = primaryForegroundColorInput.value;
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "primaryForegroundColor", primaryForegroundColor);
     });
 }
@@ -60,7 +55,7 @@ function updateLogo() {
         console.log("Invalid URL");
         return;
     }
-    updateSampleLinksQueryStrings((url) => {
+    updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "logo", logoValue);
     });
 }
@@ -84,18 +79,31 @@ const isValidURL = (url) => {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateSampleLinksQueryStrings(callback) {
-    // Update the sample links
     sampleLinks.forEach((link) => {
         const url = new URL(link.href);
         callback(url);
         link.href = url.toString();
         console.log(`Updated URL: ${link.href}`);
     });
+}
 
-    // Update the main link
+/**
+ * Updates the query strings in the main URL.
+ * @param callback A callback function that takes a URL object and updates it.
+ */
+function updateMainUrlQueryStrings(callback) {
     const mainUrl= new URL(window.location.href);
     callback(mainUrl);
     window.history.replaceState({}, document.title, mainUrl.toString());
+}
+
+/**
+ * Updates the query strings in both the sample links and the main URL.
+ * @param callback A callback function that takes a URL object and updates it.
+ */
+function updateAllQueryStrings(callback) {
+    updateSampleLinksQueryStrings(callback);
+    updateMainUrlQueryStrings(callback);
 }
 
 /**
@@ -127,6 +135,10 @@ const updateInputsFromQueryParameters = () => {
     updateValueIfQueryParameterExists(primaryColorInput, 'primaryColor', updatePrimaryColor);
     updateValueIfQueryParameterExists(primaryColorDarkInput, 'primaryColorDark', updatePrimaryColorDark);
     updateValueIfQueryParameterExists(primaryForegroundColorInput, 'primaryForegroundColor', updatePrimaryForegroundColor);
+    updateValueIfQueryParameterExists(searchFilterInput, 'search', performFilter);
+    useCaseCheckboxInputs.forEach(input => {
+        updateValueIfQueryParameterExists(input, 'usecase', performFilter);
+    });
 };
 
 /**
@@ -137,20 +149,80 @@ const updateInputsFromQueryParameters = () => {
  */
 const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
     if(queryParams.has(queryParameter)) {
-        input.value = queryParams.get(queryParameter);
+        const value = queryParams.get(queryParameter);
+        if (input.type === 'checkbox') {
+            const values = value.split(',');
+            input.checked = values.includes(input.value.toLowerCase());
+        } else {
+            input.value = value;
+        }
         action();
     }
+}
+
+/**
+ * Performs filtering on the cards based on the search input and selected tags.
+ */
+function performFilter() {
+    const query = searchFilterInput.value.toLowerCase();
+    const checkedInputs = document.querySelectorAll('.form-check-input:checked');
+    const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
+
+    cards.forEach((card) => {
+        const title = card.querySelector(".card-title").textContent.toLowerCase();
+        const text = card.querySelector(".card-text").textContent.toLowerCase();
+        const tags = card.getAttribute('data-tags').split(',');
+
+        const matchesSearch = title.includes(query) || text.includes(query);
+        const matchesTags = selectedTags.length === 0 || tags.some(tag => selectedTags.includes(tag));
+
+        if (matchesSearch && matchesTags) {
+            card.parentNode.classList.remove("d-none");
+        } else {
+            card.parentNode.classList.add("d-none");
+        }
+    });
+
+    // Update the query parameters
+    updateMainUrlQueryStrings((url) => {
+        updateQueryStringParameter(url, "search", query);
+        updateQueryStringParameter(url, "usecase", selectedTags.join(','));
+    });
+}
+
+/**
+ * Handles the use case chevron animation.
+ * @param eventType The event type to handle.
+ * @param animationName The animation name to apply.
+ * @param oldClass The old class to replace.
+ * @param newClass The new class to replace with.
+ */
+function handleUseCaseAnimation(eventType, animationName, oldClass, newClass) {
+    useCaseContent.addEventListener(eventType, function () {
+        chevronIcon.style.animationName = animationName;
+        chevronIcon.classList.add('spinning');
+        chevronIcon.classList.replace(oldClass, newClass);
+    });
+
+    useCaseContent.addEventListener(eventType.replace('hide', 'hidden').replace('show', 'shown'), function () {
+        chevronIcon.classList.remove('spinning');
+    });
 }
 
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
-    initAnimations();
     updateInputsFromQueryParameters();
 });
 
+searchFilterInput.addEventListener("input", performFilter);
 logoInput.addEventListener("change", updateLogo);
 primaryColorInput.addEventListener("change", updatePrimaryColor);
 primaryColorDarkInput.addEventListener("change", updatePrimaryColorDark);
 primaryForegroundColorInput.addEventListener("change", updatePrimaryForegroundColor);
+useCaseCheckboxInputs.forEach(input => {
+    input.addEventListener('change', performFilter);
+});
+handleUseCaseAnimation('show.bs.collapse', 'spinUp', 'bi-chevron-down', 'bi-chevron-up');
+handleUseCaseAnimation('hide.bs.collapse', 'spinDown', 'bi-chevron-up', 'bi-chevron-down');
 
