@@ -26,7 +26,42 @@ const updateCSSVariable = (variableName, queryParamName) => {
     }
 };
 
+/**
+ * Updates the config products to match the apps passed in the query parameters.
+ */
+function updateConfigProducts() {
+    const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
+    const optionaliOSPublicKey = queryParams.get('optionaliOSPublicKey');
+    const optionalAppName = queryParams.get('optionalAppName');
+
+    if (!optionalAndroidPublicKey && !optionaliOSPublicKey) {
+        return;
+    }
+
+    let demoProduct = {
+        name: optionalAppName ?? "Demo App"
+    };
+
+    if (optionaliOSPublicKey) {
+        demoProduct.ios = {
+            publicKey: optionaliOSPublicKey,
+            device: "iphone14pro",
+        };
+    }
+
+    if (optionalAndroidPublicKey) {
+        demoProduct.android = {
+            publicKey: optionalAndroidPublicKey,
+            device: "pixel6",
+        };
+    }
+
+    config.products = [];
+    config.products.push(demoProduct);
+}
+
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
 updateCSSVariable('--bs-primary', 'primaryColor');
 updateCSSVariable('--bs-primary-dark', 'primaryColorDark');
 updateCSSVariable('--bs-foreground', 'primaryForegroundColor');
+updateConfigProducts();

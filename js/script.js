@@ -8,6 +8,9 @@ const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
 const primaryColorDarkInput = document.getElementById("primaryColorDark");
 const primaryForegroundColorInput = document.getElementById("primaryForegroundColor");
+const optionalAppNameInput = document.getElementById("optionalAppName");
+const optionalAndroidPublicKeyInput = document.getElementById("optionalAndroidPublicKey");
+const optionaliOSPublicKeyInput = document.getElementById("optionaliOSPublicKey");
 const searchFilterInput = document.getElementById("filter-input");
 const cards = Array.from(document.querySelectorAll(".card"));
 const useCaseContent = document.getElementById('useCaseContent');
@@ -57,6 +60,27 @@ function updateLogo() {
     }
     updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "logo", logoValue);
+    });
+}
+
+function updateOptionalAndroidPublicKey() {
+    const optionalAndroidPublicKey = optionalAndroidPublicKeyInput.value;
+    updateAllQueryStrings((url) => {
+        updateQueryStringParameter(url, "optionalAndroidPublicKey", optionalAndroidPublicKey);
+    });
+}
+
+function updateOptionaliOSPublicKey() {
+    const optionaliOSPublicKey = optionaliOSPublicKeyInput.value;
+    updateAllQueryStrings((url) => {
+        updateQueryStringParameter(url, "optionaliOSPublicKey", optionaliOSPublicKey);
+    });
+}
+
+function updateOptionalAppName() {
+    const appName = optionalAppNameInput.value;
+    updateAllQueryStrings((url) => {
+        updateQueryStringParameter(url, "optionalAppName", appName);
     });
 }
 
@@ -135,6 +159,9 @@ const updateInputsFromQueryParameters = () => {
     updateValueIfQueryParameterExists(primaryColorInput, 'primaryColor', updatePrimaryColor);
     updateValueIfQueryParameterExists(primaryColorDarkInput, 'primaryColorDark', updatePrimaryColorDark);
     updateValueIfQueryParameterExists(primaryForegroundColorInput, 'primaryForegroundColor', updatePrimaryForegroundColor);
+    updateValueIfQueryParameterExists(optionalAppNameInput, 'optionalAppName', updateOptionalAppName);
+    updateValueIfQueryParameterExists(optionalAndroidPublicKeyInput, 'optionalAndroidPublicKey', updateOptionalAndroidPublicKey);
+    updateValueIfQueryParameterExists(optionaliOSPublicKeyInput, 'optionaliOSPublicKey', updateOptionaliOSPublicKey);
     updateValueIfQueryParameterExists(searchFilterInput, 'search', performFilter);
     useCaseCheckboxInputs.forEach(input => {
         updateValueIfQueryParameterExists(input, 'usecase', performFilter);
@@ -220,6 +247,9 @@ logoInput.addEventListener("change", updateLogo);
 primaryColorInput.addEventListener("change", updatePrimaryColor);
 primaryColorDarkInput.addEventListener("change", updatePrimaryColorDark);
 primaryForegroundColorInput.addEventListener("change", updatePrimaryForegroundColor);
+optionalAppNameInput.addEventListener("change", updateOptionalAppName);
+optionalAndroidPublicKeyInput.addEventListener("change", updateOptionalAndroidPublicKey);
+optionaliOSPublicKeyInput.addEventListener("change", updateOptionaliOSPublicKey);
 useCaseCheckboxInputs.forEach(input => {
     input.addEventListener('change', performFilter);
 });
