@@ -52,6 +52,16 @@
     border-color: var(--bs-primary-dark);
 }
 
+.btn:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--bs-primary);
+}
+
+.btn-close:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem var(--bs-primary);
+}
+
 .btn-primary:active, .btn-primary.active {
     color: var(--bs-foreground)!important;
     background-color: var(--bs-primary-dark)!important;
