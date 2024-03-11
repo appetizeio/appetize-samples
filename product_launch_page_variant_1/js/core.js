@@ -87,7 +87,7 @@ async function selectPlatform(button, shouldUpdateSession = true) {
         return;
     }
 
-    const preferredPlatform = button.text.toLowerCase().trim();
+    const preferredPlatform = button.textContent.toLowerCase().trim();
     if(selection.platform === preferredPlatform) {
         console.log(`Already selected ${preferredPlatform}`);
         return;
@@ -157,7 +157,7 @@ async function updateSession() {
 async function checkPlatformAvailability() {
     const selectedProduct = selection.product;
     platformButtons.forEach((button) => {
-        const platformName = button.text.toLowerCase().trim();
+        const platformName = button.textContent.toLowerCase().trim();
         const isDisabled = !(platformName in selectedProduct);
         console.log(`Checking if ${platformName} is available for ${selectedProduct.name}: ${!isDisabled}`);
         setButtonDisabled(button, isDisabled);
@@ -191,10 +191,11 @@ async function runCustomActions(session) {
  * Creates a button with the given text and onClick function.
  * @param text The text to display on the button
  * @param onClick The function to call when the button is clicked
- * @returns {HTMLAnchorElement} The button element.
+ * @returns {HTMLButtonElement} The button element.
  */
 function createButton(text, onClick) {
-    const button = document.createElement('a');
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button')
     button.setAttribute('onClick', onClick);
     button.setAttribute('class', 'btn btn-primary material-button');
     button.innerText = text;

@@ -140,10 +140,11 @@ async function runCustomActions(session) {
  * Creates a button with the given text and onClick function.
  * @param text The text to display on the button
  * @param onClick The function to call when the button is clicked
- * @returns {HTMLAnchorElement} The button element.
+ * @returns {HTMLButtonElement} The button element.
  */
 function createButton(text, onClick) {
-    const button = document.createElement('a');
+    const button = document.createElement('button');
+    button.setAttribute('type', 'button')
     button.setAttribute('onClick', onClick);
     button.setAttribute('class', 'btn btn-primary material-button');
     button.innerText = text;
@@ -162,19 +163,6 @@ function toggleButtonActive(buttonGroup, button) {
         });
     }
     button.classList.add('active');
-}
-
-/**
- * Sets the disabled state of the given button.
- * @param button The button to set the disabled state of.
- * @param isDisabled Whether or not the button should be disabled.
- */
-function setButtonDisabled(button, isDisabled) {
-    if (isDisabled) {
-        button.classList.add('disabled');
-    } else {
-        button.classList.remove('disabled');
-    }
 }
 
 // On Page Load

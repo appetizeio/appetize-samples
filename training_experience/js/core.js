@@ -298,13 +298,14 @@ async function updateSession() {
  * Creates a button with the given text and onClick function.
  * @param text The text to display on the button
  * @param onClick The function to call when the button is clicked
- * @returns {HTMLAnchorElement} The button element.
+ * @returns {HTMLButtonElement} The button element.
  */
 function createButton(text, onClick) {
-    const button = document.createElement('a');
+    const button = document.createElement('button');
     button.setAttribute('onClick', onClick);
     button.setAttribute('class', 'btn btn-primary material-button');
     button.setAttribute('role', 'button');
+    button.setAttribute('type', 'button');
     button.innerHTML = `<span class="spinner-border spinner-border-sm me-2 d-none" role="status" aria-hidden="true"></span> ${text}`;
     return button;
 }

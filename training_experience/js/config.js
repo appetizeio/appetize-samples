@@ -7,7 +7,7 @@ const config = {
             buttonTitle: "Get Started",
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
             device: "pixel7",
-            osVersion: "14",
+            osVersion: "13",
             successTitle: "You're logged in!",
             successDescription: "You've successfully completed the tutorial! Now you know how to log in on the Wikipedia app.",
             steps: [
@@ -81,7 +81,7 @@ const config = {
             buttonTitle: "Let's Go",
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
             device: "pixel7",
-            osVersion: "14",
+            osVersion: "13",
             successTitle: "You read your first article!",
             successDescription: "You've successfully completed the tutorial! Now you know how to search for articles on Wikipedia.",
             steps: [
@@ -136,7 +136,7 @@ const config = {
             buttonTitle: "Learn to save",
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
             device: "pixel7",
-            osVersion: "14",
+            osVersion: "13",
             successTitle: "You saved your first article!",
             successDescription: "You've successfully completed the tutorial! Now you know how to save articles on Wikipedia.",
             steps: [
