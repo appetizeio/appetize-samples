@@ -26,7 +26,24 @@ const updateCSSVariable = (variableName, queryParamName) => {
     }
 };
 
+/**
+ * Updates the config apps to match the apps passed in the query parameters.
+ */
+function updateConfigApps() {
+    const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
+    const optionaliOSPublicKey = queryParams.get('optionaliOSPublicKey');
+
+    if (optionaliOSPublicKey) {
+        config.app.ios.publicKey = optionaliOSPublicKey;
+    }
+
+    if (optionalAndroidPublicKey) {
+        config.app.android.publicKey = optionalAndroidPublicKey;
+    }
+}
+
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
 updateCSSVariable('--bs-primary', 'primaryColor');
 updateCSSVariable('--bs-primary-dark', 'primaryColorDark');
 updateCSSVariable('--bs-foreground', 'primaryForegroundColor');
+updateConfigApps();
