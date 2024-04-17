@@ -1,4 +1,4 @@
-# Product Launch Page
+# Quick Launch Page
 This sample page demonstrates how to create a custom launch page by
 embedding Appetize to showcase the different apps and/or product features available in your
 business.
