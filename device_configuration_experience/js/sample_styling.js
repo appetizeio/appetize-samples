@@ -33,12 +33,14 @@ function updateConfigApps() {
     const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
     const optionaliOSPublicKey = queryParams.get('optionaliOSPublicKey');
 
-    if (optionaliOSPublicKey) {
-        config.app.ios.publicKey = optionaliOSPublicKey;
+    if (optionalAndroidPublicKey) {
+        config.defaultPlatform = "android";
+        config.app.android.publicKey = optionalAndroidPublicKey;
     }
 
-    if (optionalAndroidPublicKey) {
-        config.app.android.publicKey = optionalAndroidPublicKey;
+    if (optionaliOSPublicKey) {
+        config.defaultPlatform = "ios";
+        config.app.ios.publicKey = optionaliOSPublicKey;
     }
 }
 

@@ -4,6 +4,7 @@ const config = {
     toast: "top",       // Set to "top" or "bottom" to change the position of the toast message.
     scale: "auto",      // Set to "auto" or "0-100" to change the scale of the device.
     centered: "both",   // Set to "both", "horizontal", or "vertical" to change the centering of the device.
+    defaultPlatform: "ios", // Set to "ios" or "android" to change the default platform.
 
     // App Config
     app: {

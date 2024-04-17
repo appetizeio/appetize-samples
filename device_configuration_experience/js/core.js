@@ -288,11 +288,11 @@ async function updateSession(selection) {
 }
 
 /**
- * Starts a session with the default device specified on the iOS platform.
+ * Starts a session with the device specified on the default platform.
  * @returns {Promise<void>} A promise that resolves when the session is started.
  */
 async function startDefaultSession() {
-    await selectDevice(config.app.ios.defaultDevice);
+    await selectDevice(config.app[config.defaultPlatform].defaultDevice);
 }
 
 /**
