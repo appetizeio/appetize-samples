@@ -14,9 +14,22 @@ const updateLogoFromQueryParam = () => {
 };
 
 /**
- * Updates the config products to match the apps passed in the query parameters.
+ * Updates a CSS variable from a query parameter.
+ * @param variableName The name of the CSS variable.
+ * @param queryParamName The name of the query parameter.
  */
-function updateConfigProducts() {
+const updateCSSVariable = (variableName, queryParamName) => {
+    if (queryParams.has(queryParamName)) {
+        const value = queryParams.get(queryParamName);
+        console.log(`Updating ${variableName} to ${value}`);
+        document.documentElement.style.setProperty(variableName, value);
+    }
+};
+
+/**
+ * Updates the config apps to match the apps passed in the query parameters.
+ */
+function updateConfigApps() {
     const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
     const optionaliOSPublicKey = queryParams.get('optionaliOSPublicKey');
     const optionalAppName = queryParams.get('optionalAppName');
@@ -33,6 +46,9 @@ function updateConfigProducts() {
             name: name,
             publicKey: optionaliOSPublicKey,
             device: "iphone15pro",
+            osVersion: "17",
+            orientation: "portrait",
+            width: "300px",
         };
         config.products.push(product);
     }
@@ -43,26 +59,16 @@ function updateConfigProducts() {
             name: name,
             publicKey: optionalAndroidPublicKey,
             device: "pixel6",
+            osVersion: "13",
+            orientation: "portrait",
+            width: "300px",
         };
         config.products.push(product);
     }
 }
 
-/**
- * Updates a CSS variable from a query parameter.
- * @param variableName The name of the CSS variable.
- * @param queryParamName The name of the query parameter.
- */
-const updateCSSVariable = (variableName, queryParamName) => {
-    if (queryParams.has(queryParamName)) {
-        const value = queryParams.get(queryParamName);
-        console.log(`Updating ${variableName} to ${value}`);
-        document.documentElement.style.setProperty(variableName, value);
-    }
-};
-
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
 updateCSSVariable('--bs-primary', 'primaryColor');
 updateCSSVariable('--bs-primary-dark', 'primaryColorDark');
 updateCSSVariable('--bs-foreground', 'primaryForegroundColor');
-updateConfigProducts();
+updateConfigApps();
