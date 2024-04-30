@@ -51,7 +51,7 @@ async function initClient(config) {
  */
 async function fetchDeviceAndOSData() {
     try {
-        const response = await fetch('https://appetize.io/available-devices');
+        const response = await fetch('https://api.appetize.io/v2/service/devices');
         return await response.json();
     } catch (error) {
         console.error(error);
@@ -67,24 +67,24 @@ async function populateDropdowns() {
     try {
         const data = await fetchDeviceAndOSData();
         window.data = data;
-        const iOSDevices = Object.keys(data.ios);
-        const androidDevices = Object.keys(data.android);
+        const iOSDevices = data.filter(device => device.platform === 'ios');
+        const androidDevices = data.filter(device => device.platform === 'android');
 
         const deviceDropdown = document.getElementById('device-dropdown-content');
         deviceDropdown.appendChild(createDropdownHeader('iOS'));
         iOSDevices.forEach(device => {
             const option = document.createElement('a');
             option.classList.add('dropdown-item');
-            option.text = getDisplayName(device);
-            option.value = device;
+            option.text = device.name;
+            option.value = device.id;
             deviceDropdown.appendChild(option);
         });
         deviceDropdown.appendChild(createDropdownHeader('Android'));
         androidDevices.forEach(device => {
             const option = document.createElement('a');
             option.classList.add('dropdown-item');
-            option.text = getDisplayName(device);
-            option.value = device;
+            option.text = device.name;
+            option.value = device.id;
             deviceDropdown.appendChild(option);
         });
     } catch (error) {
@@ -133,13 +133,11 @@ async function selectDevice(device, shouldUpdateSession = true) {
         }
         const data = window.data;
 
+        const selectedDevice = data.find(deviceData => deviceData.id === device);
         let operatingSystems;
-        if (device in data.ios) {
-            operatingSystems = data.ios[device];
-            selection.platform = 'ios';
-        } else if (device in data.android) {
-            operatingSystems = data.android[device];
-            selection.platform = 'android';
+        if (selectedDevice) {
+            operatingSystems = selectedDevice.osVersions;
+            selection.platform = selectedDevice.platform;
         }
 
         if (operatingSystems) {
@@ -293,39 +291,6 @@ async function updateSession(selection) {
  */
 async function startDefaultSession() {
     await selectDevice(config.app[config.defaultPlatform].defaultDevice);
-}
-
-/**
- * Gets a pretty display name for the device.
- * @param deviceName The unformatted device name.
- * @returns {string} The pretty display name for the device.
- */
-function getDisplayName(deviceName) {
-    const deviceMapping = {
-        "iphone8": "iPhone 8",
-        "iphone8plus": "iPhone 8 Plus",
-        "iphone11pro": "iPhone 11 Pro",
-        "iphone12": "iPhone 12",
-        "iphone13pro": "iPhone 13 Pro",
-        "iphone13promax": "iPhone 13 Pro Max",
-        "iphone14pro": "iPhone 14 Pro",
-        "iphone14promax": "iPhone 14 Pro Max",
-        "iphone15pro": "iPhone 15 Pro",
-        "iphone15promax": "iPhone 15 Pro Max",
-        "ipadair4thgeneration": "iPad Air (4th Generation)",
-        "ipadpro129inch5thgeneration": "iPad Pro 12.9-inch (5th Generation)",
-        "ipad9thgeneration": "iPad (9th Generation)",
-        "nexus5": "Nexus 5",
-        "pixel4": "Pixel 4",
-        "pixel4xl": "Pixel 4 XL",
-        "pixel6": "Pixel 6",
-        "pixel6pro": "Pixel 6 Pro",
-        "pixel7": "Pixel 7",
-        "pixel7pro": "Pixel 7 Pro",
-        "galaxytabs7": "Galaxy Tab S7"
-    };
-
-    return deviceMapping[deviceName] || deviceName;
 }
 
 /**
