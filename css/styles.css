@@ -283,3 +283,8 @@ h2, .h2 {
     0% { transform: rotate(180deg); }
     100% { transform: rotate(360deg); }
 }
+
+.license-notice {
+    font-size: 0.85em;
+    color: #6c757d;
+}
