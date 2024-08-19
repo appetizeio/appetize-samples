@@ -1,6 +1,6 @@
 # Save Video Recording Example
 
-This sample page showcases how to record and save a video of the embedded device using Appetize JS SDK using [jmuxer](https://github.com/samirkumardas/jmuxer).
+This sample showcases how to record, store, download and replay all the interactions done in the embedded Appetize device.
 
 
 ### Update Branding / CSS
@@ -16,10 +16,20 @@ This sample page showcases how to record and save a video of the embedded device
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your application public key.
+Open the [config.js](js/config.js) file and update the `config` object to match your android/ios public key.
 
 ```js
+
 const config = {
-    
+    products: [
+        {
+            platform: 'iOS',
+            publicKey: '<application public key>'
+        },
+        {
+            platform: 'Android',
+            publicKey: '<application public key>'
+        },
+    ]
 }
 ```
