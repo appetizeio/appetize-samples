@@ -16,7 +16,7 @@ This sample showcases how to record, store, download and replay all the interact
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your android/ios public key.
+Open the [config.js](js/config.js) file and update the `config` object to match your android/ios build id.
 
 ```js
 

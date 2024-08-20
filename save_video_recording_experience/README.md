@@ -16,7 +16,7 @@ This sample page showcases how to record and save a video of the embedded device
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your application public key.
+Open the [config.js](js/config.js) file and update the `config` object to match your application build id.
 
 ```js
 const config = {
