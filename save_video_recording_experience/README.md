@@ -20,6 +20,9 @@ Open the [config.js](js/config.js) file and update the `config` object to match 
 
 ```js
 const config = {
-    publicKey: "{app public key}"
+    products: {
+        ios: "{ios app public key}",
+        android: "{android app public key}",
+    }
 }
 ```

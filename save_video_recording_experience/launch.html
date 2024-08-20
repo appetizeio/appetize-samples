@@ -29,7 +29,19 @@
                     <p class="ps-8" data-aos="fade-right">
                         This sample showcases how to show and save the video recording for an Appetize session. <br>
                     </p>
-                    <div class="ps-8 mb-5" data-aos="fade-right">
+                    <!-- Platform selection -->
+                    <p class="ps-8" data-aos="fade-right">
+                        Select your platform:
+                    </p>
+                    <div class="btn-group ps-8 mb-3" data-aos="fade-right" role="group">
+                        <button class="btn btn-primary active disabled" id="ios_button" disabled>
+                            iOS
+                        </button>
+                        <button class="btn btn-primary disabled" id="android_button" disabled>
+                            Android
+                        </button>
+                    </div>
+                    <div class="ps-8 mt-5" data-aos="fade-right">
                         <button id="show_recording" type="submit" class="btn btn-primary disabled" disabled>Show
                             recording</button>
                         <button id="stop_recording" type="submit" class="btn btn-outline-primary disabled">Stop
@@ -63,8 +75,8 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="lib/jmuxer.min.js"></script>
     <!-- Remove this script in your own implementation - Used for styling the demo experience -->
-    <script src="js/config.js"></script>
     <script src="js/sample_styling.js"></script>
+    <script src="js/config.js"></script>
     <script src="js/core.js"></script>
 </body>
 

@@ -62,12 +62,14 @@ function initSamples() {
         cardBody.appendChild(actionsGroup)
         // Sample link
         const sampleLink = document.createElement('a')
+        sampleLink.target = "_blank"
         sampleLink.classList.add('btn', 'btn-primary', 'sampleLink')
         sampleLink.href = sample.sample
         sampleLink.innerText = 'Sample'
         actionsGroup.appendChild(sampleLink)
         // Source Code link
         const sourceCode = document.createElement('a')
+        sourceCode.target = "_blank"
         sourceCode.classList.add('btn', 'btn-outline-primary')
         sourceCode.href = sample.sourceCode
         sourceCode.innerText = 'Source Code'

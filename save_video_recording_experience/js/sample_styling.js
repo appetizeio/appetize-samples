@@ -31,13 +31,18 @@ const updateCSSVariable = (variableName, queryParamName) => {
  */
 function updateConfigApps() {
     const optionaliOSPublicKey = queryParams.get('optionaliOSPublicKey');
+    const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
 
-    if (!optionaliOSPublicKey) {
+    if (!optionaliOSPublicKey && !optionalAndroidPublicKey) {
         return;
     }
 
     if (optionaliOSPublicKey) {
-        config.publicKey = optionaliOSPublicKey
+        config.products.ios = optionaliOSPublicKey
+    }
+
+    if (optionalAndroidPublicKey) {
+        config.products.android = optionalAndroidPublicKey
     }
 }
 
