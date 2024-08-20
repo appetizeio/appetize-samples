@@ -24,11 +24,11 @@ const config = {
     products: [
         {
             platform: 'iOS',
-            publicKey: '<application public key>'
+            buildId: '<application build id>'
         },
         {
             platform: 'Android',
-            publicKey: '<application public key>'
+            buildId: '<application build id>'
         },
     ]
 }

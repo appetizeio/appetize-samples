@@ -25,7 +25,7 @@ function setDisabled(button, disabled) {
 }
 
 function getConfiguration() {
-    return { publicKey: selected.publicKey }
+    return { publicKey: selected.buildId }
 }
 
 
