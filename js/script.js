@@ -3,7 +3,6 @@
 // Global Variables
 
 const queryParams = new URLSearchParams(window.location.search);
-const sampleLinks = document.querySelectorAll(`.sampleLink`);
 const samplesContainer = document.getElementById("samplesContainer");
 const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
@@ -165,7 +164,7 @@ const isValidURL = (url) => {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateSampleLinksQueryStrings(callback) {
-    sampleLinks.forEach((link) => {
+    document.querySelectorAll('.sampleLink').forEach((link) => {
         const url = new URL(link.href);
         callback(url);
         link.href = url.toString();
