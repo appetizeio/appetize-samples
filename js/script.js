@@ -3,7 +3,7 @@
 // Global Variables
 
 const queryParams = new URLSearchParams(window.location.search);
-const sampleLinks = document.querySelectorAll(`.sampleLink`);
+const samplesContainer = document.getElementById("samplesContainer");
 const logoInput = document.getElementById("logoUpload");
 const primaryColorInput = document.getElementById("primaryColor");
 const primaryColorDarkInput = document.getElementById("primaryColorDark");
@@ -12,11 +12,72 @@ const optionalAppNameInput = document.getElementById("optionalAppName");
 const optionalAndroidPublicKeyInput = document.getElementById("optionalAndroidPublicKey");
 const optionaliOSPublicKeyInput = document.getElementById("optionaliOSPublicKey");
 const searchFilterInput = document.getElementById("filter-input");
-const cards = Array.from(document.querySelectorAll(".card"));
 const useCaseContent = document.getElementById('useCaseContent');
 const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
 const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
 // Init Functions
+
+/**
+ * Set up all the samples cards
+ */
+function initSamples() {
+    samples.forEach(sample => {
+        const cardContainer = document.createElement('div')
+        cardContainer.classList.add('col-md-6', 'mt-3')
+        // Card element setup
+        const card = document.createElement('div')
+        card.classList.add('card', 'bg-white', 'h-100', 'mt-3', 'ps-4', 'pe-4', 'pt-3', 'pb-3')
+        card.setAttribute('data-tags', sample.tags.join(','))
+        cardContainer.appendChild(card)
+
+        // Card body
+        const cardBody = document.createElement('div')
+        cardBody.classList.add('card-body', 'd-flex', 'flex-column')
+        card.appendChild(cardBody)
+
+        // Card title
+        const title = document.createElement('h4')
+        title.classList.add('card-title')
+        title.innerText = sample.title
+        cardBody.appendChild(title)
+
+        // Subtitle
+        if (sample.subtitle) {
+            const subtitle = document.createElement('h6')
+            subtitle.classList.add('card-subtitle', 'mb-3', 'text-muted')
+            subtitle.innerText = sample.subtitle
+            cardBody.appendChild(subtitle)
+        }
+
+        // Card text
+        const text = document.createElement('p')
+        text.classList.add('card-text')
+        text.innerText = sample.description
+        cardBody.appendChild(text)
+
+        // Actions Group
+        const actionsGroup = document.createElement('div')
+        actionsGroup.classList.add('d-grid', 'gap-2', 'mt-auto')
+        cardBody.appendChild(actionsGroup)
+        // Sample link
+        const sampleLink = document.createElement('a')
+        sampleLink.target = "_blank"
+        sampleLink.classList.add('btn', 'btn-primary', 'sampleLink')
+        sampleLink.href = sample.sample
+        sampleLink.innerText = 'Sample'
+        actionsGroup.appendChild(sampleLink)
+        // Source Code link
+        const sourceCode = document.createElement('a')
+        sourceCode.target = "_blank"
+        sourceCode.classList.add('btn', 'btn-outline-primary')
+        sourceCode.href = sample.sourceCode
+        sourceCode.innerText = 'Source Code'
+        actionsGroup.appendChild(sourceCode)
+
+        // Add the new card to the samples container
+        samplesContainer.appendChild(cardContainer)
+    })
+}
 
 /**
  * Updates the primary color in the sample links.
@@ -54,7 +115,7 @@ function updatePrimaryForegroundColor() {
 function updateLogo() {
     console.log("Updating logo")
     const logoValue = logoInput.value;
-    if(!isValidURL(logoValue)) {
+    if (!isValidURL(logoValue)) {
         console.log("Invalid URL");
         return;
     }
@@ -103,7 +164,7 @@ const isValidURL = (url) => {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateSampleLinksQueryStrings(callback) {
-    sampleLinks.forEach((link) => {
+    document.querySelectorAll('.sampleLink').forEach((link) => {
         const url = new URL(link.href);
         callback(url);
         link.href = url.toString();
@@ -116,7 +177,7 @@ function updateSampleLinksQueryStrings(callback) {
  * @param callback A callback function that takes a URL object and updates it.
  */
 function updateMainUrlQueryStrings(callback) {
-    const mainUrl= new URL(window.location.href);
+    const mainUrl = new URL(window.location.href);
     callback(mainUrl);
     window.history.replaceState({}, document.title, mainUrl.toString());
 }
@@ -175,7 +236,7 @@ const updateInputsFromQueryParameters = () => {
  * @param action The action to perform if the query parameter exists.
  */
 const updateValueIfQueryParameterExists = (input, queryParameter, action) => {
-    if(queryParams.has(queryParameter)) {
+    if (queryParams.has(queryParameter)) {
         const value = queryParams.get(queryParameter);
         if (input.type === 'checkbox') {
             const values = value.split(',');
@@ -194,7 +255,7 @@ function performFilter() {
     const query = searchFilterInput.value.toLowerCase();
     const checkedInputs = document.querySelectorAll('.form-check-input:checked');
     const selectedTags = Array.from(checkedInputs).map(input => input.id.toLowerCase());
-
+    const cards = Array.from(document.querySelectorAll(".card"));
     cards.forEach((card) => {
         const title = card.querySelector(".card-title").textContent.toLowerCase();
         const text = card.querySelector(".card-text").textContent.toLowerCase();
@@ -239,6 +300,7 @@ function handleUseCaseAnimation(eventType, animationName, oldClass, newClass) {
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
+    initSamples()
     updateInputsFromQueryParameters();
 });
 

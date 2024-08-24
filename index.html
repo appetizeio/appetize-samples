@@ -1,17 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Appetize Samples</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="i/favicon.ico" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet"/>
+    <link href="css/styles.css" rel="stylesheet" />
     <script>
-        !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-        posthog.init('phc_kPJWkN7zdHKVrAkmpzgDa2KDcAbncvlOWvZVUZTUunO',{api_host:'https://us.i.posthog.com'})
+        !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+        posthog.init('phc_kPJWkN7zdHKVrAkmpzgDa2KDcAbncvlOWvZVUZTUunO', { api_host: 'https://us.i.posthog.com' })
     </script>
     <script async src='https://www.googletagmanager.com/gtag/js?id=G-2R31P5Q9K7'>
     </script>
@@ -26,371 +27,168 @@
 </head>
 
 <body class="mb-5">
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <div class="container-fluid mx-3">
-        <a class="navbar-brand" href="#">
-            <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg"
-                 width="180">
-            Samples
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid mx-3">
+            <a class="navbar-brand" href="#">
+                <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg" width="180">
+                Samples
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="https://appetize.io/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="https://github.com/appetizeio/appetize-samples">Github</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="sideMenu mt-3 col-md-2 bg-light p-4 pb-5 me-5 ms-5">
-            <div class="input-group">
-                <div class="input-group-prepend">
-            <span class="input-group-text">
-                <i class="bi bi-search"></i>
-            </span>
-                </div>
-                <label for="filter-input"></label>
-                <input class="form-control border" type="search" placeholder="Search..." id="filter-input">
-            </div>
-            <div class="mt-4">
-                <h5 class="d-flex justify-content-between align-items-center mb-3">
-                    <a class="text-dark text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
-                       role="button" aria-expanded="true" aria-controls="useCaseContent">
-                        Use Case
-                    </a>
-                    <i class="bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
-                       aria-expanded="true" aria-controls="useCaseContent"></i>
-                </h5>
-                <div id="useCaseContent" class="collapse show">
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="demo engineering" id="demo engineering">
-                        <label class="form-check-label" for="demo engineering">
-                            Demo Engineering
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="testing" id="testing">
-                        <label class="form-check-label" for="testing">
-                            Testing
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="training" id="training">
-                        <label class="form-check-label" for="training">
-                            Training
-                        </label>
-                    </div>
-                    <div class="form-check mb-2">
-                        <input class="form-check-input" type="checkbox" value="support" id="support">
-                        <label class="form-check-label" for="support">
-                            Support
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <!-- License notice section -->
-            <div class="mt-4 license-notice">
-                <p class="mb-0">
-                    This sample collection is licensed under the
-                    <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-dark" target="_blank">MIT License</a>.
-                </p>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://appetize.io/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/appetizeio/appetize-samples">Github</a>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
 
-        <div class="col-md-8">
-            <section class="container py-10 py-lg-20 bg-bg-3 text-center text-md-start">
-                <div class="accordion mt-3" id="accordionStyling">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="setStyleHeader">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="sideMenu mt-3 col-md-2 bg-light p-4 pb-5 me-5 ms-5">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="bi bi-search"></i>
+                        </span>
+                    </div>
+                    <label for="filter-input"></label>
+                    <input class="form-control border" type="search" placeholder="Search..." id="filter-input">
+                </div>
+                <div class="mt-4">
+                    <h5 class="d-flex justify-content-between align-items-center mb-3">
+                        <a class="text-dark text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
+                            role="button" aria-expanded="true" aria-controls="useCaseContent">
+                            Use Case
+                        </a>
+                        <i class="bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
+                            aria-expanded="true" aria-controls="useCaseContent"></i>
+                    </h5>
+                    <div id="useCaseContent" class="collapse show">
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="demo engineering"
+                                id="demo engineering">
+                            <label class="form-check-label" for="demo engineering">
+                                Demo Engineering
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="testing" id="testing">
+                            <label class="form-check-label" for="testing">
+                                Testing
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="training" id="training">
+                            <label class="form-check-label" for="training">
+                                Training
+                            </label>
+                        </div>
+                        <div class="form-check mb-2">
+                            <input class="form-check-input" type="checkbox" value="support" id="support">
+                            <label class="form-check-label" for="support">
+                                Support
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- License notice section -->
+                <div class="mt-4 license-notice">
+                    <p class="mb-0">
+                        This sample collection is licensed under the
+                        <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-dark"
+                            target="_blank">MIT License</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <section class="container py-10 py-lg-20 bg-bg-3 text-center text-md-start">
+                    <div class="accordion mt-3" id="accordionStyling">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="setStyleHeader">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#collapseStyling" aria-expanded="false"
                                     aria-controls="collapseStyling">
-                                Personalize your Sample Experience
-                            </button>
-                        </h2>
-                        <div id="collapseStyling" class="accordion-collapse collapse" aria-labelledby="setStyleHeader"
-                             data-bs-parent="#accordionStyling">
-                            <div class="accordion-body">
-                                <form>
-                                    <div class="mb-3">
-                                        <label for="logoUpload" class="form-label">Brand Logo</label>
-                                        <input type="text" class="form-control" id="logoUpload"
-                                               placeholder="Enter the URL of the logo">
-                                        <small class="form-text text-muted" style="height: 400px">Hint: Try and use
-                                            an image
-                                            with a height of ~400 pixels and no padding. Use one of the free image
-                                            hosting sites
-                                            or your own site to host the image.</small>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="primaryColor" class="form-label">Primary Color</label>
-                                        <input type="color" class="form-control" id="primaryColor"
-                                               pattern="#[A-Fa-f0-9]{6}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
-                                        <input type="color" class="form-control" id="primaryColorDark"
-                                               pattern="#[A-Fa-f0-9]{6}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="primaryForegroundColor" class="form-label">Primary Foreground
-                                            Color</label>
-                                        <input type="color" class="form-control" id="primaryForegroundColor"
-                                               pattern="#[A-Fa-f0-9]{6}">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="optionalAppName" class="form-label">Optional App Name</label>
-                                        <input type="text" class="form-control" id="optionalAppName"
-                                               placeholder="Enter the app name">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="optionalAndroidPublicKey" class="form-label">Optional Android Public Key</label>
-                                        <input type="text" class="form-control" id="optionalAndroidPublicKey"
-                                               placeholder="Enter the Android publicKey">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="optionaliOSPublicKey" class="form-label">Optional iOS Public Key</label>
-                                        <input type="text" class="form-control" id="optionaliOSPublicKey"
-                                               placeholder="Enter the iOS publicKey">
-                                        <small class="form-text text-muted" style="height: 400px">Note: Custom app publicKeys might only work on some samples.</small>
-                                    </div>
-                                </form>
+                                    Personalize your Sample Experience
+                                </button>
+                            </h2>
+                            <div id="collapseStyling" class="accordion-collapse collapse"
+                                aria-labelledby="setStyleHeader" data-bs-parent="#accordionStyling">
+                                <div class="accordion-body">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="logoUpload" class="form-label">Brand Logo</label>
+                                            <input type="text" class="form-control" id="logoUpload"
+                                                placeholder="Enter the URL of the logo">
+                                            <small class="form-text text-muted" style="height: 400px">Hint: Try and use
+                                                an image
+                                                with a height of ~400 pixels and no padding. Use one of the free image
+                                                hosting sites
+                                                or your own site to host the image.</small>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="primaryColor" class="form-label">Primary Color</label>
+                                            <input type="color" class="form-control" id="primaryColor"
+                                                pattern="#[A-Fa-f0-9]{6}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
+                                            <input type="color" class="form-control" id="primaryColorDark"
+                                                pattern="#[A-Fa-f0-9]{6}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="primaryForegroundColor" class="form-label">Primary Foreground
+                                                Color</label>
+                                            <input type="color" class="form-control" id="primaryForegroundColor"
+                                                pattern="#[A-Fa-f0-9]{6}">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="optionalAppName" class="form-label">Optional App Name</label>
+                                            <input type="text" class="form-control" id="optionalAppName"
+                                                placeholder="Enter the app name">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="optionalAndroidPublicKey" class="form-label">Optional Android
+                                                Public Key</label>
+                                            <input type="text" class="form-control" id="optionalAndroidPublicKey"
+                                                placeholder="Enter the Android publicKey">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="optionaliOSPublicKey" class="form-label">Optional iOS Public
+                                                Key</label>
+                                            <input type="text" class="form-control" id="optionaliOSPublicKey"
+                                                placeholder="Enter the iOS publicKey">
+                                            <small class="form-text text-muted" style="height: 400px">Note: Custom app
+                                                publicKeys might only work on some samples.</small>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row mb-3">
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title">Quick Launch Page</h4>
-                                <h6 class="card-subtitle mb-3 text-muted">Variant 1</h6>
-                                <p class="card-text">This sample page demonstrates how to create a custom launch
-                                    page by
-                                    embedding Appetize to showcase the different apps and/or product features
-                                    available in your
-                                    business.</p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink"
-                                       href="product_launch_page_variant_1/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_1"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row mb-3" id="samplesContainer">
                     </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title">Quick Launch Page</h4>
-                                <h6 class="card-subtitle mb-3 text-muted">Variant 2</h6>
-                                <p class="card-text">This sample page demonstrates how to create a custom launch
-                                    page by
-                                    embedding Appetize to showcase the different apps and/or product features
-                                    available in your
-                                    business.</p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink"
-                                       href="product_launch_page_variant_2/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/product_launch_page_variant_2"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Device Configuration Experience</h4>
-                                <p class="card-text">This sample page demonstrates how you can fetch all the
-                                    available devices
-                                    Appetize has to offer as well as how you can specify device configurations
-                                    such as model, Operating System, orientation and much more!</p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink"
-                                       href="device_configuration_experience/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="testing,support">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Pass Credentials Launch Page</h4>
-                                <p class="card-text">This sample page demonstrates how to create a custom launch
-                                    page that can
-                                    automatically pass in user credentials to any app and log in that
-                                    user.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink"
-                                       href="pass_credentials_launch_page/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/pass_credentials_launch_page"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,training,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Screenshot Automation</h4>
-                                <p class="card-text">This sample showcases how to use the Appetize JS SDK to
-                                    automate
-                                    screenshots of your app.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink" href="screenshot_automation/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/screenshot_automation"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="support,training">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Training Experience</h4>
-                                <p class="card-text">This sample page demonstrates how to create a custom training
-                                    experience
-                                    that can be used to train users on how to use your app.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink" href="training_experience/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/training_experience"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Language Picker Experience</h4>
-                                <p class="card-text">If your app supports multiple languages, this sample demonstrates how to create a language
-                                    picker experience that can be used to change the language of your app.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink" href="language_picker_launch_page/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/language_picker_launch_page"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Storybook Samples</h4>
-                                <p class="card-text">These samples showcase how you can use Appetize inside Storybook to showcase your app
-                                    and/or app components in a Storybook environment.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink" href="https://storybookjs.github.io/native/"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/storybookjs/native"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 mt-3">
-                        <div class="card bg-white h-100 mt-3 ps-4 pe-4 pt-3 pb-3" data-tags="demo engineering,support,testing">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title mb-3">Quick Debuggable Experience</h4>
-                                <h6 class="card-subtitle mb-3 text-muted">Includes screenshot and logs exporting</h6>
-                                <p class="card-text">This sample page demonstrates how to create a custom launch
-                                    page by
-                                    embedding Appetize to showcase the different apps and/or product features
-                                    available in your
-                                    business.
-                                    It also includes the ability to take screenshots and download network, debug and AppRecorder logs.
-                                </p>
-                                <div class="d-grid gap-2 mt-auto">
-                                    <a class="btn btn-primary sampleLink" href="quick_debuggable_experience/launch.html"
-                                       target="_blank">
-                                        Sample
-                                    </a>
-                                    <a class="btn btn-outline-primary"
-                                       href="https://github.com/appetizeio/appetize-samples/tree/main/quick_debuggable_experience"
-                                       target="_blank">
-                                        Source Code
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-<script src="js/script.js"></script>
+    <script src="js/samples.js"></script>
+    <script src="js/script.js"></script>
 
 </body>
+
 </html>
