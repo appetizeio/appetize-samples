@@ -133,7 +133,7 @@ async function validateUserAction(session, action) {
     }
 
     console.log(action);
-    if(await activeStep.validate(session, action)) {
+    if (await activeStep.validate(session, action)) {
         completeStep(activeStepIndex);
     }
 }
@@ -178,12 +178,12 @@ async function selectTutorial(index, shouldUpdateSession = true) {
     const clickedButton = allButtons[index];
     showSpinner(clickedButton);
 
+    loadTutorialSteps(tutorial);
+    showAndHideWithAnimation(tutorialContent, tutorialSelection);
+
     if (shouldUpdateSession) {
         await updateSession();
     }
-
-    loadTutorialSteps(tutorial);
-    showAndHideWithAnimation(tutorialContent, tutorialSelection);
 
     allButtons.forEach(button => {
         enableButton(button);
