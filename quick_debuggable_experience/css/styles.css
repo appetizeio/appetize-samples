@@ -62,10 +62,11 @@
     box-shadow: 0 0 0 0.25rem var(--bs-primary);
 }
 
-.btn-primary:active, .btn-primary.active {
-    color: var(--bs-foreground)!important;
-    background-color: var(--bs-primary-dark)!important;
-    border-color: var(--bs-primary-dark)!important;
+.btn-primary:active,
+.btn-primary.active {
+    color: var(--bs-foreground) !important;
+    background-color: var(--bs-primary-dark) !important;
+    border-color: var(--bs-primary-dark) !important;
     border: 2px solid var(--bs-primary);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25) !important;
 }
@@ -76,10 +77,14 @@
     border-color: var(--bs-primary);
 }
 
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
-    color: var(--bs-foreground)!important;
-    background-color: var(--bs-primary-dark)!important;
-    border-color: var(--bs-primary-dark)!important;
+.btn-check:checked+.btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check)+.btn:active {
+    color: var(--bs-foreground) !important;
+    background-color: var(--bs-primary-dark) !important;
+    border-color: var(--bs-primary-dark) !important;
 }
 
 .device-toolbar-btn {
@@ -88,7 +93,8 @@
 }
 
 .device-toolbar {
-    margin-top: -1.8em;
+    margin-top: 0.4em;
+    padding-bottom: 1rem;
 }
 
 .logo {
@@ -110,7 +116,8 @@ p {
     margin-bottom: 1rem;
 }
 
-h2, .h2 {
+h2,
+.h2 {
     margin-top: var(--h2-top-margin);
     font-weight: 700;
     line-height: 1.25;
@@ -123,7 +130,7 @@ h2, .h2 {
     margin-left: -1.25em;
 }
 
-#appActions > * {
+#appActions>* {
     margin-left: 1.25rem;
     margin-bottom: 1em;
 }
