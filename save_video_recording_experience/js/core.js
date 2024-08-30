@@ -3,7 +3,7 @@
 let h264Frames = []
 let videoBuffer = []
 const appetizeIframeName = '#appetize';
-const stopRecordingButton = document.getElementById('stop_recording');
+const toggleRecording = document.getElementById('toggle_recording');
 const showRecordingButton = document.getElementById('show_recording');
 const saveRecordingButton = document.getElementById('save_recording');
 const recordingModalElement = document.getElementById('recordingModal');
@@ -69,10 +69,17 @@ function setupPlatformSelection() {
 /**
  * Stops the recording and feed JMuxer with the frames
  */
-function setupStopVideoRecordingButton() {
-    stopRecordingButton.onclick = async () => {
-        // Clear the frames and disable the button
-        await window.session.end()
+function setupToggleVideoRecordingButton() {
+    toggleRecording.onclick = async () => {
+        // Disable until the next action can be performed
+        setDisabled(toggleRecording, true)
+
+        if (recording) {
+            // Clear the frames and disable the button
+            await window.session.end()
+        } else {
+            await window.client.startSession();
+        }
     }
 }
 
@@ -83,6 +90,19 @@ function setUpShowVideoRecordingButton() {
     showRecordingButton.onclick = async () => {
         const recordingModal = new bootstrap.Modal(recordingModalElement);
         recordingModal.show();
+    }
+}
+
+function toggleRecordingState() {
+    recording = !recording
+    if (!recording) {
+        toggleRecording.classList.remove('btn-outline-primary')
+        toggleRecording.classList.add('btn-primary')
+        toggleRecording.innerText = 'Start recording'
+    } else {
+        toggleRecording.classList.remove('btn-primary')
+        toggleRecording.classList.add('btn-outline-primary')
+        toggleRecording.innerText = 'Stop recording'
     }
 }
 
@@ -116,9 +136,10 @@ function subscribeSessionEvents(session) {
     })
 
     session.on('end', async () => {
+        toggleRecordingState()
         setDisabled(showRecordingButton, false)
         setDisabled(saveRecordingButton, false)
-        setDisabled(stopRecordingButton, true)
+        setDisabled(toggleRecording, false)
         jmuxer.reset()
         await waitForJMuxer()
         h264Frames.forEach((frame) => {
@@ -175,16 +196,17 @@ async function initClient() {
             }, 100)
         })
         console.log(`Loading client for ${appetizeIframeName}`);
-        window.client = await window.appetize.getClient(appetizeIframeName, { publicKey: config.products.ios });
+        window.client = await window.appetize.getClient(appetizeIframeName, { publicKey: config.products.ios, scale: 'auto', centered: 'both' });
         console.log('client loaded!');
         window.client.on("session", async session => {
             try {
+                toggleRecordingState()
                 window.session = session
                 console.log('session started!')
                 h264Frames = []
                 videoBuffer = []
                 // Enable the recording once the session has started
-                setDisabled(stopRecordingButton, false)
+                setDisabled(toggleRecording, false)
                 setDisabled(saveRecordingButton, true)
                 setDisabled(showRecordingButton, true)
                 subscribeSessionEvents(session)
@@ -204,7 +226,7 @@ async function initClient() {
 document.addEventListener('DOMContentLoaded', async () => {
     initAnimations()
     await initClient()
-    setupStopVideoRecordingButton()
+    setupToggleVideoRecordingButton()
     setUpShowVideoRecordingButton()
     setUpSaveVideoRecordingButton()
     setupPlatformSelection()
