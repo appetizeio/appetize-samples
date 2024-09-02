@@ -6,6 +6,7 @@ let actions = []
 const appetizeIframeName = '#appetize';
 const saveActions = document.getElementById("save_actions")
 const replayActions = document.getElementById("replay_actions")
+const startOver = document.getElementById("start_over")
 const showActions = document.getElementById("show_actions")
 const actionsModal = document.getElementById('actions_modal')
 const copyActions = document.getElementById('copy_actions')
@@ -25,7 +26,17 @@ function setDisabled(button, disabled) {
 }
 
 function getConfiguration() {
-    return { publicKey: selected.buildId }
+    return { publicKey: selected.buildId, scale: 'auto', centered: 'both' }
+}
+
+
+function clearActions() {
+    // Clear all the actions
+    actions = []
+    setDisabled(saveActions, true)
+    setDisabled(replayActions, true)
+    setDisabled(showActions, true)
+    setDisabled(startOver, true)
 }
 
 
@@ -80,6 +91,16 @@ function downloadActionsListener() {
 }
 
 /**
+ * Clears all the actions recorded 
+ */
+function setupStartOverButton() {
+    startOver.onclick = async () => {
+        clearActions()
+        await session.reinstallApp()
+    }
+}
+
+/**
  * Binds the restart and playback actions callback to the button
  */
 function restartAndReplayActionsListener() {
@@ -89,6 +110,7 @@ function restartAndReplayActionsListener() {
         playback = true
         const text = replayActions.innerText
         setDisabled(replayActions, true)
+        setDisabled(startOver, true)
         setDisabled(androidButton, true)
         setDisabled(iosButton, true)
         try {
@@ -107,6 +129,7 @@ function restartAndReplayActionsListener() {
         replayActions.innerText = text
         setDisabled(replayActions, false)
         setDisabled(androidButton, false)
+        setDisabled(startOver, false)
         setDisabled(iosButton, false)
 
         playback = false
@@ -145,15 +168,13 @@ function subscribeSessionForActions(session) {
             setDisabled(saveActions, false)
             setDisabled(replayActions, false)
             setDisabled(showActions, false)
+            setDisabled(startOver, false)
         }
     })
 
     session.on('end', () => {
         // Clear all the actions
-        actions = []
-        setDisabled(saveActions, true)
-        setDisabled(replayActions, true)
-        setDisabled(showActions, true)
+        clearActions()
     })
 }
 
@@ -237,4 +258,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     restartAndReplayActionsListener()
     downloadActionsListener()
     showActionsListener()
+    setupStartOverButton()
 })

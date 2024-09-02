@@ -20,23 +20,23 @@
 <body>
     <section class="py-10 py-lg-20 bg-bg-3 text-center text-md-start mt-3">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center" style="min-height: 100vh;">
                 <div class="mb-12 mb-md-0 col-md-6 col-xl-5">
                     <img id="frontpage_logo" alt="logo" class="img-fluid mb-6 mt-6 w-50 logo" data-aos="fade-right"
                         data-aos-delay="150" src="i/frontpage_logo.png" srcset="i/frontpage_logo@2x.png 2x">
                     <h2 class="mb-6 display-5 ps-8 mt-8" data-aos="fade-right" data-aos-delay="250">
                         Record and playback
                     </h2>
-                    <p class="ps-8" data-aos="fade-right">
+                    <p data-aos="fade-right">
                         This sample showcases how to record, store, download and replay all the interactions done in the
                         embedded Appetize device. <br>
 
                     </p>
                     <!-- Platform selection -->
-                    <p class="ps-8" data-aos="fade-right">
+                    <p data-aos="fade-right">
                         Select your platform:
                     </p>
-                    <div class="btn-group ps-8 mb-3" data-aos="fade-right" role="group">
+                    <div class="btn-group ps-8" data-aos="fade-right" role="group">
                         <button class="btn btn-primary active disabled" id="ios_button" disabled>
                             iOS
                         </button>
@@ -44,21 +44,38 @@
                             Android
                         </button>
                     </div>
-                    <div class="mt-5" data-aos="fade-right">
-                        <button id="replay_actions" type="submit" class="btn btn-primary disabled" disabled>Replay
+
+                    <!-- Controls -->
+                    <p class="mt-3" data-aos="fade-right">
+                        Controls:
+                    </p>
+                    <div data-aos="fade-right">
+                        <button id="replay_actions" class="btn btn-primary disabled" disabled>Replay
                             actions</button>
-                        <button id="show_actions" type="submit" class="btn btn-primary disabled" disabled>Show
-                            actions</button>
+
+                        <button id="start_over" class="btn btn-outline-primary disabled" disabled>
+                            Start Over
+                        </button>
                     </div>
+
+                    <!-- Actions -->
+                    <p class="mt-3" data-aos="fade-right">
+                        Actions:
+                    </p>
+                    <div data-aos="fade-right">
+                        <button id="show_actions" class="btn btn-primary disabled" disabled>Show
+                            actions</button>
+                        <button id="save_actions" class="btn btn-primary disabled mx-auto" disabled>
+                            <i class="bi bi-download me-2"></i> Save actions
+                        </button>
+                    </div>
+
                 </div>
                 <div class="col-md-5 col-lg-6 text-center">
                     <div>
-                        <iframe data-aos="fade-in" height="700px" id="appetize" style="overflow:hidden;" width="350px">
+                        <iframe data-aos="fade-in" id="appetize" style="overflow:hidden; height: 90vh; width: 100%;">
                         </iframe>
                     </div>
-                    <button id="save_actions" type="submit" class="btn btn-primary disabled mx-auto" disabled>
-                        <i class="bi bi-download me-2"></i> Save actions
-                    </button>
                 </div>
             </div>
         </div>

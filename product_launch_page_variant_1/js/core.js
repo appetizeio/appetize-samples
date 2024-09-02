@@ -88,7 +88,7 @@ async function selectPlatform(button, shouldUpdateSession = true) {
     }
 
     const preferredPlatform = button.textContent.toLowerCase().trim();
-    if(selection.platform === preferredPlatform) {
+    if (selection.platform === preferredPlatform) {
         console.log(`Already selected ${preferredPlatform}`);
         return;
     }
@@ -108,7 +108,7 @@ async function selectPlatform(button, shouldUpdateSession = true) {
  */
 async function selectApp(index, shouldUpdateSession = true) {
     const product = config.products[index];
-    if(selection.product === product) {
+    if (selection.product === product) {
         console.log(`Already selected ${product.name}`)
         return;
     }

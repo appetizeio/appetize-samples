@@ -17,9 +17,9 @@
 </head>
 
 <body>
-    <section class="py-10 py-lg-20 bg-bg-3 text-center text-md-start mt-3">
+    <section class="py-10 py-lg-20 text-center text-md-start">
         <div class="container">
-            <div class="row align-items-center">
+            <div class="row align-items-center" style="min-height: 100vh;">
                 <div class="mb-12 mb-md-0 col-md-6 col-xl-5">
                     <img id="frontpage_logo" alt="logo" class="img-fluid mb-6 mt-6 w-50 logo" data-aos="fade-right"
                         data-aos-delay="150" src="i/frontpage_logo.png" srcset="i/frontpage_logo@2x.png 2x">
@@ -33,7 +33,7 @@
                     <p class="ps-8" data-aos="fade-right">
                         Select your platform:
                     </p>
-                    <div class="btn-group ps-8 mb-3" data-aos="fade-right" role="group">
+                    <div class="btn-group ps-8" data-aos="fade-right" role="group">
                         <button class="btn btn-primary active disabled" id="ios_button" disabled>
                             iOS
                         </button>
@@ -41,21 +41,34 @@
                             Android
                         </button>
                     </div>
-                    <div class="ps-8 mt-5" data-aos="fade-right">
+                    <!-- Controls -->
+                    <p class="mt-3" data-aos="fade-right">
+                        Controls
+                    </p>
+
+                    <!-- class="btn btn-outline-primary disabled" -->
+                    <button id="toggle_recording" type="submit" class="btn btn-primary">
+                        Start recording
+                    </button>
+
+                    <!-- Actions -->
+                    <p class="mt-3" data-aos="fade-right">
+                        Actions
+                    </p>
+
+                    <div data-aos="fade-right">
                         <button id="show_recording" type="submit" class="btn btn-primary disabled" disabled>Show
                             recording</button>
-                        <button id="stop_recording" type="submit" class="btn btn-outline-primary disabled">Stop
-                            recording</button>
+                        <button id="save_recording" type="submit" class="btn btn-primary disabled mx-auto" disabled>
+                            <i class="bi bi-download me-2"></i> Save recording
+                        </button>
                     </div>
                 </div>
                 <div class="col-md-5 col-lg-6 text-center">
                     <div>
-                        <iframe data-aos="fade-in" height="700px" id="appetize" style="overflow:hidden;" width="350px">
+                        <iframe data-aos="fade-in" id="appetize" style="overflow:hidden; height: 90vh; width: 100%;">
                         </iframe>
                     </div>
-                    <button id="save_recording" type="submit" class="btn btn-primary disabled mx-auto" disabled>
-                        <i class="bi bi-download me-2"></i> Save recording
-                    </button>
                 </div>
             </div>
         </div>
