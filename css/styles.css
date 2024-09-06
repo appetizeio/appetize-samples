@@ -65,8 +65,8 @@
 }
 
 .btn-primary:active, .btn-primary.active {
-    color: var(--bs-foreground)!important;
-    background-color: var(--bs-primary-dark)!important;
+    color: var(--bs-foreground) !important;
+    background-color: var(--bs-primary-dark) !important;
     border: 1px solid var(--bs-border-color);
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25) !important;
 }
@@ -90,9 +90,9 @@
 }
 
 .btn-outline-primary:active, .btn-outline-primary.active {
-    color: var(--bs-foreground)!important;
-    background-color: var(--bs-primary-dark)!important;
-    border: 1px solid var(--bs-border-color)!important;
+    color: var(--bs-foreground) !important;
+    background-color: var(--bs-primary-dark) !important;
+    border: 1px solid var(--bs-border-color) !important;
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25) !important;
 }
 
@@ -190,11 +190,11 @@ h2, .h2 {
 }
 
 .card.bg-white {
-    background-color: var(--bs-card-background)!important;
+    background-color: var(--bs-card-background) !important;
 }
 
 .card.bg-white:hover {
-    background-color: var(--bs-card-background-hover)!important;
+    background-color: var(--bs-card-background-hover) !important;
 }
 
 .accordion-button:not(.collapsed) {
@@ -212,7 +212,7 @@ h2, .h2 {
 .accordion-button {
     font-weight: 500;
     font-family: var(--bs-body-font-family);
-    font-size:0.55em;
+    font-size: 0.55em;
 }
 
 .accordion-item:last-of-type .accordion-button.collapsed {
@@ -220,7 +220,7 @@ h2, .h2 {
 }
 
 .accordion-item {
-    border: 0 solid var(--bs-border-color)!important;
+    border: 0 solid var(--bs-border-color) !important;
     border-radius: 1.25em !important;
 }
 
@@ -271,17 +271,25 @@ h2, .h2 {
 }
 
 .sideMenu.bg-light {
-    background-color: var(--bs-card-background-hover)!important;
+    background-color: var(--bs-card-background-hover) !important;
 }
 
 @keyframes spinUp {
-    0% { transform: rotate(-180deg); }
-    100% { transform: rotate(0deg); }
+    0% {
+        transform: rotate(-180deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 
 @keyframes spinDown {
-    0% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(180deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .license-notice {

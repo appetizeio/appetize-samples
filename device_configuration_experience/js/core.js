@@ -8,7 +8,9 @@ let selection = {
     device: null,
     os: null,
     isPortrait: true,
-    publicKey: () => { return config.app[selection.platform].publicKey }
+    publicKey: () => {
+        return config.app[selection.platform].publicKey
+    }
 }
 
 
@@ -154,7 +156,7 @@ async function selectDevice(device, shouldUpdateSession = true) {
 
             selection.device = device;
             selection.os = operatingSystems[operatingSystems.length - 1];
-            if(shouldUpdateSession) {
+            if (shouldUpdateSession) {
                 await updateSession(selection);
             }
         }
@@ -214,7 +216,7 @@ function observeOSChanges() {
  */
 async function rotateDevice(direction) {
     try {
-        if(window.session) {
+        if (window.session) {
             selection.isPortrait = !selection.isPortrait;
             updateAppetizeClassList();
             await session.rotate(direction);
@@ -229,7 +231,7 @@ async function rotateDevice(direction) {
  */
 function updateAppetizeClassList() {
     const iFrame = document.getElementById("appetize");
-    if(selection.isPortrait) {
+    if (selection.isPortrait) {
         iFrame.classList.remove('landscape');
         iFrame.classList.add('portrait');
     } else {
@@ -273,7 +275,7 @@ async function updateSession(selection) {
             toast: config.toast
         }
 
-        if(!window.client) {
+        if (!window.client) {
             await initClient(sessionConfig);
         }
 
@@ -329,14 +331,6 @@ function findDropdownItem(element) {
 
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     await populateDropdowns();
     observeDeviceChanges();
     observeOSChanges();

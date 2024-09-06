@@ -235,13 +235,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
     await initPlatforms();
     await initProducts();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     await updateSession()
 });

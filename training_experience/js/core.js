@@ -386,14 +386,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     window.confetti = new JSConfetti();
     initAnimations();
     await initTutorials();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     tutorialContentCloseButton.addEventListener('click', function () {
         selectTutorial(-1);
     });

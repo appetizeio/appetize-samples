@@ -1,6 +1,7 @@
-# Training Experience 
+# Training Experience
+
 This sample page demonstrates how to create a training experience for your product(s)
-by making use of Appetize's AppRecorder. 
+by making use of Appetize's AppRecorder.
 The page is designed
 to be a straightforward to use template that can be customized to match your branding and product configuration.
 
@@ -8,14 +9,17 @@ to be a straightforward to use template that can be customized to match your bra
 
 ### Update Branding / CSS
 
-1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up and running update the following variables:
+1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up
+   and running update the following variables:
 
     ```css
         --bs-primary: {your brand hex color};
         --bs-primary-dark: {your brand darker hex color};
     ```
 
-2. Update your brand logo by replacing the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own logo.
+2. Update your brand logo by replacing
+   the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own
+   logo.
 
 ### Update Configuration
 

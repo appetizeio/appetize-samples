@@ -1,4 +1,3 @@
-
 const config = {
     toast: "top",       // Set to "top" or "bottom" to change the position of the toast message.
 

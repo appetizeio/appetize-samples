@@ -12,11 +12,12 @@ const androidButton = document.getElementById('android_button')
 let jmuxer;
 let jmuxerReady = false
 let recording = false
+
 // Util functions
 /**
  * Update the button element with the new disabled state
- * @param {HTMLButtonElement} button 
- * @param {boolean} disabled 
+ * @param {HTMLButtonElement} button
+ * @param {boolean} disabled
  */
 function setDisabled(button, disabled) {
     button.disabled = disabled
@@ -39,7 +40,6 @@ function waitForJMuxer() {
         }, 200)
     })
 }
-
 
 
 // Event listeners
@@ -111,7 +111,7 @@ function toggleRecordingState() {
  */
 function setUpSaveVideoRecordingButton() {
     saveRecordingButton.onclick = async () => {
-        const blob = new Blob(videoBuffer, { type: 'video/mp4' });
+        const blob = new Blob(videoBuffer, {type: 'video/mp4'});
         const downloadUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = downloadUrl;
@@ -128,7 +128,7 @@ function setUpSaveVideoRecordingButton() {
 /**
  * Susbscribes the Appetize session to record all the frames and clean the state once the session
  * has finished
- * @param {Session} session 
+ * @param {Session} session
  */
 function subscribeSessionEvents(session) {
     session.on('video', data => {
@@ -186,17 +186,12 @@ function initJMuxer() {
  */
 async function initClient() {
     try {
-        // Check that the client has loaded
-        await new Promise(res => {
-            let i = setInterval(() => {
-                if (window.appetize.getClient) {
-                    clearInterval(i)
-                    res()
-                }
-            }, 100)
-        })
         console.log(`Loading client for ${appetizeIframeName}`);
-        window.client = await window.appetize.getClient(appetizeIframeName, { publicKey: config.products.ios, scale: 'auto', centered: 'both' });
+        window.client = await window.appetize.getClient(appetizeIframeName, {
+            publicKey: config.products.ios,
+            scale: 'auto',
+            centered: 'both'
+        });
         console.log('client loaded!');
         window.client.on("session", async session => {
             try {

@@ -13,6 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&subset=latin&display=swap"
           rel="stylesheet"/>
     <link href="css/styles.css" rel="stylesheet"/>
+    <script>
+        (function () {
+            const n = window, i = document, o = i.getElementsByTagName("script")[0], t = i.createElement("script");
+            (t.src = "https://js.appetize.io/embed.js"), (t.async = 1), o.parentNode.insertBefore(t, o);
+            const s = new Promise(function (e) {
+                t.onload = function () {
+                    e();
+                };
+            });
+            n.appetize = {
+                getClient: function (...e) {
+                    return s.then(() => n.appetize.getClient(...e));
+                },
+            };
+        })();
+    </script>
 </head>
 
 <body>

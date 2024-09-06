@@ -109,11 +109,11 @@
     border-color: rgba(224, 224, 224, 0.75);
 }
 
-.btn-check:checked+.btn,
+.btn-check:checked + .btn,
 .btn.active,
 .btn.show,
 .btn:first-child:active,
-:not(.btn-check)+.btn:active {
+:not(.btn-check) + .btn:active {
     color: var(--bs-foreground) !important;
     background-color: var(--bs-primary-dark) !important;
     border-color: var(--bs-primary-dark) !important;
@@ -161,7 +161,7 @@ h2,
     margin-left: -1.25em;
 }
 
-#appActions>* {
+#appActions > * {
     margin-left: 1.25rem;
     margin-bottom: 1em;
 }

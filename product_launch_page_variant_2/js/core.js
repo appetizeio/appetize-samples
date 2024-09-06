@@ -65,7 +65,7 @@ async function initClient(config) {
  */
 async function selectApp(index, shouldUpdateSession = true) {
     const product = config.products[index];
-    if(selection.product === product) {
+    if (selection.product === product) {
         console.log(`Already selected ${product.name}`)
         return;
     }
@@ -105,7 +105,7 @@ async function updateSession() {
             record: true,
         };
 
-        if(!window.client) {
+        if (!window.client) {
             await initClient(sessionConfig);
         }
 
@@ -113,7 +113,7 @@ async function updateSession() {
         const session = await window.client.startSession(sessionConfig);
         console.log(session);
 
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -170,13 +170,5 @@ function toggleButtonActive(buttonGroup, button) {
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
     await initProducts();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     await updateSession()
 });
