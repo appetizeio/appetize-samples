@@ -49,7 +49,6 @@ function updateConfigApps() {
 }
 
 
-
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
 updateCSSVariable('--bs-primary', 'primaryColor');
 updateCSSVariable('--bs-primary-dark', 'primaryColorDark');

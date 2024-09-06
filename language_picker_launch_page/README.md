@@ -1,4 +1,5 @@
 # Language Picker Launch Page Experience
+
 If your app supports multiple languages, this sample demonstrates how to create a language
 picker experience that can be used to change the language of your app.
 
@@ -6,18 +7,22 @@ picker experience that can be used to change the language of your app.
 
 ### Update Branding / CSS
 
-1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up and running update the following variables:
+1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up
+   and running update the following variables:
 
     ```css
         --bs-primary: {your brand hex color};
         --bs-primary-dark: {your brand darker hex color};
     ```
 
-2. Update your brand logo by replacing the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own logo.
+2. Update your brand logo by replacing
+   the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own
+   logo.
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your product configuration. The following options are available:
+Open the [config.js](js/config.js) file and update the `config` object to match your product configuration. The
+following options are available:
 
 ```js
 const config = {
