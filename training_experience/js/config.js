@@ -89,11 +89,11 @@ const config = {
                     title: "Tap on the search bar",
                     description: "This will open the search screen.",
                     validate: async (session, action) => {
-                        const textView =  validateTapAction(action, {
+                        const textView = validateTapAction(action, {
                             'text': 'Search Wikipedia',
                             'class': 'android.widget.TextView'
                         })
-                        const container = validateTapAction(action,{
+                        const container = validateTapAction(action, {
                             "resource-id": "org.wikipedia:id/search_container"
                         });
                         return textView || container;
@@ -144,11 +144,11 @@ const config = {
                     title: "Tap on the search bar",
                     description: "This will open the search screen.",
                     validate: async (session, action) => {
-                        const textView =  validateTapAction(action, {
+                        const textView = validateTapAction(action, {
                             'text': 'Search Wikipedia',
                             'class': 'android.widget.TextView'
                         })
-                        const container = validateTapAction(action,{
+                        const container = validateTapAction(action, {
                             "resource-id": "org.wikipedia:id/search_container"
                         });
                         return textView || container;

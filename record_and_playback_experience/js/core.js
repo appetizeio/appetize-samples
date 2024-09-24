@@ -16,8 +16,8 @@ const androidButton = document.getElementById('android_button')
 // Util functions
 /**
  * Update the button element with the new disabled state
- * @param {HTMLButtonElement} button 
- * @param {boolean} disabled 
+ * @param {HTMLButtonElement} button
+ * @param {boolean} disabled
  */
 function setDisabled(button, disabled) {
     button.disabled = disabled
@@ -39,7 +39,6 @@ function clearActions() {
     setDisabled(showActions, true)
     setDisabled(startOver, true)
 }
-
 
 
 // Event listeners
@@ -92,7 +91,7 @@ function downloadActionsListener() {
 }
 
 /**
- * Clears all the actions recorded 
+ * Clears all the actions recorded
  */
 function setupStartOverButton() {
     startOver.onclick = async () => {
@@ -227,15 +226,6 @@ async function updateSession(selection) {
  */
 async function initClient(sessionConfig) {
     try {
-        // Check that the client has loaded
-        await new Promise(res => {
-            let i = setInterval(() => {
-                if (window.appetize.getClient) {
-                    clearInterval(i)
-                    res()
-                }
-            }, 100)
-        })
         console.log(`Loading client for ${appetizeIframeName}`);
         window.client = await window.appetize.getClient(appetizeIframeName, sessionConfig);
         console.log('client loaded!');

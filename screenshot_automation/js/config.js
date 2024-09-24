@@ -156,7 +156,7 @@ const config = {
                         console.log("End of Explore Playback actions");
                     }
                 }
-                ]
+            ]
         }
     ],
 

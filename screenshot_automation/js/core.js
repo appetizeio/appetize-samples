@@ -110,7 +110,7 @@ async function startSessionForDevices() {
         }
     }
 
-    if(imageData.length > 0) {
+    if (imageData.length > 0) {
         imagesContainer.appendChild(createDownloadAllContent());
     }
 
@@ -299,7 +299,7 @@ function createImageCollectionCard(title) {
     cardDiv.appendChild(cardHeaderDiv);
     cardDiv.appendChild(cardBodyDiv);
 
-    return { cardDiv, grid };
+    return {cardDiv, grid};
 }
 
 /**
@@ -349,14 +349,6 @@ function setAppetizerVisibility(visible) {
 
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    });
 });
 
 // Event Listeners

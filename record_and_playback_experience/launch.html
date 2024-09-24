@@ -15,6 +15,22 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css">
     <link href="css/styles.css" rel="stylesheet" />
+    <script>
+        (function () {
+            const n = window, i = document, o = i.getElementsByTagName("script")[0], t = i.createElement("script");
+            (t.src = "https://js.appetize.io/embed.js"), (t.async = 1), o.parentNode.insertBefore(t, o);
+            const s = new Promise(function (e) {
+                t.onload = function () {
+                    e();
+                };
+            });
+            n.appetize = {
+                getClient: function (...e) {
+                    return s.then(() => n.appetize.getClient(...e));
+                },
+            };
+        })();
+    </script>
 </head>
 
 <body>
@@ -51,7 +67,8 @@
                     </p>
                     <div data-aos="fade-right">
                         <button id="replay_actions" class="btn btn-primary disabled" disabled>Replay
-                            actions</button>
+                            actions
+                        </button>
 
                         <button id="start_over" class="btn btn-outline-primary disabled" disabled>
                             Start Over
@@ -64,7 +81,8 @@
                     </p>
                     <div data-aos="fade-right">
                         <button id="show_actions" class="btn btn-primary disabled" disabled>Show
-                            actions</button>
+                            actions
+                        </button>
                         <button id="save_actions" class="btn btn-primary disabled mx-auto" disabled>
                             <i class="bi bi-download me-2"></i> Save actions
                         </button>
@@ -104,8 +122,8 @@
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-confetti@latest/dist/js-confetti.browser.js"></script>
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <!-- Remove this script in your own implementation - Used for styling the demo experience -->
     <script src="js/config.js"></script>
+    <!-- Remove this script in your own implementation - Used for styling the demo experience -->
     <script src="js/sample_styling.js"></script>
     <script src="js/core.js"></script>
 </body>

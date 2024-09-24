@@ -1,31 +1,38 @@
 # Screenshot Automation
+
 This sample launch showcases how to use the Appetize JS SDK to automate screenshots of your app.
 
 When customizing this sample, it is important to determine the criteria for the screenshot generation. For example:
- - Do you want to capture all of your app's features or a subset of features?
- - Which devices and OS versions do you want to generate screenshots for?
- - Which languages do you want to generate screenshots for?
- - Which orientations do you want to generate screenshots for?
- - Any other scenarios?
 
-For this sample (and illustrative purposes) we have chosen to generate screenshots for both the Android and iOS versions of the app, on multiple device types, and in English and French. 
+- Do you want to capture all of your app's features or a subset of features?
+- Which devices and OS versions do you want to generate screenshots for?
+- Which languages do you want to generate screenshots for?
+- Which orientations do you want to generate screenshots for?
+- Any other scenarios?
+
+For this sample (and illustrative purposes) we have chosen to generate screenshots for both the Android and iOS versions
+of the app, on multiple device types, and in English and French.
 
 ## :hammer: Getting Started
 
 ### Update Branding / CSS
 
-1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up and running update the following variables:
+1. Open the [styles.css](css/styles.css) file and update the root variables to match your branding. To quickly get up
+   and running update the following variables:
 
     ```css
         --bs-primary: {your brand hex color};
         --bs-primary-dark: {your brand darker hex color};
     ```
 
-2. Update your brand logo by replacing the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own logo.
+2. Update your brand logo by replacing
+   the [frontpage_logo.png](i/frontpage_logo.png) & [frontpage_logo@2x.png](i/frontpage_logo@2x.png) files with your own
+   logo.
 
 ### Update Configuration
 
-Open the [config.js](js/config.js) file and update the `config` object to match your expected apps and screenshot steps. By default, the following options are available:
+Open the [config.js](js/config.js) file and update the `config` object to match your expected apps and screenshot steps.
+By default, the following options are available:
 
 ```js
     const config = {
