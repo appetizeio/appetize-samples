@@ -4,7 +4,10 @@
 const appetizeIframeName = '#appetize';
 const tutorialActionsContainer = document.getElementById('tutorialActions');
 const tutorialContent = document.getElementById('tutorialContent');
+const queueContent = document.getElementById('queueContent');
 const tutorialSelection = document.getElementById('tutorialSelection');
+const queueContentTitle = document.getElementById('queueContentTitle');
+const queueContentPosition = document.getElementById('queueContentPosition');
 const tutorialContentCloseButton = document.querySelector('#tutorialContent .btn-close');
 const tutorialSteps = document.getElementById('tutorialSteps');
 const successModal = document.getElementById('successModal');
@@ -76,6 +79,12 @@ async function initClient(config) {
         console.log(`Loading client for ${appetizeIframeName}`);
         window.client = await window.appetize.getClient(appetizeIframeName, config);
         console.log('client loaded!');
+        window.client.on('queue', ({ name, position }) => {
+            showElement(queueContent)
+            hideElementWithAnimation(tutorialSelection)
+            queueContentTitle.innerText = name ?? 'Device Queue'
+            queueContentPosition.innerText = position
+        })
         window.client.on("session", async session => {
             console.log('session started!')
             try {
@@ -99,7 +108,9 @@ async function initClient(config) {
  */
 function resetUI() {
     selection.tutorial = null;
-    showAndHideWithAnimation(tutorialSelection, tutorialContent);
+    showElement(tutorialSelection)
+    hideElementWithAnimation(tutorialContent)
+    hideElementWithAnimation(queueContent)
 }
 
 /**
@@ -179,11 +190,13 @@ async function selectTutorial(index, shouldUpdateSession = true) {
     showSpinner(clickedButton);
 
     loadTutorialSteps(tutorial);
-    showAndHideWithAnimation(tutorialContent, tutorialSelection);
 
     if (shouldUpdateSession) {
         await updateSession();
     }
+    showElement(tutorialContent)
+    hideElementWithAnimation(tutorialSelection)
+    hideElementWithAnimation(queueContent)
 
     allButtons.forEach(button => {
         enableButton(button);
@@ -355,29 +368,36 @@ function showSuccessModal(title, description) {
     const bsSuccessModal = new bootstrap.Modal(successModal);
     successModal.querySelector('.modal-title').textContent = title;
     successModal.querySelector('.modal-body').textContent = description;
-    bsSuccessModal.show();
+    bsSuccessModal.showElement();
 
     window.confetti.addConfetti();
 }
 
 /**
- * Shows one element with a fade-in animation and hides another with a fade-out animation.
+ * Shows an html element
  * @param {HTMLElement} showElement The element to show.
- * @param {HTMLElement} hideElement The element to hide.
  */
-function showAndHideWithAnimation(showElement, hideElement) {
-    // Element to show
+function showElement(showElement) {
     showElement.classList.add('show');
     showElement.classList.remove('d-none');
+}
 
-    // Element to hide
-    hideElement.classList.remove('show');
+/**
+ * Hides the element only if visible and apply a fade-out animation.
+ * @param {HTMLElement} hideElement The element to hide.
+ */
+function hideElementWithAnimation(hideElement) {
+    // Only perform the action if the element is shown
+    if (hideElement.classList.contains('show')) {
+        // Element to hide
+        hideElement.classList.remove('show');
 
-    // Add event listener for transitionend event
-    hideElement.addEventListener('transitionend', function handler() {
-        hideElement.removeEventListener('transitionend', handler);
-        hideElement.classList.add('d-none');
-    });
+        // Add event listener for transitionend event
+        hideElement.addEventListener('transitionend', function handler() {
+            hideElement.removeEventListener('transitionend', handler);
+            hideElement.classList.add('d-none');
+        });
+    }
 }
 
 // On Page Load
