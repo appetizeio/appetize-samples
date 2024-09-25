@@ -114,13 +114,13 @@ h2,
     margin-left: -1.25em;
 }
 
-#appActions>* {
+#appActions > * {
     margin-left: 1.25rem;
     margin-bottom: 1em;
 }
 
 .dropdown-hover-all .dropdown-menu,
-.dropdown-hover>.dropdown-menu.dropend {
+.dropdown-hover > .dropdown-menu.dropend {
     margin-left: -1px !important
 }
 

@@ -423,13 +423,5 @@ document.addEventListener("DOMContentLoaded", async function () {
     await initProducts();
     initScreenshotButton();
     initLogsButton();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     await updateSession()
 });

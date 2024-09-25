@@ -152,28 +152,22 @@ const updateCredentialsFromQueryParams = () => {
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
     updateCredentialsFromQueryParams();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     await initClient();
 });
 
 // Event Listeners
 
-passwordField.addEventListener('keyup', function(event) {
+passwordField.addEventListener('keyup', function (event) {
     if (event.key === 'Enter') {
         event.preventDefault();
         startSessionButton.click();
     }
 });
 
-startSessionButton.addEventListener('click', async function(event) {
-    if(!window.client) { return; }
+startSessionButton.addEventListener('click', async function (event) {
+    if (!window.client) {
+        return;
+    }
     try {
         await window.client.startSession();
     } catch (error) {

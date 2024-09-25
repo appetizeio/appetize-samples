@@ -52,7 +52,7 @@ async function initLanguageSelector() {
 
 function selectLanguage(index) {
     const language = config.languages[index];
-    if(selection.language === language) {
+    if (selection.language === language) {
         console.log(`Already selected ${language.name}`)
         return;
     }
@@ -60,7 +60,7 @@ function selectLanguage(index) {
     console.log(`Selecting language ${language.name}`);
     selection.language = language;
     languageButton.innerText = language.name;
-    if(window.session) {
+    if (window.session) {
         window.session.setLanguage(language.code);
     } else {
         updateSession();
@@ -148,7 +148,7 @@ async function initClient(config) {
  */
 async function selectApp(index, shouldUpdateSession = true) {
     const product = config.products[index];
-    if(selection.product === product) {
+    if (selection.product === product) {
         console.log(`Already selected ${product.name}`)
         return;
     }
@@ -195,7 +195,7 @@ async function updateSession() {
         //adjust iframe width
         iFrame.width = selectedApp.width;
 
-        if(!window.client) {
+        if (!window.client) {
             await initClient(sessionConfig);
         }
 
@@ -203,7 +203,7 @@ async function updateSession() {
         const session = await window.client.setConfig(sessionConfig);
         console.log(session);
 
-    } catch(error) {
+    } catch (error) {
         console.error(error);
     }
 }
@@ -273,14 +273,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
     await initProducts();
     await initLanguageSelector();
-    await new Promise(res => {
-        let i = setInterval(() => {
-            if (window.appetize.getClient) {
-                clearInterval(i)
-                res()
-            }
-        }, 100)
-    })
     observeLanguageChanges();
     await updateSession()
 });

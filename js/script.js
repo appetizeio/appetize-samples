@@ -15,6 +15,7 @@ const searchFilterInput = document.getElementById("filter-input");
 const useCaseContent = document.getElementById('useCaseContent');
 const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
 const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
+
 // Init Functions
 
 /**
