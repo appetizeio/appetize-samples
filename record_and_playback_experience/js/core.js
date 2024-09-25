@@ -26,7 +26,8 @@ function setDisabled(button, disabled) {
 }
 
 function getConfiguration() {
-    return {publicKey: selected.buildId, scale: 'auto', centered: 'both'}
+    const { buildId, ...configuration } = selected
+    return { publicKey: buildId, scale: 'auto', centered: 'both', ...configuration }
 }
 
 
@@ -138,20 +139,26 @@ function restartAndReplayActionsListener() {
 /**
  * Binds the platform buttons and triggers a session with the new selection
  */
-function subscribePlatformButtonListeners() {
+function initPlatforms() {
     ['ios', 'android'].forEach((platform, index) => {
         const button = document.getElementById(`${platform}_button`)
         // Enable the button default is disabled
         button.classList.remove('disabled')
         button.disabled = false
-        button.addEventListener('click', () => {
-            // If it's the current active don't do anything
-            if (button.classList.contains('active')) return
+        const togglePlatform = () => {
             updateSession(config.products[index])
             // Remove the current active element
             document.querySelector('.active').classList.remove('active')
             button.classList.add('active')
+        }
+        button.addEventListener('click', () => {
+            // If it's the current active don't do anything
+            if (button.classList.contains('active')) return
+            togglePlatform()
         })
+
+        // If an optional key was passed start the session and toggle the platform
+        if (config.default === index) togglePlatform()
     })
 }
 
@@ -244,7 +251,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     window.confetti = new JSConfetti();
     initAnimations()
     await initClient(getConfiguration())
-    subscribePlatformButtonListeners()
+    initPlatforms()
     restartAndReplayActionsListener()
     downloadActionsListener()
     showActionsListener()

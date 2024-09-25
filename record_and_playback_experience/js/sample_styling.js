@@ -37,14 +37,14 @@ function updateConfigApps() {
         return;
     }
 
-    if (optionaliOSPublicKey) {
-        config[0].publicKey = optionaliOSPublicKey
-        config.publicKey = optionaliOSPublicKey
+    if (optionalAndroidPublicKey) {
+        config.products[1].buildId = optionalAndroidPublicKey
+        config.default = 1
     }
 
-    if (optionalAndroidPublicKey) {
-        config[1].publicKey = optionalAndroidPublicKey
-        config.publicKey = optionalAndroidPublicKey
+    if (optionaliOSPublicKey) {
+        config.products[0].buildId = optionaliOSPublicKey
+        config.default = 0
     }
 }
 
