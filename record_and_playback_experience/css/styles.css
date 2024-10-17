@@ -78,7 +78,7 @@
 }
 
 .btn-outline-primary {
-    color: var(--bs-foreground);
+    color: black;
     border: 1px solid var(--bs-border-color);
     background-color: var(--bs-outline-background);
 }
@@ -98,7 +98,7 @@
 }
 
 .btn-outline-primary:focus {
-    color: var(--bs-foreground);
+    color: black;
     background-color: var(--bs-outline-background);
     border: 1px solid var(--bs-border-color);
 }
