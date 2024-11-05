@@ -65,14 +65,14 @@ function initSamples() {
         sampleLink.target = "_blank"
         sampleLink.classList.add('btn', 'btn-primary', 'sampleLink')
         sampleLink.href = sample.sample
-        sampleLink.innerText = 'Sample'
+        sampleLink.innerText = sample.sampleButtonText ? sample.sampleButtonText : 'Sample';
         actionsGroup.appendChild(sampleLink)
         // Source Code link
         const sourceCode = document.createElement('a')
         sourceCode.target = "_blank"
         sourceCode.classList.add('btn', 'btn-outline-primary')
         sourceCode.href = sample.sourceCode
-        sourceCode.innerText = 'Source Code'
+        sourceCode.innerText = sample.sourceCodeButtonText ? sample.sourceCodeButtonText : 'Source Code';
         actionsGroup.appendChild(sourceCode)
 
         // Add the new card to the samples container

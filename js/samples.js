@@ -83,4 +83,14 @@ const samples = [
         sample: "save_video_recording_experience/launch.html",
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/save_video_recording_experience"
     },
+    {
+        title: "Testing with Playwright",
+        subtitle: "Mobile and Web E2E Testing",
+        description: "Reliably End-to-End test your Android and iOS mobile applications or web applications with Playwright and Appetize AppRecorder.",
+        tags: ["testing", "support"],
+        sampleButtonText: "Overview",
+        sourceCodeButtonText: "Getting Started",
+        sample: "https://docs.appetize.io/testing",
+        sourceCode: "https://docs.appetize.io/testing/getting-started"
+    }
 ]
