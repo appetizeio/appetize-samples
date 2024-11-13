@@ -25,6 +25,14 @@ const samples = [
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience"
     },
     {
+        title: "Device Configuration Experience",
+        subtitle: "With Dark Mode & Font Scaling",
+        description: "This sample page shows how to fetch all available devices from Appetize and configure them, including model, OS, orientation, dark mode, and font scaling.",
+        tags: ["demo engineering", "support", "testing"],
+        sample: "device_configuration_experience_variant_2/launch.html",
+        sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience_variant_2"
+    },
+    {
         title: "Pass Credentials Launch Page",
         description: "This sample page demonstrates how to create a custom launch page that can automatically pass in user credentials to any app and log in that user.",
         tags: ["support", "testing"],
