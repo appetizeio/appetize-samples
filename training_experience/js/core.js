@@ -368,7 +368,7 @@ function showSuccessModal(title, description) {
     const bsSuccessModal = new bootstrap.Modal(successModal);
     successModal.querySelector('.modal-title').textContent = title;
     successModal.querySelector('.modal-body').textContent = description;
-    bsSuccessModal.showElement();
+    bsSuccessModal.show();
 
     window.confetti.addConfetti();
 }
