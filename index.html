@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
         <div class="container-fluid mx-3">
             <a class="navbar-brand" href="#">
-                <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg" width="180">
+                <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg" width="111">
                 Samples
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -52,7 +52,7 @@
 
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="sideMenu mt-3 col-md-2 bg-light p-4 pb-5 me-5 ms-5">
+            <div class="sideMenu mt-3 col-md-2 bg-dark p-4 pb-5 me-5 ms-5">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -64,11 +64,11 @@
                 </div>
                 <div class="mt-4">
                     <h5 class="d-flex justify-content-between align-items-center mb-3">
-                        <a class="text-dark text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
+                        <a class="text-light text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
                             role="button" aria-expanded="true" aria-controls="useCaseContent">
                             Use Case
                         </a>
-                        <i class="bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
+                        <i class="text-light bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
                             aria-expanded="true" aria-controls="useCaseContent"></i>
                     </h5>
                     <div id="useCaseContent" class="collapse show">
@@ -101,9 +101,9 @@
                 </div>
                 <!-- License notice section -->
                 <div class="mt-4 license-notice">
-                    <p class="mb-0">
+                    <p class="mb-0 text-center">
                         This sample collection is licensed under the
-                        <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-dark"
+                        <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-light"
                             target="_blank">MIT License</a>.
                     </p>
                 </div>
@@ -122,7 +122,7 @@
                             </h2>
                             <div id="collapseStyling" class="accordion-collapse collapse"
                                 aria-labelledby="setStyleHeader" data-bs-parent="#accordionStyling">
-                                <div class="accordion-body">
+                                <div class="accordion-body bg-dark text-light">
                                     <form>
                                         <div class="mb-3">
                                             <label for="logoUpload" class="form-label">Brand Logo</label>
@@ -157,17 +157,16 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="optionalAndroidPublicKey" class="form-label">Optional Android
-                                                Public Key</label>
+                                                Build Identifier</label>
                                             <input type="text" class="form-control" id="optionalAndroidPublicKey"
-                                                placeholder="Enter the Android publicKey">
+                                                placeholder="Enter the Android buildId">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="optionaliOSPublicKey" class="form-label">Optional iOS Public
-                                                Key</label>
+                                            <label for="optionaliOSPublicKey" class="form-label">Optional iOS Build Identifier</label>
                                             <input type="text" class="form-control" id="optionaliOSPublicKey"
-                                                placeholder="Enter the iOS publicKey">
+                                                placeholder="Enter the iOS buildId">
                                             <small class="form-text text-muted" style="height: 400px">Note: Custom app
-                                                publicKeys might only work on some samples.</small>
+                                                buildIds might only work on some samples.</small>
                                         </div>
                                     </form>
                                 </div>

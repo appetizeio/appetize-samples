@@ -27,7 +27,7 @@ function initSamples() {
         cardContainer.classList.add('col-md-6', 'mt-3')
         // Card element setup
         const card = document.createElement('div')
-        card.classList.add('card', 'bg-white', 'h-100', 'mt-3', 'ps-4', 'pe-4', 'pt-3', 'pb-3')
+        card.classList.add('card', 'bg-white', 'text-bg-dark', 'h-100', 'mt-3', 'ps-4', 'pe-4', 'pt-3', 'pb-3')
         card.setAttribute('data-tags', sample.tags.join(','))
         cardContainer.appendChild(card)
 
@@ -45,7 +45,7 @@ function initSamples() {
         // Subtitle
         if (sample.subtitle) {
             const subtitle = document.createElement('h6')
-            subtitle.classList.add('card-subtitle', 'mb-3', 'text-muted')
+            subtitle.classList.add('card-subtitle', 'mb-3')
             subtitle.innerText = sample.subtitle
             cardBody.appendChild(subtitle)
         }
