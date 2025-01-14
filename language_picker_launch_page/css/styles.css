@@ -3,9 +3,9 @@
 /* Update these variables to match your brand colors and styles */
 
 :root {
-    --bs-primary: #65E5A6;
-    --bs-primary-dark: #29cd7c;
-    --bs-foreground: #090909;
+    --bs-primary: #040C1F;
+    --bs-primary-dark: #182445;
+    --bs-foreground: #F8FAFC;
     --h2-color: #090909;
     --h2-top-margin: 0.5em;
     --logo-start-offset: 0;
@@ -23,13 +23,13 @@
     background-color: var(--bs-primary);
     color: var(--bs-foreground);
     border: none;
-    border-radius: 0.65rem;
-    padding: 0.8rem 1.2rem;
+    border-radius: 99px;
+    padding: 0.8rem 1.4rem;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.2;
     vertical-align: middle;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    min-height: 40px;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 

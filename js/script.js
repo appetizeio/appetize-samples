@@ -58,19 +58,19 @@ function initSamples() {
 
         // Actions Group
         const actionsGroup = document.createElement('div')
-        actionsGroup.classList.add('d-grid', 'gap-2', 'mt-auto')
+        actionsGroup.classList.add('d-flex', 'gap-2', 'mt-auto')
         cardBody.appendChild(actionsGroup)
         // Sample link
         const sampleLink = document.createElement('a')
         sampleLink.target = "_blank"
-        sampleLink.classList.add('btn', 'btn-primary', 'sampleLink')
+        sampleLink.classList.add('btn', 'btn-primary', 'sampleLink', 'flex-fill')
         sampleLink.href = sample.sample
         sampleLink.innerText = sample.sampleButtonText ? sample.sampleButtonText : 'Sample';
         actionsGroup.appendChild(sampleLink)
         // Source Code link
         const sourceCode = document.createElement('a')
         sourceCode.target = "_blank"
-        sourceCode.classList.add('btn', 'btn-outline-primary')
+        sourceCode.classList.add('btn', 'btn-outline-primary', 'flex-fill')
         sourceCode.href = sample.sourceCode
         sourceCode.innerText = sample.sourceCodeButtonText ? sample.sourceCodeButtonText : 'Source Code';
         actionsGroup.appendChild(sourceCode)
