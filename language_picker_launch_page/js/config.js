@@ -24,8 +24,8 @@ const config = {
         {
             name: "Wikipedia (iOS)",
             publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
-            device: "iphone14pro",
-            osVersion: "17",
+            device: "iphone15pro",
+            osVersion: "18",
             orientation: "portrait",
             width: "300px",
             customActions: customActions
@@ -33,8 +33,8 @@ const config = {
         {
             name: "Wikipedia (Android)",
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
-            device: "pixel6",
-            osVersion: "13",
+            device: "pixel8",
+            osVersion: "15",
             orientation: "portrait",
             width: "300px",
             customActions: customActions

@@ -10,11 +10,11 @@ const config = {
     app: {
         ios: {
             publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
-            defaultDevice: "iphone14pro",
+            defaultDevice: "iphone15pro",
         },
         android: {
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
-            defaultDevice: "pixel6",
+            defaultDevice: "pixel8",
         }
     }
     // End of App configuration.

@@ -25,10 +25,10 @@
     --h2-top-margin: 0.5em;
     --logo-start-offset: 0;
     --logo-top-offset: 2em;
-    --bs-fonts: 'Maax', sans-serif;
+    --bs-fonts: 'Rethink Sans Variable';
     --bs-body-font-family: var(--bs-fonts);
     --bs-body-font-size: 1rem;
-    --bs-body-font-weight: 200;
+    --bs-body-font-weight: 400;
     --bs-body-line-height: 1.5;
     --bs-border-radius: 8px;
     --bs-border-color: #232737;
@@ -154,14 +154,6 @@
 
 .accordion-button:hover {
     background-color: var(--bs-secondary-hover);
-}
-
-.toolbar-logo {
-    margin-right: 1em;
-}
-
-.navbar-brand {
-    font-size: 20px;
 }
 
 .navbar-dark .navbar-nav .nav-link,
@@ -299,22 +291,22 @@ h2, .h2 {
 }
 
 @font-face {
-    font-family: Maax;
-    src: url(fonts/2c987754494892c704e4.woff2) format("woff2")
+    font-family: "Rethink Sans Variable";
+    src: url(fonts/font-normal.woff2) format("woff2")
 }
 
 @font-face {
     font-display: swap;
-    font-family: Maax;
+    font-family: "Rethink Sans Variable";
     font-weight: 500;
-    src: url(fonts/65c2a3cf883168b92786.woff2) format("woff2")
+    src: url(fonts/font-normal.woff2) format("woff2")
 }
 
 @font-face {
     font-display: swap;
-    font-family: Maax;
+    font-family: "Rethink Sans Variable";
     font-weight: 700;
-    src: url(fonts/65c2a3cf883168b92786.woff2) format("woff2")
+    src: url(fonts/font-normal.woff2) format("woff2")
 }
 
 .input-group-prepend .input-group-text {

@@ -45,14 +45,14 @@ function updateConfigProducts() {
     if (optionaliOSPublicKey) {
         demoProduct.ios = {
             publicKey: optionaliOSPublicKey,
-            device: "iphone14pro",
+            device: "iphone15pro",
         };
     }
 
     if (optionalAndroidPublicKey) {
         demoProduct.android = {
             publicKey: optionalAndroidPublicKey,
-            device: "pixel6",
+            device: "pixel8",
         };
     }
 

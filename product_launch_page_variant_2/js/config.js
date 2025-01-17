@@ -11,7 +11,7 @@ const config = {
         {
             name: "Wiki (Pixel 7)",
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
-            device: "pixel7"
+            device: "pixel8"
         }
     ],
     // End of product configuration.
