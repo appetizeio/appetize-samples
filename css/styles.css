@@ -29,7 +29,7 @@
     --bs-body-font-family: var(--bs-fonts);
     --bs-body-font-size: 1rem;
     --bs-body-font-weight: 400;
-    --bs-body-line-height: 1.5;
+    --bs-body-line-height: 24px;
     --bs-border-radius: 8px;
     --bs-border-color: #232737;
     --bs-input-border-color: #4C596C;
@@ -43,8 +43,8 @@
     border-radius: 999px;
     padding: 0.8rem 1.2rem;
     font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.2;
+    font-weight: 700;
+    line-height: 24px;
     vertical-align: middle;
     box-shadow: none;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -167,6 +167,7 @@
 
 .navbar-nav .nav-link {
     padding: 0 1rem;
+    font-weight: 500;
 }
 
 .navbar-brand {
@@ -189,6 +190,36 @@
     color: var(--bs-primary);
 }
 
+.navbar-nav .nav-item.primary {
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.navbar-nav .nav-item.primary .nav-link {
+    border-radius: 999px;
+    color: var(--bs-secondary-foreground);
+    border: 1px solid var(--bs-border-color);
+    background-color: var(--bs-secondary);
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+}
+
+.navbar-nav .nav-item.primary .nav-link:hover {
+    color: var(--bs-secondary-foreground);
+    background-color: var(--bs-secondary-hover);
+    border: 1px solid var(--bs-secondary-hover);
+}
+
+.navbar-nav .nav-item.primary .nav-link:focus,
+.navbar-nav .nav-item.primary .nav-link:active {
+    color: var(--bs-secondary-foreground);
+    background-color: var(--bs-secondary-hover);
+    border: 1px solid var(--bs-secondary-hover);
+}
+
 .logo {
     margin-left: var(--logo-start-offset);
     margin-top: var(--logo-top-offset);
@@ -199,8 +230,10 @@ body {
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
-    line-height: var(--bs-body-line-height);
+    line-height: var(--bs-body-line-height);font-smooth: never; /* For MacOS-specific font smoothing (not supported by all browsers) */
     -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased; /* Improves rendering in WebKit browsers */
+    font-smooth: never; /* For MacOS-specific font smoothing (not supported by all browsers) */
     background-color: var(--bs-background-color);
 }
 
@@ -287,7 +320,7 @@ h2, .h2 {
 }
 
 .text-muted {
-    color: #6c757d!important;
+    color: #6E7995!important;
 }
 
 @font-face {

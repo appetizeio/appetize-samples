@@ -15,6 +15,8 @@ const searchFilterInput = document.getElementById("filter-input");
 const useCaseContent = document.getElementById('useCaseContent');
 const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
 const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
+const logoPreview = document.getElementById('logoPreview');
+const logoPreviewContainer = document.getElementById('logoPreviewContainer');
 
 // Init Functions
 
@@ -118,7 +120,12 @@ function updateLogo() {
     const logoValue = logoInput.value;
     if (!isValidURL(logoValue)) {
         console.log("Invalid URL");
+        logoPreview.src = "";
+        logoPreviewContainer.classList.add("d-none");
         return;
+    } else {
+        logoPreview.src = logoValue;
+        logoPreviewContainer.classList.remove("d-none");
     }
     updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "logo", logoValue);
