@@ -14,9 +14,9 @@ const config = {
              */
             devices: [
                 {
-                    displayName: "iPhone 14 Pro",
-                    device: "iphone14pro",
-                    osVersion: "16.2",
+                    displayName: "iPhone 16 Pro",
+                    device: "iphone16pro",
+                    osVersion: "18",
                 },
                 {
                     displayName: "iPhone 12",
@@ -129,9 +129,9 @@ const config = {
             publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
             devices: [
                 {
-                    displayName: "Pixel 7",
-                    device: "pixel7",
-                    osVersion: "13.0",
+                    displayName: "Pixel 8",
+                    device: "pixel8",
+                    osVersion: "15.0",
                 },
                 {
                     displayName: "Galaxy Tab S7",

@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>Appetize Samples</title>
     <meta content="width=device-width, initial-scale=1" name="viewport">
-    <link href="i/favicon.ico" rel="icon">
+    <link href="i/favicon-32.png" rel="icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
@@ -28,10 +28,9 @@
 
 <body class="mb-5">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container-fluid mx-3">
+        <div class="container-fluid">
             <a class="navbar-brand" href="#">
-                <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg" width="180">
-                Samples
+                <img alt="" class="img-fluid toolbar-logo" src="i/logo.svg" width="195px"/>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,7 +41,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="https://appetize.io/">Home</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item primary">
                         <a class="nav-link" href="https://github.com/appetizeio/appetize-samples">Github</a>
                     </li>
                 </ul>
@@ -50,9 +49,9 @@
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid px-5">
         <div class="row justify-content-center">
-            <div class="sideMenu mt-3 col-md-2 bg-light p-4 pb-5 me-5 ms-5">
+            <div class="sideMenu mt-3 col-md-2 bg-dark p-4 pb-5 me-4 ms-4">
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text">
@@ -64,11 +63,11 @@
                 </div>
                 <div class="mt-4">
                     <h5 class="d-flex justify-content-between align-items-center mb-3">
-                        <a class="text-dark text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
+                        <a class="text-light text-decoration-none" data-bs-toggle="collapse" href="#useCaseContent"
                             role="button" aria-expanded="true" aria-controls="useCaseContent">
                             Use Case
                         </a>
-                        <i class="bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
+                        <i class="text-light bi bi-chevron-up" data-bs-toggle="collapse" href="#useCaseContent" role="button"
                             aria-expanded="true" aria-controls="useCaseContent"></i>
                     </h5>
                     <div id="useCaseContent" class="collapse show">
@@ -101,9 +100,9 @@
                 </div>
                 <!-- License notice section -->
                 <div class="mt-4 license-notice">
-                    <p class="mb-0">
+                    <p class="mb-0 text-center">
                         This sample collection is licensed under the
-                        <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-dark"
+                        <a href="https://github.com/appetizeio/appetize-samples/blob/main/LICENSE" class="text-light"
                             target="_blank">MIT License</a>.
                     </p>
                 </div>
@@ -122,52 +121,56 @@
                             </h2>
                             <div id="collapseStyling" class="accordion-collapse collapse"
                                 aria-labelledby="setStyleHeader" data-bs-parent="#accordionStyling">
-                                <div class="accordion-body">
+                                <div class="accordion-body bg-dark text-light">
                                     <form>
-                                        <div class="mb-3">
-                                            <label for="logoUpload" class="form-label">Brand Logo</label>
-                                            <input type="text" class="form-control" id="logoUpload"
-                                                placeholder="Enter the URL of the logo">
-                                            <small class="form-text text-muted" style="height: 400px">Hint: Try and use
-                                                an image
-                                                with a height of ~400 pixels and no padding. Use one of the free image
-                                                hosting sites
-                                                or your own site to host the image.</small>
+                                        <div class="p-3">
+                                            <h5 class="text-light mb-3">Brand Settings</h5>
+                                            <div class="row align-items-center mb-3">
+                                                <div class="col-md-8">
+                                                    <label for="logoUpload" class="form-label">Logo</label>
+                                                    <input type="text" class="form-control mb-2" id="logoUpload" placeholder="Enter the URL of the logo" oninput="updateLogoPreview()">
+                                                    <small class="form-text text-muted">Hint: Try and use
+                                                        an image
+                                                        with a height of ~400 pixels and no padding. Use one of the free image
+                                                        hosting sites
+                                                        or your own site to host the image.</small>
+                                                </div>
+                                                <div class="col-md-4 text-center">
+                                                    <div id="logoPreviewContainer" class="p-2 bg-light border rounded d-none" style="max-width: 150px; margin: auto;">
+                                                        <img id="logoPreview" src="" alt="Logo Preview" class="img-fluid" style="max-height: 100px;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-md-4">
+                                                    <label for="primaryColor" class="form-label">Primary Color</label>
+                                                    <input type="color" class="form-control" id="primaryColor" pattern="#[A-Fa-f0-9]{6}">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
+                                                    <input type="color" class="form-control" id="primaryColorDark" pattern="#[A-Fa-f0-9]{6}">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label for="primaryForegroundColor" class="form-label">Primary Foreground Color</label>
+                                                    <input type="color" class="form-control" id="primaryForegroundColor" pattern="#[A-Fa-f0-9]{6}">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="primaryColor" class="form-label">Primary Color</label>
-                                            <input type="color" class="form-control" id="primaryColor"
-                                                pattern="#[A-Fa-f0-9]{6}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="primaryColorDark" class="form-label">Primary Dark Color</label>
-                                            <input type="color" class="form-control" id="primaryColorDark"
-                                                pattern="#[A-Fa-f0-9]{6}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="primaryForegroundColor" class="form-label">Primary Foreground
-                                                Color</label>
-                                            <input type="color" class="form-control" id="primaryForegroundColor"
-                                                pattern="#[A-Fa-f0-9]{6}">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="optionalAppName" class="form-label">Optional App Name</label>
-                                            <input type="text" class="form-control" id="optionalAppName"
-                                                placeholder="Enter the app name">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="optionalAndroidPublicKey" class="form-label">Optional Android
-                                                Public Key</label>
-                                            <input type="text" class="form-control" id="optionalAndroidPublicKey"
-                                                placeholder="Enter the Android publicKey">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="optionaliOSPublicKey" class="form-label">Optional iOS Public
-                                                Key</label>
-                                            <input type="text" class="form-control" id="optionaliOSPublicKey"
-                                                placeholder="Enter the iOS publicKey">
-                                            <small class="form-text text-muted" style="height: 400px">Note: Custom app
-                                                publicKeys might only work on some samples.</small>
+                                        <div class="p-3">
+                                            <h5 class="text-light mb-3">Optional App Settings</h5>
+                                            <div class="mb-3">
+                                                <label for="optionalAppName" class="form-label text-light">App Name</label>
+                                                <input type="text" class="form-control bg-dark text-light border-secondary" id="optionalAppName" placeholder="Enter the app name">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="optionalAndroidPublicKey" class="form-label text-light">Android Build Identifier</label>
+                                                <input type="text" class="form-control bg-dark text-light border-secondary" id="optionalAndroidPublicKey" placeholder="Enter the Android buildId">
+                                            </div>
+                                            <div>
+                                                <label for="optionaliOSPublicKey" class="form-label text-light">iOS Build Identifier</label>
+                                                <input type="text" class="form-control bg-dark text-light border-secondary mb-2" id="optionaliOSPublicKey" placeholder="Enter the iOS buildId">
+                                                <small class="form-text text-muted">Note: Custom app build identifiers might only work on specific samples.</small>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

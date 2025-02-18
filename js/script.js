@@ -15,6 +15,8 @@ const searchFilterInput = document.getElementById("filter-input");
 const useCaseContent = document.getElementById('useCaseContent');
 const chevronIcon = useCaseContent.previousElementSibling.querySelector('.bi');
 const useCaseCheckboxInputs = document.querySelectorAll('.sideMenu .form-check-input')
+const logoPreview = document.getElementById('logoPreview');
+const logoPreviewContainer = document.getElementById('logoPreviewContainer');
 
 // Init Functions
 
@@ -27,7 +29,7 @@ function initSamples() {
         cardContainer.classList.add('col-md-6', 'mt-3')
         // Card element setup
         const card = document.createElement('div')
-        card.classList.add('card', 'bg-white', 'h-100', 'mt-3', 'ps-4', 'pe-4', 'pt-3', 'pb-3')
+        card.classList.add('card', 'bg-white', 'text-bg-dark', 'h-100', 'mt-3', 'ps-4', 'pe-4', 'pt-3', 'pb-3')
         card.setAttribute('data-tags', sample.tags.join(','))
         cardContainer.appendChild(card)
 
@@ -45,7 +47,7 @@ function initSamples() {
         // Subtitle
         if (sample.subtitle) {
             const subtitle = document.createElement('h6')
-            subtitle.classList.add('card-subtitle', 'mb-3', 'text-muted')
+            subtitle.classList.add('card-subtitle', 'mb-3')
             subtitle.innerText = sample.subtitle
             cardBody.appendChild(subtitle)
         }
@@ -58,19 +60,19 @@ function initSamples() {
 
         // Actions Group
         const actionsGroup = document.createElement('div')
-        actionsGroup.classList.add('d-grid', 'gap-2', 'mt-auto')
+        actionsGroup.classList.add('d-flex', 'gap-2', 'mt-auto')
         cardBody.appendChild(actionsGroup)
         // Sample link
         const sampleLink = document.createElement('a')
         sampleLink.target = "_blank"
-        sampleLink.classList.add('btn', 'btn-primary', 'sampleLink')
+        sampleLink.classList.add('btn', 'btn-primary', 'sampleLink', 'flex-fill')
         sampleLink.href = sample.sample
         sampleLink.innerText = sample.sampleButtonText ? sample.sampleButtonText : 'Sample';
         actionsGroup.appendChild(sampleLink)
         // Source Code link
         const sourceCode = document.createElement('a')
         sourceCode.target = "_blank"
-        sourceCode.classList.add('btn', 'btn-outline-primary')
+        sourceCode.classList.add('btn', 'btn-outline-primary', 'flex-fill')
         sourceCode.href = sample.sourceCode
         sourceCode.innerText = sample.sourceCodeButtonText ? sample.sourceCodeButtonText : 'Source Code';
         actionsGroup.appendChild(sourceCode)
@@ -118,7 +120,12 @@ function updateLogo() {
     const logoValue = logoInput.value;
     if (!isValidURL(logoValue)) {
         console.log("Invalid URL");
+        logoPreview.src = "";
+        logoPreviewContainer.classList.add("d-none");
         return;
+    } else {
+        logoPreview.src = logoValue;
+        logoPreviewContainer.classList.remove("d-none");
     }
     updateAllQueryStrings((url) => {
         updateQueryStringParameter(url, "logo", logoValue);

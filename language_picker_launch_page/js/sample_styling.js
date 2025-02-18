@@ -46,7 +46,7 @@ function updateConfigApps() {
             name: name,
             publicKey: optionaliOSPublicKey,
             device: "iphone15pro",
-            osVersion: "17",
+            osVersion: "18",
             orientation: "portrait",
             width: "300px",
         };
@@ -58,8 +58,8 @@ function updateConfigApps() {
         const product = {
             name: name,
             publicKey: optionalAndroidPublicKey,
-            device: "pixel6",
-            osVersion: "13",
+            device: "pixel8",
+            osVersion: "15",
             orientation: "portrait",
             width: "300px",
         };

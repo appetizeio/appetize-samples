@@ -42,7 +42,7 @@ function updateConfigProducts() {
         const product = {
             name: name,
             publicKey: optionalAndroidPublicKey,
-            device: "pixel6",
+            device: "pixel8",
         };
         config.products.push(product);
     }
