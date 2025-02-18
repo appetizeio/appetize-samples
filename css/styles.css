@@ -13,7 +13,7 @@
     --bs-nav-foreground: #F8FAFC;
     --bs-navbar-background: #040C1F;
     --bs-navbar-height: 64px;
-    --bs-navbar-content-height: 40px;
+    --bs-navbar-content-height: 32px;
     --bs-navbar-border-color: #182445;
     --bs-sidemenu-background: #040C1F;
     --bs-card-background: #0D111D;
@@ -194,7 +194,7 @@
     padding: 0;
     background: none;
     border: none;
-    font-size: 1rem;
+    font-size: 14px;
     font-weight: 500;
     line-height: 24px;
 }
@@ -230,7 +230,8 @@ body {
     font-family: var(--bs-body-font-family);
     font-size: var(--bs-body-font-size);
     font-weight: var(--bs-body-font-weight);
-    line-height: var(--bs-body-line-height);font-smooth: never; /* For MacOS-specific font smoothing (not supported by all browsers) */
+    line-height: var(--bs-body-line-height);
+    font-smooth: never; /* For MacOS-specific font smoothing (not supported by all browsers) */
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased; /* Improves rendering in WebKit browsers */
     font-smooth: never; /* For MacOS-specific font smoothing (not supported by all browsers) */
