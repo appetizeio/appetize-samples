@@ -1,6 +1,6 @@
 // Description: Core functions for the deep link experience template.
-// Variables
 
+// Variables
 const appetizeIframeName = '#appetize';
 const appActionsContainer = document.getElementById('appActions');
 const customDeepLinkInput = document.getElementById('customDeepLink');
@@ -24,7 +24,7 @@ function initAnimations() {
 }
 
 /**
- * Initializes the deep link buttons and selects the first one.
+ * Initializes the deep link buttons
  */
 async function initDeepLinks() {
     const deepLinkActions = config.deepLinks.map((deepLinkConfig, i) => {
