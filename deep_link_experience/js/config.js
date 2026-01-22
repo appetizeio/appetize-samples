@@ -3,7 +3,7 @@
 const config = {
     toast: "top",
     android: {
-        publicKey: "b_kgrmvicbe6bfhxb2ezznshbv2m",
+        publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
         device: "pixel8",
     },
 
