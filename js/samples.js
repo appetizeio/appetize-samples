@@ -33,6 +33,13 @@ const samples = [
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience_variant_2"
     },
     {
+        title: "Deep Link Experience",
+        description: "This sample page demonstrates how to create a custom launch page that can be used to launch a deep link to your app.",
+        tags: ["demo engineering", "support", "testing"],
+        sample: "deep_link_experience/launch.html",
+        sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/deep_link_experience"
+    },
+    {
         title: "Pass Credentials Launch Page",
         description: "This sample page demonstrates how to create a custom launch page that can automatically pass in user credentials to any app and log in that user.",
         tags: ["support", "testing"],
