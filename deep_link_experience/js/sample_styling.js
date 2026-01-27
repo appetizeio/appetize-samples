@@ -26,25 +26,7 @@ const updateCSSVariable = (variableName, queryParamName) => {
     }
 };
 
-/**
- * Updates the config Android app to match the app passed in the query parameters.
- */
-function updateConfigApp() {
-    const optionalAndroidPublicKey = queryParams.get('optionalAndroidPublicKey');
-    const optionalAppName = queryParams.get('optionalAppName');
-
-    if (!optionalAndroidPublicKey) {
-        return;
-    }
-
-    config.android = {
-        publicKey: optionalAndroidPublicKey,
-        device: "pixel8",
-    };
-}
-
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
 updateCSSVariable('--bs-primary', 'primaryColor');
 updateCSSVariable('--bs-primary-dark', 'primaryColorDark');
 updateCSSVariable('--bs-foreground', 'primaryForegroundColor');
-updateConfigApp();
