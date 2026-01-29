@@ -54,16 +54,16 @@ async function runCustomActions(session) {
     var password = passwordField.value;
 
     // Tab Bar
-
+    await session.waitForAnimations();
     await session.findElement({
         attributes: {
-            'resource-id': "org.wikipedia:id/nav_more_container"
+            'resource-id': "org.wikipedia:id/nav_tab_more"
         }
     })
     await session.tap({
         element: {
             attributes: {
-                'resource-id': "org.wikipedia:id/nav_more_container"
+                'resource-id': "org.wikipedia:id/nav_tab_more"
             }
         }
     });
