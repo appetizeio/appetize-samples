@@ -10,7 +10,7 @@ const config = {
         },
         {
             name: "Wiki (Pixel 7)",
-            publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+            publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
             device: "pixel8"
         }
     ],

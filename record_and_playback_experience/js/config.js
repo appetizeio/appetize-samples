@@ -9,7 +9,7 @@ const config = {
     },
     {
       platform: "Android",
-      buildId: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+      buildId: "demo_7hzx4sssu7giioyxnw5iwlbrma",
       device: "pixel8",
     },
   ],
