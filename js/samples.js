@@ -40,6 +40,13 @@ const samples = [
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/deep_link_experience"
     },
     {
+        title: "Launch Params Experience",
+        description: "This sample page demonstrates how to pass custom launch parameters to your app when starting an Appetize session, such as color themes and configuration options.",
+        tags: ["demo engineering", "support", "testing"],
+        sample: "launch_params_experience/launch.html",
+        sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/launch_params_experience"
+    },
+    {
         title: "Pass Credentials Launch Page",
         description: "This sample page demonstrates how to create a custom launch page that can automatically pass in user credentials to any app and log in that user.",
         tags: ["support", "testing"],
