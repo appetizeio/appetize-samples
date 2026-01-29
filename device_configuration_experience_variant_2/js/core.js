@@ -78,7 +78,23 @@ async function initClient(config) {
 async function fetchDeviceAndOSData() {
     try {
         const response = await fetch('https://api.appetize.io/v2/service/devices');
-        return await response.json();
+        const devices = await response.json();
+
+        return devices
+            // We want to only get devices that support the minimum OS version for the app.
+            .filter(device => {
+                const platform = device.platform;
+                const osVersionsSupportedInDevice = device.osVersions;
+                const minOsVersion = Number(config.app[platform].osVersion);
+                return osVersionsSupportedInDevice.some(osVersion => Number(osVersion) >= minOsVersion);
+            })
+            // We want to only get OS versions that support the minimum OS version for the app.
+            .map(device => {
+                return {
+                    ...device,
+                    osVersions: device.osVersions.filter(osVersion => Number(osVersion) >= Number(config.app[device.platform].osVersion))
+                }
+            });
     } catch (error) {
         console.error(error);
         throw error;
@@ -92,6 +108,7 @@ async function fetchDeviceAndOSData() {
 async function populateDropdowns() {
     try {
         const data = await fetchDeviceAndOSData();
+
         window.data = data;
         const iOSDevices = data.filter(device => device.platform === 'ios');
         const androidDevices = data.filter(device => device.platform === 'android');
@@ -331,7 +348,7 @@ async function updateSession(selection) {
             centered: config.centered,
             scale: config.scale,
             toast: config.toast,
-            launchArgs: selection.platform === 'ios' ? [ "-UIPreferredContentSizeCategoryName", selection.fontSize.iOS] : null,
+            launchArgs: selection.platform === 'ios' ? ["-UIPreferredContentSizeCategoryName", selection.fontSize.iOS] : null,
         }
 
         if (!window.client) {
@@ -340,7 +357,7 @@ async function updateSession(selection) {
 
         console.log(selection);
         const session = await window.client.startSession(sessionConfig);
-        if(selection.platform === 'android') {
+        if (selection.platform === 'android') {
             await updateAndroidFontSize();
         }
         console.log(session);
@@ -403,7 +420,7 @@ function setLightModeButtonState() {
  * @returns {Promise<void>} A promise that resolves when the font size is updated.
  */
 async function updateFontSize() {
-    if(session) {
+    if (session) {
         if (selection.platform === 'ios') {
             await updateSession(selection);
         } else {

@@ -54,7 +54,23 @@ async function initClient(config) {
 async function fetchDeviceAndOSData() {
     try {
         const response = await fetch('https://api.appetize.io/v2/service/devices');
-        return await response.json();
+        const devices = await response.json();
+
+        return devices
+            // We want to only get devices that support the minimum OS version for the app.
+            .filter(device => {
+                const platform = device.platform;
+                const osVersionsSupportedInDevice = device.osVersions;
+                const minOsVersion = Number(config.app[platform].osVersion);
+                return osVersionsSupportedInDevice.some(osVersion => Number(osVersion) >= minOsVersion);
+            })
+            // We want to only get OS versions that support the minimum OS version for the app.
+            .map(device => {
+                return {
+                    ...device,
+                    osVersions: device.osVersions.filter(osVersion => Number(osVersion) >= Number(config.app[device.platform].osVersion))
+                }
+            });
     } catch (error) {
         console.error(error);
         throw error;
