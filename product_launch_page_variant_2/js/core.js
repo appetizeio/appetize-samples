@@ -98,6 +98,7 @@ async function updateSession() {
         const sessionConfig = {
             publicKey: selectedApp.publicKey,
             device: selectedApp.device,
+            osVersion: selectedApp.osVersion,
             centered: 'both',
             scale: 'auto',
             toast: config.toast,

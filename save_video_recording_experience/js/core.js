@@ -13,6 +13,13 @@ let jmuxer;
 let jmuxerReady = false
 let recording = false
 
+let selection = {
+    platform: 'ios',
+    app: () => {
+        return config.products[selection.platform]
+    }
+}
+
 // Util functions
 /**
  * Update the button element with the new disabled state
@@ -48,9 +55,13 @@ function setupPlatformSelection() {
     const eventButtonHandler = async (button, platform) => {
         // If it's the current active don't do anything
         if (button.classList.contains('active')) return
+        selection.platform = platform
         await window.client.endSession()
+        const app = selection.app()
         await window.client.setConfig({
-            publicKey: config.products[platform]
+            publicKey: app.publicKey,
+            device: app.device,
+            osVersion: app.osVersion,
         })
         // Remove the current active element
         document.querySelector('.active').classList.remove('active')
@@ -111,7 +122,7 @@ function toggleRecordingState() {
  */
 function setUpSaveVideoRecordingButton() {
     saveRecordingButton.onclick = async () => {
-        const blob = new Blob(videoBuffer, {type: 'video/mp4'});
+        const blob = new Blob(videoBuffer, { type: 'video/mp4' });
         const downloadUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = downloadUrl;
@@ -188,9 +199,9 @@ async function initClient() {
     try {
         console.log(`Loading client for ${appetizeIframeName}`);
         window.client = await window.appetize.getClient(appetizeIframeName, {
-            publicKey: config.products.ios,
             scale: 'auto',
-            centered: 'both'
+            centered: 'both',
+            ...selection.app()
         });
         console.log('client loaded!');
         window.client.on("session", async session => {

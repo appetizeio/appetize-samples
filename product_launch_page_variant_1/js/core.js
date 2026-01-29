@@ -138,7 +138,7 @@ async function updateSession() {
         return;
     }
 
-    const newUrl = `https://appetize.io/embed/${selectedApp.publicKey}?device=${selectedApp.device}&toast=${config.toast}&scale=auto&centered=both&autoplay=${config.autoPlay}`;
+    const newUrl = `https://appetize.io/embed/${selectedApp.publicKey}?device=${selectedApp.device}&osVersion=${selectedApp.osVersion}&toast=${config.toast}&scale=auto&centered=both&autoplay=${config.autoPlay}`;
 
     console.log(`Updating session with ${selectedApp.publicKey}`);
     iFrame.src = newUrl;
