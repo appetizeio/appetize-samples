@@ -9,18 +9,18 @@ const config = {
         {
             name: "Wiki (Explore)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone15pro",
             },
             android: {
-                publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+                publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
                 device: "pixel8",
             }
         },
         {
             name: "Wiki (Places)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone16pro",
                 customActions: wikiPlacesIosCustomActions
             }
@@ -28,12 +28,12 @@ const config = {
         {
             name: "Wiki (Search)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone14pro",
                 customActions: wikiSearchIosCustomActions
             },
             android: {
-                publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+                publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
                 device: "pixel8pro",
                 customActions: wikiSearchAndroidCustomActions
             }
@@ -56,28 +56,28 @@ const config = {
 async function wikiPlacesIosCustomActions(client, session) {
     console.log('Wiki Places iOS custom action called');
     await session.tap({
-            element: {
-                attributes: {
-                    "accessibilityLabel": "Places"
-                }
+        element: {
+            attributes: {
+                "accessibilityLabel": "Places"
             }
         }
+    }
     );
     await session.tap({
-            element: {
-                attributes: {
-                    "accessibilityLabel": "Enable location"
-                }
-            }
-        }, {matchIndex: 0}
-    );
-    await session.tap({
-            element: {
-                attributes: {
-                    "accessibilityLabel": "Allow Once"
-                }
+        element: {
+            attributes: {
+                "accessibilityLabel": "Enable location"
             }
         }
+    }, { matchIndex: 0 }
+    );
+    await session.tap({
+        element: {
+            attributes: {
+                "accessibilityLabel": "Allow Once"
+            }
+        }
+    }
     );
 }
 
@@ -90,12 +90,12 @@ async function wikiPlacesIosCustomActions(client, session) {
 async function wikiSearchIosCustomActions(client, session) {
     console.log('Wiki Search iOS custom action called');
     await session.tap({
-            element: {
-                attributes: {
-                    "accessibilityLabel": "Search"
-                }
+        element: {
+            attributes: {
+                "accessibilityLabel": "Search"
             }
         }
+    }
     );
 }
 
@@ -107,12 +107,14 @@ async function wikiSearchIosCustomActions(client, session) {
  */
 async function wikiSearchAndroidCustomActions(client, session) {
     console.log('Wiki Search Android custom action called');
+    await session.waitForAnimations();
+
     await session.tap({
-            element: {
-                attributes: {
-                    "content-desc": "Search"
-                }
+        element: {
+            attributes: {
+                "resource-id": "org.wikipedia:id/navigation_bar_item_small_label_view",
+                "text": "Search",
             }
         }
-    );
+    });
 }

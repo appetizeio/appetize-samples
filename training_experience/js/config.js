@@ -5,7 +5,7 @@ const config = {
             title: "How to log in on the Wikipedia app",
             description: "This tutorial will show you how to log in on the Wikipedia app.",
             buttonTitle: "Get Started",
-            publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+            publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
             device: "pixel7",
             osVersion: "13",
             successTitle: "You're logged in!",
@@ -22,9 +22,18 @@ const config = {
                             'text': 'More'
                         })
                         const tappedContainer = validateTapAction(action, {
-                            'resource-id': 'org.wikipedia:id/nav_more_container'
+                            'resource-id': 'org.wikipedia:id/nav_tab_more'
                         })
-                        return tappedIcon || tappedText || tappedContainer;
+
+                        if (tappedIcon || tappedText || tappedContainer) return true
+
+                        // If the drawer is open we also consider this step complete
+                        const drawer = await session.findElement({
+                            attributes: {
+                                'resource-id': 'org.wikipedia:id/main_drawer_account_container'
+                            }
+                        }, { timeout: 1500 })
+                        return !!drawer;
                     }
                 },
                 {
@@ -79,7 +88,7 @@ const config = {
             title: "Search for articles on the Wikipedia app",
             description: "This tutorial will show you how to search for articles on the Wikipedia app.",
             buttonTitle: "Let's Go",
-            publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+            publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
             device: "pixel7",
             osVersion: "13",
             successTitle: "You read your first article!",
@@ -125,7 +134,17 @@ const config = {
                             // This one won't be perfect, but it's good enough for the demo.
                             'resource-id': 'org.wikipedia:id/page_list_item_image'
                         })
-                        return title || description || image;
+
+                        if (title || description || image) return true;
+
+                        // If the article is open we also consider this step complete
+                        const article = await session.findElement({
+                            attributes: {
+                                "resource-id": "pcs-edit-section-title-description",
+                                text: "Edible fruit"
+                            }
+                        }, )
+                        return !!article;
                     }
                 }
             ]
@@ -134,7 +153,7 @@ const config = {
             title: "Save articles on the Wikipedia app",
             description: "This tutorial will show you how to save articles on the Wikipedia app.",
             buttonTitle: "Learn to save",
-            publicKey: "demo_r0m5r98axtdhftx1hmmhq1c0m8",
+            publicKey: "demo_7hzx4sssu7giioyxnw5iwlbrma",
             device: "pixel7",
             osVersion: "13",
             successTitle: "You saved your first article!",
@@ -180,7 +199,16 @@ const config = {
                             // This one won't be perfect, but it's good enough for the demo.
                             'resource-id': 'org.wikipedia:id/page_list_item_image'
                         })
-                        return title || description || image;
+                        if (title || description || image) return true;
+
+                        // If the article is open we also consider this step complete
+                        const article = await session.findElement({
+                            attributes: {
+                                "resource-id": "pcs-edit-section-title-description",
+                                text: "Edible fruit"
+                            }
+                        }, { timeout: 1500 })
+                        return !!article;
                     }
                 },
                 {
