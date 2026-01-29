@@ -2,7 +2,7 @@
 
 const config = {
     products: {
-        ios: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+        ios: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
         android: "demo_7hzx4sssu7giioyxnw5iwlbrma",
     }
 }

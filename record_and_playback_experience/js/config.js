@@ -4,7 +4,7 @@ const config = {
   products: [
     {
       platform: "iOS",
-      buildId: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+      buildId: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
       device: "iphone15pro",
     },
     {

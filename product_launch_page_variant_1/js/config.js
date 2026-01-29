@@ -9,7 +9,7 @@ const config = {
         {
             name: "Wiki (Explore)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone15pro",
             },
             android: {
@@ -20,7 +20,7 @@ const config = {
         {
             name: "Wiki (Places)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone16pro",
                 customActions: wikiPlacesIosCustomActions
             }
@@ -28,7 +28,7 @@ const config = {
         {
             name: "Wiki (Search)",
             ios: {
-                publicKey: "demo_phq04c56jnvrkg0bn9w5ep4m9r",
+                publicKey: "demo_ea5a5c67z2eqszqkb64wu6t6ta",
                 device: "iphone14pro",
                 customActions: wikiSearchIosCustomActions
             },
