@@ -46,6 +46,7 @@ function updateConfigProducts() {
         demoProduct.ios = {
             publicKey: optionaliOSPublicKey,
             device: "iphone15pro",
+            osVersion: "18"
         };
     }
 
@@ -53,6 +54,7 @@ function updateConfigProducts() {
         demoProduct.android = {
             publicKey: optionalAndroidPublicKey,
             device: "pixel8",
+            osVersion: "15"
         };
     }
 

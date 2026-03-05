@@ -33,6 +33,7 @@ function updateConfigProducts() {
             name: name,
             publicKey: optionaliOSPublicKey,
             device: "iphone15pro",
+            osVersion: "18"
         };
         config.products.push(product);
     }
@@ -43,6 +44,7 @@ function updateConfigProducts() {
             name: name,
             publicKey: optionalAndroidPublicKey,
             device: "pixel8",
+            osVersion: "15"
         };
         config.products.push(product);
     }
