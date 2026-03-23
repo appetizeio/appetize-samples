@@ -46,28 +46,41 @@
                     device
                     configurations such as model, OS and orientation and much more!
                 </p>
-                <div class="mb-5" data-aos="fade-right">
-                    <div class="dropdown mt-3">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="deviceToolsButton"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Device Tools
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="deviceToolsButton">
-                            <div class="dropdown dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="device-dropdown"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Model</a>
-                                <div id="device-dropdown-content" class="dropdown-menu"
-                                     aria-labelledby="device-dropdown">
-                                </div>
+                <div class="device-controls mt-4 mb-5" data-aos="fade-right">
+                    <div class="control-group">
+                        <label class="control-label">Platform</label>
+                        <div class="orientation-toggle" id="platform-toggle">
+                            <button class="toggle-option active" id="ios-btn" data-platform="ios">iOS</button>
+                            <button class="toggle-option" id="android-btn" data-platform="android">Android</button>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Model</label>
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="device-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select Device
+                            </button>
+                            <div id="device-dropdown-content" class="dropdown-menu" aria-labelledby="device-dropdown">
                             </div>
-                            <div class="dropdown dropend">
-                                <a class="dropdown-item dropdown-toggle" href="#" id="os-dropdown"
-                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">OS</a>
-                                <div id="os-dropdown-content" class="dropdown-menu" aria-labelledby="os-dropdown">
-                                </div>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">OS Version</label>
+                        <div class="dropup">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="os-dropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Select OS
+                            </button>
+                            <div id="os-dropdown-content" class="dropdown-menu" aria-labelledby="os-dropdown">
                             </div>
-                            <a class="dropdown-item" id="rotate-right" href="#">Rotate Right</a>
-                            <a class="dropdown-item" id="rotate-left" href="#">Rotate Left</a>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">Orientation</label>
+                        <div class="orientation-toggle" id="orientation-toggle">
+                            <button class="toggle-option active" id="portrait-btn" data-orientation="portrait" disabled>Portrait</button>
+                            <button class="toggle-option" id="landscape-btn" data-orientation="landscape" disabled>Landscape</button>
                         </div>
                     </div>
                 </div>

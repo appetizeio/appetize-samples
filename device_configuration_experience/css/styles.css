@@ -110,6 +110,28 @@ h2,
     margin-bottom: 1rem;
 }
 
+.device-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: flex-end;
+    padding-left: 2rem;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.control-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #666;
+}
+
 #appActions {
     margin-left: -1.25em;
 }
@@ -124,11 +146,55 @@ h2,
     margin-left: -1px !important
 }
 
+#device-dropdown-content {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+#os-dropdown-content {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
 .dropdown-item:focus,
 .dropdown-item:hover {
     color: var(--bs-foreground);
     cursor: pointer;
     background-color: var(--bs-primary);
+}
+
+.orientation-toggle {
+    display: flex;
+    background-color: #e9ecef;
+    border-radius: 99px;
+    padding: 3px;
+    gap: 2px;
+}
+
+.toggle-option {
+    border: none;
+    background: transparent;
+    padding: 0.5rem 1rem;
+    border-radius: 99px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.toggle-option:hover {
+    color: #333;
+}
+
+.toggle-option.active {
+    background-color: var(--bs-primary);
+    color: var(--bs-foreground);
+}
+
+.toggle-option:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
 }
 
 #appetize.portrait {

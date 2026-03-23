@@ -38,6 +38,13 @@ async function initClient(config) {
             console.log('session started!')
             try {
                 window.session = session;
+                setOrientationControlsEnabled(true);
+
+                session.on("end", () => {
+                    console.log('session ended!');
+                    window.session = null;
+                    setOrientationControlsEnabled(false);
+                });
             } catch (error) {
                 console.error(error);
             }
@@ -85,29 +92,54 @@ async function populateDropdowns() {
     try {
         const data = await fetchDeviceAndOSData();
         window.data = data;
-        const iOSDevices = data.filter(device => device.platform === 'ios');
-        const androidDevices = data.filter(device => device.platform === 'android');
-
-        const deviceDropdown = document.getElementById('device-dropdown-content');
-        deviceDropdown.appendChild(createDropdownHeader('iOS'));
-        iOSDevices.forEach(device => {
-            const option = document.createElement('a');
-            option.classList.add('dropdown-item');
-            option.text = device.name;
-            option.value = device.id;
-            deviceDropdown.appendChild(option);
-        });
-        deviceDropdown.appendChild(createDropdownHeader('Android'));
-        androidDevices.forEach(device => {
-            const option = document.createElement('a');
-            option.classList.add('dropdown-item');
-            option.text = device.name;
-            option.value = device.id;
-            deviceDropdown.appendChild(option);
-        });
+        populateDeviceDropdownForPlatform(config.defaultPlatform);
     } catch (error) {
         console.error(error);
     }
+}
+
+/**
+ * Populates the device dropdown with devices for the given platform.
+ * @param {string} platform The platform to filter devices by ('ios' or 'android').
+ */
+function populateDeviceDropdownForPlatform(platform) {
+    const devices = window.data.filter(device => device.platform === platform);
+    const deviceDropdown = document.getElementById('device-dropdown-content');
+    deviceDropdown.innerHTML = '';
+
+    devices.forEach(device => {
+        const option = document.createElement('a');
+        option.classList.add('dropdown-item');
+        option.text = device.name;
+        option.value = device.id;
+        deviceDropdown.appendChild(option);
+    });
+}
+
+/**
+ * Observes the platform toggle and updates devices accordingly.
+ */
+function observePlatformToggle() {
+    const iosBtn = document.getElementById('ios-btn');
+    const androidBtn = document.getElementById('android-btn');
+
+    iosBtn.addEventListener('click', async () => {
+        if (selection.platform !== 'ios') {
+            iosBtn.classList.add('active');
+            androidBtn.classList.remove('active');
+            populateDeviceDropdownForPlatform('ios');
+            await selectDevice(config.app.ios.defaultDevice);
+        }
+    });
+
+    androidBtn.addEventListener('click', async () => {
+        if (selection.platform !== 'android') {
+            androidBtn.classList.add('active');
+            iosBtn.classList.remove('active');
+            populateDeviceDropdownForPlatform('android');
+            await selectDevice(config.app.android.defaultDevice);
+        }
+    });
 }
 
 /**
@@ -156,6 +188,10 @@ async function selectDevice(device, shouldUpdateSession = true) {
         if (selectedDevice) {
             operatingSystems = selectedDevice.osVersions;
             selection.platform = selectedDevice.platform;
+
+            // Update the device dropdown button text
+            const deviceButton = document.getElementById('device-dropdown');
+            deviceButton.textContent = selectedDevice.name;
         }
 
         if (operatingSystems) {
@@ -172,6 +208,11 @@ async function selectDevice(device, shouldUpdateSession = true) {
 
             selection.device = device;
             selection.os = operatingSystems[operatingSystems.length - 1];
+
+            // Update the OS dropdown button text
+            const osButton = document.getElementById('os-dropdown');
+            osButton.textContent = selection.os;
+
             if (shouldUpdateSession) {
                 await updateSession(selection);
             }
@@ -190,6 +231,11 @@ async function selectDevice(device, shouldUpdateSession = true) {
 async function selectOS(os, shouldUpdateSession = true) {
     try {
         selection.os = os;
+
+        // Update the OS dropdown button text
+        const osButton = document.getElementById('os-dropdown');
+        osButton.textContent = os;
+
         if (shouldUpdateSession) {
             await updateSession(selection);
         }
@@ -226,49 +272,44 @@ function observeOSChanges() {
 }
 
 /**
- * Rotates the device in the given direction.
- * @param direction The direction to rotate the device, either 'left' or 'right'.
- * @returns {Promise<void>} A promise that resolves when the device is rotated.
+ * Enables or disables the orientation toggle buttons.
+ * @param {boolean} enabled Whether the buttons should be enabled.
  */
-async function rotateDevice(direction) {
-    try {
-        if (window.session) {
-            selection.isPortrait = !selection.isPortrait;
-            updateAppetizeClassList();
-            await session.rotate(direction);
-        }
-    } catch (error) {
-        console.error(error);
-    }
+function setOrientationControlsEnabled(enabled) {
+    const portraitBtn = document.getElementById('portrait-btn');
+    const landscapeBtn = document.getElementById('landscape-btn');
+    portraitBtn.disabled = !enabled;
+    landscapeBtn.disabled = !enabled;
 }
 
 /**
- * Updates the Appetize iFrame with the appropriate orientation class to get the preferred sizing.
+ * Observes the orientation toggle and rotates the device accordingly.
  */
-function updateAppetizeClassList() {
-    const iFrame = document.getElementById("appetize");
-    if (selection.isPortrait) {
-        iFrame.classList.remove('landscape');
-        iFrame.classList.add('portrait');
-    } else {
-        iFrame.classList.remove('portrait');
-        iFrame.classList.add('landscape');
-    }
-}
-
-/**
- * Observes the rotation buttons and rotates the device accordingly.
- */
-function observeRotationChanges() {
+function observeOrientationToggle() {
     try {
-        const rotateLeftButton = document.getElementById('rotate-left');
-        rotateLeftButton.addEventListener('click', async event => {
-            await rotateDevice('left');
+        const portraitBtn = document.getElementById('portrait-btn');
+        const landscapeBtn = document.getElementById('landscape-btn');
+
+        portraitBtn.addEventListener('click', async () => {
+            if (!selection.isPortrait) {
+                selection.isPortrait = true;
+                portraitBtn.classList.add('active');
+                landscapeBtn.classList.remove('active');
+                if (window.session) {
+                    // await session.rotate('left');
+                }
+            }
         });
 
-        const rotateRightButton = document.getElementById('rotate-right');
-        rotateRightButton.addEventListener('click', async event => {
-            await rotateDevice('right');
+        landscapeBtn.addEventListener('click', async () => {
+            if (selection.isPortrait) {
+                selection.isPortrait = false;
+                landscapeBtn.classList.add('active');
+                portraitBtn.classList.remove('active');
+                if (window.session) {
+                    // await session.rotate('right');
+                }
+            }
         });
     } catch (error) {
         console.error(error);
@@ -311,6 +352,11 @@ async function updateSession(selection) {
  * @returns {Promise<void>} A promise that resolves when the session is started.
  */
 async function startDefaultSession() {
+    // Sync the platform toggle with the configured default
+    if (config.defaultPlatform === 'android') {
+        document.getElementById('android-btn').classList.add('active');
+        document.getElementById('ios-btn').classList.remove('active');
+    }
     await selectDevice(config.app[config.defaultPlatform].defaultDevice);
 }
 
@@ -351,8 +397,9 @@ function findDropdownItem(element) {
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
     await populateDropdowns();
+    observePlatformToggle();
     observeDeviceChanges();
     observeOSChanges();
-    observeRotationChanges();
+    observeOrientationToggle();
     await startDefaultSession();
 });
