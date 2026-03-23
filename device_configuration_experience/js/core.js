@@ -296,7 +296,7 @@ function observeOrientationToggle() {
                 portraitBtn.classList.add('active');
                 landscapeBtn.classList.remove('active');
                 if (window.session) {
-                    // await session.rotate('left');
+                    await session.rotate('left');
                 }
             }
         });
@@ -307,7 +307,7 @@ function observeOrientationToggle() {
                 landscapeBtn.classList.add('active');
                 portraitBtn.classList.remove('active');
                 if (window.session) {
-                    // await session.rotate('right');
+                    await session.rotate('right');
                 }
             }
         });
@@ -317,12 +317,23 @@ function observeOrientationToggle() {
 }
 
 /**
+ * Resets the orientation toggle back to portrait.
+ */
+function resetOrientationToPortrait() {
+    selection.isPortrait = true;
+    document.getElementById('portrait-btn').classList.add('active');
+    document.getElementById('landscape-btn').classList.remove('active');
+}
+
+/**
  * Updates the session with the current selection and configurations.
  * @param selection The current selection to start the session with.
  * @returns {Promise<void>} A promise that resolves when the session is updated.
  */
 async function updateSession(selection) {
     try {
+        resetOrientationToPortrait();
+
         const iFrame = document.querySelector(appetizeIframeName);
         iFrame.referrerPolicy = "unsafe-url";
 
@@ -332,7 +343,8 @@ async function updateSession(selection) {
             osVersion: selection.os,
             centered: config.centered,
             scale: config.scale,
-            toast: config.toast
+            toast: config.toast,
+            orientation: selection.isPortrait ? 'portrait' : 'landscape'
         }
 
         if (!window.client) {
