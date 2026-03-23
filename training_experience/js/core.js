@@ -285,6 +285,9 @@ async function updateSession() {
             return;
         }
 
+        const iFrame = document.querySelector(appetizeIframeName);
+        iFrame.referrerPolicy = "unsafe-url";
+
         const sessionConfig = {
             publicKey: selectedTutorial.publicKey,
             device: selectedTutorial.device,

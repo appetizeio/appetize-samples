@@ -194,6 +194,7 @@ async function updateSession() {
 
         //adjust iframe width
         iFrame.width = selectedApp.width;
+        iFrame.referrerPolicy = "unsafe-url";
 
         if (!window.client) {
             await initClient(sessionConfig);

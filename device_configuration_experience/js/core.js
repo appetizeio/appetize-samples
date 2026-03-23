@@ -282,6 +282,9 @@ function observeRotationChanges() {
  */
 async function updateSession(selection) {
     try {
+        const iFrame = document.querySelector(appetizeIframeName);
+        iFrame.referrerPolicy = "unsafe-url";
+
         const sessionConfig = {
             publicKey: selection.publicKey(),
             device: selection.device,

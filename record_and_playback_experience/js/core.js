@@ -203,6 +203,9 @@ function initAnimations() {
 async function updateSession(selection) {
     try {
         selected = selection
+        const iFrame = document.querySelector(appetizeIframeName);
+        iFrame.referrerPolicy = "unsafe-url";
+
         const sessionConfig = getConfiguration()
         console.log(`Starting session with config: ${JSON.stringify(sessionConfig)}`);
 

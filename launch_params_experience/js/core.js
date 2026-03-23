@@ -120,6 +120,8 @@ async function updateSession() {
             autoPlay: false
         };
 
+        iFrame.referrerPolicy = "unsafe-url";
+
         if (!window.client) {
             await initClient(sessionConfig);
         }

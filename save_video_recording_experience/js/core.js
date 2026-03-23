@@ -58,6 +58,8 @@ function setupPlatformSelection() {
         selection.platform = platform
         await window.client.endSession()
         const app = selection.app()
+        const iFrame = document.querySelector(appetizeIframeName);
+        iFrame.referrerPolicy = "unsafe-url";
         await window.client.setConfig({
             publicKey: app.publicKey,
             device: app.device,

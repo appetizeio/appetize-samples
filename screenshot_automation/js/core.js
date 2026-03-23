@@ -54,6 +54,9 @@ async function initClient(config) {
  */
 async function updateSession(publicKey, device) {
     try {
+        const iFrame = document.getElementById(appetizeIframeName);
+        iFrame.referrerPolicy = "unsafe-url";
+
         const sessionConfig = {
             publicKey: publicKey,
             device: device.device,

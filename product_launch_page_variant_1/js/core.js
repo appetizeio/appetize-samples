@@ -9,6 +9,7 @@ let selection = {
     platform: null,
     product: null,
     app: function () {
+        console.log(this.product);
         return this.product[this.platform];
     }
 }
@@ -141,6 +142,7 @@ async function updateSession() {
     const newUrl = `https://appetize.io/embed/${selectedApp.publicKey}?device=${selectedApp.device}&osVersion=${selectedApp.osVersion}&toast=${config.toast}&scale=auto&centered=both&autoplay=${config.autoPlay}`;
 
     console.log(`Updating session with ${selectedApp.publicKey}`);
+    iFrame.referrerPolicy = "unsafe-url";
     iFrame.src = newUrl;
 
     // Wait for the iframe to have a src before initializing client. If we already have a client, don't init again.
