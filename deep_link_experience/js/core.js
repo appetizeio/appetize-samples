@@ -157,7 +157,7 @@ async function updateSession() {
             centered: 'both',
             scale: 'auto',
             toast: config.toast,
-            record: true,
+            record: false,
         };
 
         iFrame.referrerPolicy = "unsafe-url";

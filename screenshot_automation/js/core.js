@@ -63,6 +63,7 @@ async function updateSession(publicKey, device) {
             osVersion: device.osVersion,
             centered: "both",
             scale: "auto",
+            record: true,
         }
 
         console.log(`Starting session with config: ${JSON.stringify(sessionConfig)}`);

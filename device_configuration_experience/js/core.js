@@ -344,7 +344,8 @@ async function updateSession(selection) {
             centered: config.centered,
             scale: config.scale,
             toast: config.toast,
-            orientation: selection.isPortrait ? 'portrait' : 'landscape'
+            orientation: selection.isPortrait ? 'portrait' : 'landscape',
+            record: false
         }
 
         if (!window.client) {

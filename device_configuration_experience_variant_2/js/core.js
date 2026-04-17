@@ -352,6 +352,7 @@ async function updateSession(selection) {
             scale: config.scale,
             toast: config.toast,
             launchArgs: selection.platform === 'ios' ? ["-UIPreferredContentSizeCategoryName", selection.fontSize.iOS] : null,
+            record: false
         }
 
         if (!window.client) {

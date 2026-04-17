@@ -64,6 +64,7 @@ function setupPlatformSelection() {
             publicKey: app.publicKey,
             device: app.device,
             osVersion: app.osVersion,
+            record: false,
         })
         // Remove the current active element
         document.querySelector('.active').classList.remove('active')
@@ -203,6 +204,7 @@ async function initClient() {
         window.client = await window.appetize.getClient(appetizeIframeName, {
             scale: 'auto',
             centered: 'both',
+            record: false,
             ...selection.app()
         });
         console.log('client loaded!');
