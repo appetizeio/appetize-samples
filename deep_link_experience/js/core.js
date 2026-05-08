@@ -52,8 +52,15 @@ async function initClient(sessionConfig) {
             console.log('session started!')
             try {
                 window.session = session;
-                // Enable deep link buttons when session is active
+                // Give the app a few seconds to warm up before enabling deep links
+                await new Promise(resolve => setTimeout(resolve, 3000));
                 setDeepLinkButtonsEnabled(true);
+
+                session.on("end", () => {
+                    console.log('session ended!');
+                    window.session = null;
+                    setDeepLinkButtonsEnabled(false);
+                });
             } catch (error) {
                 console.error(error);
             }
