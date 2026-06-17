@@ -33,6 +33,13 @@ const samples = [
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/device_configuration_experience_variant_2"
     },
     {
+        title: "Audio & TalkBack Experience",
+        description: "This sample page demonstrates how to enable audio output and Google's TalkBack screen reader on Android by passing the audio config flag and running adb shell commands via the adbShellCommand config flag.",
+        tags: ["demo engineering", "support", "testing"],
+        sample: "audio_talkback_experience/launch.html",
+        sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/audio_talkback_experience"
+    },
+    {
         title: "Deep Link Experience",
         description: "This sample page demonstrates how to create a custom launch page that can be used to launch a deep link to your app.",
         tags: ["demo engineering", "support", "testing"],
