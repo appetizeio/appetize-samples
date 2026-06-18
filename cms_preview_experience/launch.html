@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Appetize CMS Preview Experience</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="i/favicon-32.png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script>
+        (function () {
+            const n = window, i = document, o = i.getElementsByTagName("script")[0], t = i.createElement("script");
+            (t.src = "https://js.appetize.io/embed.js"), (t.async = 1), o.parentNode.insertBefore(t, o);
+            const s = new Promise(function (e) { t.onload = function () { e(); }; });
+            n.appetize = { getClient: function (...e) { return s.then(() => n.appetize.getClient(...e)); } };
+        })();
+    </script>
+    <style>
+        :root {
+            --bg: #f5f6f8;
+            --panel: #ffffff;
+            --ink: #14141f;
+            --muted: #71717f;
+            --line: #e6e6ee;
+            --field-line: #d7d7e1;
+            --accent: #18c989;
+            --accent-ink: #0a0a12;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            height: 100%;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 14px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .app { display: flex; min-height: 100vh; }
+
+        /* ---------- Control panel ---------- */
+        .panel {
+            width: 420px;
+            flex: 0 0 420px;
+            background: var(--panel);
+            border-right: 1px solid var(--line);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+        .panel__head {
+            padding: 20px 24px 16px;
+            border-bottom: 1px solid var(--line);
+        }
+        .brand { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+        .brand img { height: 22px; }
+        .panel__head h1 { font-size: 18px; font-weight: 700; margin: 0 0 4px; letter-spacing: -.01em; }
+        .panel__head p { font-size: 12.5px; color: var(--muted); margin: 0; line-height: 1.45; }
+
+        .panel__body { padding: 18px 24px; overflow-y: auto; flex: 1; }
+        .panel__foot {
+            padding: 14px 24px;
+            border-top: 1px solid var(--line);
+            background: var(--panel);
+        }
+
+        /* ---------- Form primitives ---------- */
+        .group { margin-bottom: 18px; }
+        .group__label {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .grid--3 { grid-template-columns: repeat(3, 1fr); }
+        .span-2 { grid-column: 1 / -1; }
+        .field { display: flex; flex-direction: column; gap: 5px; }
+        .field label { font-size: 11.5px; font-weight: 600; color: #45454f; }
+
+        input[type=text], input[type=url], textarea {
+            width: 100%;
+            border: 1px solid var(--field-line);
+            border-radius: 9px;
+            padding: 8px 11px;
+            font-size: 13.5px;
+            color: var(--ink);
+            background: #fff;
+            transition: border-color .12s, box-shadow .12s;
+        }
+        input::placeholder, textarea::placeholder { color: #b3b3bf; }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(24, 201, 137, .18);
+        }
+        textarea { resize: vertical; min-height: 58px; line-height: 1.45; }
+
+        /* color swatch inputs */
+        .swatch { display: flex; flex-direction: column; gap: 5px; }
+        input[type=color] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 38px;
+            border: 1px solid var(--field-line);
+            border-radius: 9px;
+            padding: 3px;
+            background: #fff;
+            cursor: pointer;
+        }
+        input[type=color]::-webkit-color-swatch-wrapper { padding: 0; }
+        input[type=color]::-webkit-color-swatch { border: none; border-radius: 6px; }
+
+        /* ---------- Segmented platform control ---------- */
+        .segmented { display: flex; gap: 4px; background: #eef0f3; border-radius: 10px; padding: 4px; }
+        .segmented button {
+            flex: 1;
+            border: none;
+            background: transparent;
+            border-radius: 7px;
+            padding: 8px 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: #5a5a66;
+            cursor: pointer;
+            transition: background .12s, color .12s, box-shadow .12s;
+        }
+        .segmented button:hover { color: var(--ink); }
+        .segmented button.is-active {
+            background: #fff;
+            color: var(--ink);
+            box-shadow: 0 1px 3px rgba(20, 20, 31, .12);
+        }
+
+        /* ---------- Content blocks ---------- */
+        .blocks__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .cms-block {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: #fafafc;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* ---------- Buttons ---------- */
+        .btn-ghost {
+            border: 1px solid var(--field-line);
+            background: #fff;
+            color: var(--ink);
+            border-radius: 8px;
+            padding: 5px 11px;
+            font-size: 12.5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-ghost:hover { background: #f4f4f7; }
+        .btn-remove {
+            align-self: flex-start;
+            border: none;
+            background: transparent;
+            color: #c0392b;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 2px 0;
+            cursor: pointer;
+        }
+        .btn-primary-cta {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            background: var(--accent);
+            color: var(--accent-ink);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 12px;
+            cursor: pointer;
+            transition: filter .12s, opacity .12s;
+        }
+        .btn-primary-cta:hover:not(:disabled) { filter: brightness(.96); }
+        .btn-primary-cta:disabled { opacity: .5; cursor: not-allowed; }
+        .length-status { font-size: 11.5px; color: var(--muted); margin-bottom: 8px; text-align: center; }
+        .length-status.over { color: #c0392b; font-weight: 600; }
+        .spinner {
+            display: inline-block; width: 14px; height: 14px; margin-right: 8px;
+            border: 2px solid rgba(10, 10, 18, .35); border-top-color: var(--accent-ink);
+            border-radius: 50%; animation: spin .7s linear infinite; vertical-align: -2px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---------- Payload modal ---------- */
+        .btn-view {
+            width: 100%;
+            margin-top: 10px;
+            border: 1px dashed var(--field-line);
+            background: #fff;
+            color: var(--muted);
+            border-radius: 9px;
+            padding: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-view:hover { background: #f4f4f7; color: var(--ink); }
+        .modal-overlay {
+            position: fixed; inset: 0; z-index: 50;
+            background: rgba(12, 12, 20, .5);
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+        }
+        .modal-overlay[hidden] { display: none; }
+        .modal-card {
+            background: #fff; border-radius: 14px; width: 100%; max-width: 580px;
+            max-height: 82vh; display: flex; flex-direction: column;
+            box-shadow: 0 24px 70px rgba(0, 0, 0, .35); overflow: hidden;
+        }
+        .modal-head {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 14px 18px; border-bottom: 1px solid var(--line);
+            font-size: 14px; font-weight: 700;
+        }
+        .modal-close {
+            border: none; background: transparent; font-size: 24px; line-height: 1;
+            color: var(--muted); cursor: pointer; padding: 0 4px;
+        }
+        .modal-close:hover { color: var(--ink); }
+        .modal-body { padding: 16px 18px; overflow: auto; }
+        .modal-body .lbl {
+            font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: .05em; color: var(--muted); margin: 14px 0 5px;
+        }
+        .modal-body .lbl:first-child { margin-top: 0; }
+        .modal-body pre {
+            margin: 0; background: #14141f; color: #d7f7e8; border-radius: 9px;
+            padding: 10px 12px; font-size: 11px; line-height: 1.5;
+            white-space: pre-wrap; word-break: break-all;
+        }
+
+        /* ---------- Device stage ---------- */
+        .stage {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(120% 120% at 50% 0%, #fbfbfd 0%, #eef0f4 100%);
+            padding: 24px;
+        }
+        .stage iframe {
+            width: 100%;
+            max-width: 430px;
+            height: min(90vh, 900px);
+            border: none;
+            overflow: hidden;
+        }
+
+        /* ---------- Responsive ---------- */
+        @media (max-width: 900px) {
+            .app { flex-direction: column; }
+            .panel { width: 100%; flex: none; height: auto; position: static; }
+            .stage { min-height: 70vh; }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app">
+        <aside class="panel">
+            <div class="panel__head">
+                <div class="brand">
+                    <img id="frontpage_logo" src="i/frontpage_logo.svg" alt="Appetize">
+                </div>
+                <h1>CMS Preview</h1>
+                <p>Build a content payload and push it into the running app via a deep link to preview changes live.</p>
+            </div>
+
+            <div class="panel__body">
+                <div class="group">
+                    <span class="group__label">Platform</span>
+                    <div class="segmented" id="platformPicker"></div>
+                </div>
+
+                <div class="group">
+                    <div class="grid">
+                        <div class="field span-2">
+                            <label for="title">Title</label>
+                            <input type="text" id="title">
+                        </div>
+                        <div class="field span-2">
+                            <label for="subtitle">Subtitle</label>
+                            <input type="text" id="subtitle">
+                        </div>
+                        <div class="field">
+                            <label for="badge">Badge</label>
+                            <input type="text" id="badge">
+                        </div>
+                        <div class="field">
+                            <label for="ctaText">CTA button</label>
+                            <input type="text" id="ctaText">
+                        </div>
+                        <div class="field span-2">
+                            <label for="imageUrl">Hero image URL</label>
+                            <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <span class="group__label">Theme</span>
+                    <div class="grid grid--3">
+                        <div class="swatch">
+                            <label for="backgroundColor" class="field"><span style="font-size:11.5px;font-weight:600;color:#45454f;">Background</span></label>
+                            <input type="color" id="backgroundColor" value="#0E1116">
+                        </div>
+                        <div class="swatch">
+                            <label for="textColor" style="font-size:11.5px;font-weight:600;color:#45454f;">Text</label>
+                            <input type="color" id="textColor" value="#FFFFFF">
+                        </div>
+                        <div class="swatch">
+                            <label for="accentColor" style="font-size:11.5px;font-weight:600;color:#45454f;">Accent</label>
+                            <input type="color" id="accentColor" value="#65E5A6">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="group">
+                    <div class="blocks__head">
+                        <span class="group__label" style="margin-bottom:0;">Content blocks</span>
+                        <button type="button" class="btn-ghost" id="addBlock">+ Add block</button>
+                    </div>
+                    <div id="blocksContainer"></div>
+                </div>
+
+                <button type="button" class="btn-view" id="viewPayload">View deep link &amp; JSON payload</button>
+            </div>
+
+            <div class="panel__foot">
+                <div class="length-status" id="lengthStatus"></div>
+                <button class="btn-primary-cta" type="button" id="launchPreview" disabled>Launch / Update Preview</button>
+            </div>
+        </aside>
+
+        <main class="stage">
+            <iframe id="appetize" referrerPolicy="unsafe-url"></iframe>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="payloadModal" hidden>
+        <div class="modal-card" role="dialog" aria-modal="true" aria-label="Deep link and JSON payload">
+            <div class="modal-head">
+                <span>Deep link &amp; JSON payload</span>
+                <button class="modal-close" id="payloadClose" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="lbl">Deep link</div>
+                <pre id="deepLinkPreview"></pre>
+                <div class="lbl">JSON</div>
+                <pre id="jsonPreview"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://js.appetize.io/embed.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/core.js"></script>
+</body>
+
+</html>
