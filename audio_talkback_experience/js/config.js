@@ -16,7 +16,6 @@ const config = {
     // grant the permissions TalkBack requires and enable the accessibility service.
     // Each entry is the command exactly as it would be passed to `adb shell`; they are run
     // one by one at runtime via session.adbShellCommand once the device is ready.
-    talkBackDelay: 0,   // Optional extra delay (ms) after the device is ready before running the commands.
     talkBackCommands: [
         "pm uninstall io.appetize.automations",
         "pm grant com.google.android.marvin.talkback android.permission.POST_NOTIFICATIONS",

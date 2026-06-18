@@ -64,10 +64,6 @@ async function initClient(sessionConfig) {
 async function enableTalkBack(session) {
     try {
         await session.waitUntilReady();
-        // Optional extra settle time before issuing the commands.
-        if (config.talkBackDelay) {
-            await session.waitForTimeout(config.talkBackDelay);
-        }
 
         for (const command of config.talkBackCommands) {
             try {

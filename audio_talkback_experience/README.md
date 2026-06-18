@@ -106,7 +106,6 @@ method (`adbShellCommand` accepts a single command, so each one is run in turn):
 ```js
 client.on("session", async session => {
     await session.waitUntilReady();          // wait until the device has booted
-    // await session.waitForTimeout(2000);   // optional extra settle time
 
     for (const command of config.talkBackCommands) {
         try {
