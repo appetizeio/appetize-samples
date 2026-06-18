@@ -6,7 +6,7 @@ const appetizeIframeName = '#appetize';
 let selection = {
     platform: config.defaultPlatform,
     audio: true,       // Whether audio output is enabled on the device. On by default.
-    talkBack: false,   // Whether the TalkBack screen reader is enabled on the device.
+    talkBack: true,    // Whether the TalkBack screen reader is enabled on the device. On by default.
     publicKey: () => {
         return config.app[selection.platform].publicKey;
     }
@@ -79,10 +79,11 @@ async function enableTalkBack(session) {
 }
 
 /**
- * Updates (or starts) the session with the current audio & TalkBack selection.
- * Both `audio` and `adbShellCommand` are applied when the session starts, so changing
- * either toggle restarts the session with the new configuration.
- * @returns {Promise<void>} A promise that resolves when the session is updated.
+ * Applies the current audio & TalkBack selection to the embed's launch config.
+ * The session is NOT auto-started — the user starts it by clicking "Tap to Play". Changing a
+ * toggle updates the config via setConfig (which ends any active session), so the next session
+ * the user starts picks up the new configuration.
+ * @returns {Promise<void>} A promise that resolves when the config is applied.
  */
 async function updateSession() {
     try {
@@ -110,10 +111,13 @@ async function updateSession() {
         console.log(sessionConfig);
 
         if (!window.client) {
+            // Initialise the client with the config but don't start a session — the embed
+            // shows "Tap to Play" and the user starts the session when they're ready.
             await initClient(sessionConfig);
+        } else {
+            // Update the config for the next session the user starts (ends any active session).
+            await window.client.setConfig(sessionConfig);
         }
-
-        await window.client.startSession(sessionConfig);
     } catch (error) {
         console.error(error);
     }
