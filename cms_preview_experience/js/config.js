@@ -24,7 +24,7 @@ const config = {
     },
 
     // Which platform is selected on load.
-    defaultPlatform: "ios",
+    defaultPlatform: "android",
 
     // The deep link path that opens the CMS Preview Test on both apps.
     // The encoded payload is appended as ?payload=<base64url(JSON)>.
