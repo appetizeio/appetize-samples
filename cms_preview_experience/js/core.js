@@ -8,19 +8,22 @@ const addBlockButton = document.getElementById('addBlock');
 const launchPreviewButton = document.getElementById('launchPreview');
 const deepLinkPreview = document.getElementById('deepLinkPreview');
 const jsonPreview = document.getElementById('jsonPreview');
+const lengthStatus = document.getElementById('lengthStatus');
+const viewPayloadButton = document.getElementById('viewPayload');
+const payloadModal = document.getElementById('payloadModal');
+const payloadCloseButton = document.getElementById('payloadClose');
 
 const FIELD_IDS = ['title', 'subtitle', 'badge', 'ctaText', 'imageUrl', 'backgroundColor', 'textColor', 'accentColor'];
 
+// iOS silently truncates deep links at 2048 characters (the limit lives in the
+// URL delivery path, e.g. `simctl openurl`). Android has no comparable cap.
+const IOS_DEEP_LINK_MAX = 2048;
+
 let selectedPlatform = config.defaultPlatform;
+let sessionReady = false;
+let withinLimit = true;
 
 // Init Functions
-
-/**
- * Initializes animations for the page.
- */
-function initAnimations() {
-    AOS.init({ easing: 'ease-out-cubic', once: true, offset: 120, duration: 650 });
-}
 
 /**
  * Renders a platform selection button per configured app.
@@ -30,7 +33,7 @@ function initPlatformPicker() {
         const button = document.createElement('button');
         button.type = 'button';
         button.textContent = app.name || key;
-        button.className = 'btn flex-fill ' + (key === selectedPlatform ? 'btn-primary' : 'btn-outline-primary');
+        button.className = key === selectedPlatform ? 'is-active' : '';
         button.dataset.platform = key;
         button.onclick = () => selectPlatform(key);
         return button;
@@ -88,11 +91,10 @@ async function selectPlatform(platform) {
     if (platform === selectedPlatform && window.session) return;
     selectedPlatform = platform;
     Array.from(platformPicker.children).forEach((button) => {
-        const active = button.dataset.platform === platform;
-        button.classList.toggle('btn-primary', active);
-        button.classList.toggle('btn-outline-primary', !active);
+        button.classList.toggle('is-active', button.dataset.platform === platform);
     });
     setControlsEnabled(false);
+    updatePreviews(); // the length limit only applies to iOS, so re-evaluate on switch
     await updateSession();
 }
 
@@ -102,23 +104,23 @@ async function selectPlatform(platform) {
  */
 function addBlock(block = {}) {
     const wrapper = document.createElement('div');
-    wrapper.className = 'border rounded p-2 mb-2 cms-block';
+    wrapper.className = 'cms-block';
 
     const heading = document.createElement('input');
     heading.type = 'text';
-    heading.className = 'form-control form-control-sm mb-2 block-heading';
+    heading.className = 'block-heading';
     heading.placeholder = 'Heading';
     heading.value = block.heading || '';
 
     const body = document.createElement('textarea');
-    body.className = 'form-control form-control-sm mb-2 block-body';
+    body.className = 'block-body';
     body.rows = 2;
     body.placeholder = 'Body';
     body.value = block.body || '';
 
     const remove = document.createElement('button');
     remove.type = 'button';
-    remove.className = 'btn btn-sm btn-outline-danger';
+    remove.className = 'btn-remove';
     remove.textContent = 'Remove';
     remove.onclick = () => { wrapper.remove(); updatePreviews(); };
 
@@ -138,9 +140,12 @@ async function launchPreview() {
         return;
     }
     const deepLink = buildDeepLink();
+    if (selectedPlatform === 'ios' && deepLink.length > IOS_DEEP_LINK_MAX) {
+        console.warn(`Deep link is ${deepLink.length} chars; iOS truncates at ${IOS_DEEP_LINK_MAX}. Aborting.`);
+        return;
+    }
     const originalText = launchPreviewButton.innerHTML;
-    launchPreviewButton.innerHTML =
-        '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Updating…';
+    launchPreviewButton.innerHTML = '<span class="spinner"></span>Updating…';
     launchPreviewButton.disabled = true;
     try {
         await window.session.openUrl(deepLink);
@@ -173,6 +178,7 @@ async function updateSession() {
             centered: 'both',
             scale: 'auto',
             toast: config.toast,
+            grantPermissions: true,
             record: false,
         };
 
@@ -235,23 +241,60 @@ function toBase64Url(str) {
  * Refreshes the deep link and JSON previews from the current form state.
  */
 function updatePreviews() {
+    const deepLink = buildDeepLink();
     jsonPreview.textContent = JSON.stringify(buildContent(), null, 2);
-    deepLinkPreview.textContent = buildDeepLink();
+    deepLinkPreview.textContent = deepLink;
+
+    const length = deepLink.length;
+    const isIOS = selectedPlatform === 'ios';
+    const over = isIOS && length > IOS_DEEP_LINK_MAX;
+    withinLimit = !over;
+
+    if (isIOS) {
+        lengthStatus.textContent = over
+            ? `Deep link ${length} / ${IOS_DEEP_LINK_MAX} — too long for iOS, shorten the content`
+            : `Deep link ${length} / ${IOS_DEEP_LINK_MAX} chars`;
+    } else {
+        lengthStatus.textContent = `Deep link ${length} chars (no limit on Android)`;
+    }
+    lengthStatus.classList.toggle('over', over);
+
+    updateLaunchButton();
 }
 
 /**
- * Enables or disables the launch button based on session availability.
- * @param enabled Whether controls should be enabled.
+ * Marks whether the Appetize session is ready and refreshes the launch button state.
+ * @param enabled Whether a session is available.
  */
 function setControlsEnabled(enabled) {
-    launchPreviewButton.disabled = !enabled;
+    sessionReady = enabled;
+    updateLaunchButton();
+}
+
+/**
+ * Enables the launch button only when a session is ready and the deep link fits the platform limit.
+ */
+function updateLaunchButton() {
+    launchPreviewButton.disabled = !(sessionReady && withinLimit);
+}
+
+/**
+ * Wires up the deep link / JSON payload modal (open, close, backdrop, Esc).
+ */
+function initModal() {
+    const open = () => { payloadModal.hidden = false; };
+    const close = () => { payloadModal.hidden = true; };
+    viewPayloadButton.addEventListener('click', open);
+    payloadCloseButton.addEventListener('click', close);
+    payloadModal.addEventListener('click', (e) => { if (e.target === payloadModal) close(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !payloadModal.hidden) close(); });
 }
 
 // On Page Load
 
 document.addEventListener('DOMContentLoaded', async function () {
-    initAnimations();
     initPlatformPicker();
     initForm();
+    initModal();
     await updateSession();
 });
