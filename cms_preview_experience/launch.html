@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Appetize CMS Preview Experience</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link href="i/favicon-32.png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@next/dist/aos.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&family=DM+Sans:wght@100;200;300;400;500;600;700;800;900&subset=latin&display=swap"
+        rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script>
+        (function () {
+            const n = window, i = document, o = i.getElementsByTagName("script")[0], t = i.createElement("script");
+            (t.src = "https://js.appetize.io/embed.js"), (t.async = 1), o.parentNode.insertBefore(t, o);
+            const s = new Promise(function (e) {
+                t.onload = function () {
+                    e();
+                };
+            });
+            n.appetize = {
+                getClient: function (...e) {
+                    return s.then(() => n.appetize.getClient(...e));
+                },
+            };
+        })();
+    </script>
+</head>
+
+<body>
+    <section class="py-10 py-lg-20 bg-bg-3 text-center text-md-start">
+        <div class="container-fluid px-lg-8">
+            <div class="row align-items-start" style="min-height: 100vh;">
+                <div class="mb-12 mb-md-0 col-md-6 col-xl-5">
+                    <img alt="logo" class="img-fluid mb-6 mt-6 w-50 logo" data-aos="fade-right" data-aos-delay="150"
+                        id="frontpage_logo" src="i/frontpage_logo.svg">
+                    <h2 class="mb-4 display-6 ps-8 mt-4" data-aos="fade-right" data-aos-delay="250">
+                        CMS Preview Experience
+                    </h2>
+                    <p class="ps-8" data-aos="fade-right">
+                        Build a CMS payload and push it into the running app via a deep link to preview your
+                        content changes live.
+                    </p>
+
+                    <div class="ps-8" data-aos="fade-right">
+                        <!-- Platform picker -->
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Platform</label>
+                            <div class="btn-group d-flex" role="group" id="platformPicker"></div>
+                        </div>
+
+                        <!-- Content form -->
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="title">
+                            </div>
+                            <div class="col-12">
+                                <label for="subtitle" class="form-label">Subtitle</label>
+                                <input type="text" class="form-control" id="subtitle">
+                            </div>
+                            <div class="col-6">
+                                <label for="badge" class="form-label">Badge</label>
+                                <input type="text" class="form-control" id="badge">
+                            </div>
+                            <div class="col-6">
+                                <label for="ctaText" class="form-label">CTA button text</label>
+                                <input type="text" class="form-control" id="ctaText">
+                            </div>
+                            <div class="col-12">
+                                <label for="imageUrl" class="form-label">Hero image URL</label>
+                                <input type="url" class="form-control" id="imageUrl"
+                                    placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="col-4">
+                                <label for="backgroundColor" class="form-label">Background</label>
+                                <input type="color" class="form-control form-control-color w-100"
+                                    id="backgroundColor" value="#0E1116">
+                            </div>
+                            <div class="col-4">
+                                <label for="textColor" class="form-label">Text</label>
+                                <input type="color" class="form-control form-control-color w-100" id="textColor"
+                                    value="#FFFFFF">
+                            </div>
+                            <div class="col-4">
+                                <label for="accentColor" class="form-label">Accent</label>
+                                <input type="color" class="form-control form-control-color w-100" id="accentColor"
+                                    value="#65E5A6">
+                            </div>
+                        </div>
+
+                        <!-- Repeatable content blocks -->
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <label class="form-label fw-bold mb-0">Content blocks</label>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" id="addBlock">
+                                    + Add block
+                                </button>
+                            </div>
+                            <div id="blocksContainer"></div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="mt-4 d-grid">
+                            <button class="btn btn-primary material-button" type="button" id="launchPreview"
+                                disabled>
+                                Launch / Update Preview
+                            </button>
+                        </div>
+
+                        <!-- Live payload preview -->
+                        <div class="mt-4">
+                            <a class="small text-decoration-none" data-bs-toggle="collapse" href="#payloadPreview"
+                                role="button">Show deep link &amp; JSON payload</a>
+                            <div class="collapse mt-2" id="payloadPreview">
+                                <label class="form-label small fw-bold mb-1">Deep link</label>
+                                <pre class="bg-dark text-light p-2 rounded small text-wrap"
+                                    id="deepLinkPreview"></pre>
+                                <label class="form-label small fw-bold mb-1">JSON</label>
+                                <pre class="bg-dark text-light p-2 rounded small" id="jsonPreview"></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-5 col-lg-6 text-center">
+                    <iframe data-aos="fade-in" id="appetize" style="overflow:hidden; height: 90vh; width: 100%;"
+                        referrerPolicy="unsafe-url">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://js.appetize.io/embed.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="js/config.js"></script>
+    <!-- Remove this script in your own implementation - Used for styling the demo experience -->
+    <script src="js/sample_styling.js"></script>
+    <script src="js/core.js"></script>
+
+</body>
+
+</html>

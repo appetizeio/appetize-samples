@@ -47,6 +47,13 @@ const samples = [
         sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/deep_link_experience"
     },
     {
+        title: "CMS Preview Experience",
+        description: "This sample page demonstrates how to preview CMS content changes live by building a content payload from a customizable form and pushing it into your iOS or Android app via a deep link.",
+        tags: ["demo engineering", "support", "testing"],
+        sample: "cms_preview_experience/launch.html",
+        sourceCode: "https://github.com/appetizeio/appetize-samples/tree/main/cms_preview_experience"
+    },
+    {
         title: "Launch Params Experience",
         description: "This sample page demonstrates how to pass custom launch parameters to your app when starting an Appetize session, such as color themes and configuration options.",
         tags: ["demo engineering", "support", "testing"],
