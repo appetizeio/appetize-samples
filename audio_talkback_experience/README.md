@@ -10,8 +10,12 @@ Android screen reader, on an Appetize session. Both features are Android only.
 
 The TalkBack commands run *after* the session is ready (`session.waitUntilReady`) rather than
 via the start-time `adbShellCommand` config flag, so the system has finished booting before
-the accessibility service is enabled. Toggling audio restarts the session; toggling TalkBack
-restarts the session and then runs the commands once the device is ready.
+the accessibility service is enabled.
+
+Both audio and TalkBack are enabled by default. The session is not auto-started &mdash; the
+embed shows "Tap to Play" and the user starts it when ready. Changing a toggle updates the
+launch config via `setConfig` (ending any active session), so the next session the user starts
+picks up the new configuration.
 
 ## :hammer: Getting Started
 
