@@ -1,4 +1,4 @@
-// Description: Core functions for the Audio & TalkBack experience.
+// Description: Core functions for the TalkBack experience.
 // Variables
 
 const appetizeIframeName = '#appetize';

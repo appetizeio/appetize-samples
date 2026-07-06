@@ -1,4 +1,4 @@
-# Audio & TalkBack Experience
+# TalkBack Experience
 
 This sample page demonstrates how to enable **audio output** and **TalkBack**, Google's
 Android screen reader, on an Appetize session. Both features are Android only.
