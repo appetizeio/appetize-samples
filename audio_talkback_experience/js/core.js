@@ -40,11 +40,14 @@ async function initClient(sessionConfig) {
             });
 
             // Focus the embed iframe so keyboard input (e.g. the arrow keys) is routed to the
-            // device out of the box, without the user having to click the device first.
-            focusDevice();
+            // device without the user having to click it first. Focusing at "session" alone is
+            // too early — the player isn't interactive yet — so we (re)focus once the first
+            // frame arrives and again once the device is fully ready.
+            session.on("firstFrameReceived", focusDevice);
 
             // TalkBack is always enabled at runtime, once the device is ready.
             await enableTalkBack(session);
+            focusDevice();
         });
     } catch (error) {
         console.error(error);
@@ -85,9 +88,12 @@ async function enableTalkBack(session) {
  */
 function focusDevice() {
     const iFrame = document.querySelector(appetizeIframeName);
-    if (iFrame) {
-        iFrame.focus();
+    if (!iFrame) {
+        return;
     }
+    // Defer to the next frame so focus lands after the embed's own focus handling has run,
+    // otherwise it can be stolen back and the arrow keys won't reach the device.
+    requestAnimationFrame(() => iFrame.focus({ preventScroll: true }));
 }
 
 /**
