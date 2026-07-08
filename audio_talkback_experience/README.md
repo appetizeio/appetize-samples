@@ -12,10 +12,11 @@ The TalkBack commands run *after* the session is ready (`session.waitUntilReady`
 via the start-time `adbShellCommand` config flag, so the system has finished booting before
 the accessibility service is enabled.
 
-Both audio and TalkBack are enabled by default. The session is not auto-started &mdash; the
-embed shows "Tap to Play" and the user starts it when ready. Changing a toggle updates the
-launch config via `setConfig` (ending any active session), so the next session the user starts
-picks up the new configuration.
+Audio and TalkBack are always enabled &mdash; there are no toggles to configure. The session is
+not auto-started &mdash; the embed shows "Tap to Play" and the user starts it when ready. As soon
+as the session starts the embed iframe is focused (via `iframe.focus()`), so the device's arrow
+keys, Enter, etc. are routed to the device out of the box &mdash; the user can navigate with the
+keyboard (and TalkBack) without first clicking on the device.
 
 ## :hammer: Getting Started
 
@@ -62,17 +63,16 @@ const config = {
 };
 ```
 
-### Open Sample Video
+### Focusing the device on session start
 
-`audio: true` only enables audio output &mdash; something on the device still has to make
-noise. The page includes an **Open Sample Video** button that opens a sample video on the
-running session via `session.openUrl`, giving you something audible to play (the click also
-serves as the user gesture browsers require before audio can play). Change the default video
-in [config.js](js/config.js) or override it at runtime with a `sampleVideoUrl` query
-parameter:
+Keyboard input only reaches the device once the embed iframe has focus. As soon as the
+session starts the page focuses the iframe so the arrow keys work immediately:
 
-```
-launch.html?sampleVideoUrl=https://vimeo.com/347119375
+```js
+client.on("session", async session => {
+    document.querySelector("#appetize").focus();
+    // ...
+});
 ```
 
 ### Optionally passing an Android public key

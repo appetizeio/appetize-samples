@@ -5,8 +5,6 @@ const appetizeIframeName = '#appetize';
 
 let selection = {
     platform: config.defaultPlatform,
-    audio: true,       // Whether audio output is enabled on the device. On by default.
-    talkBack: true,    // Whether the TalkBack screen reader is enabled on the device. On by default.
     publicKey: () => {
         return config.app[selection.platform].publicKey;
     }
@@ -41,10 +39,12 @@ async function initClient(sessionConfig) {
                 window.session = null;
             });
 
-            // Enable TalkBack at runtime, once the device is ready.
-            if (selection.talkBack) {
-                await enableTalkBack(session);
-            }
+            // Focus the embed iframe so keyboard input (e.g. the arrow keys) is routed to the
+            // device out of the box, without the user having to click the device first.
+            focusDevice();
+
+            // TalkBack is always enabled at runtime, once the device is ready.
+            await enableTalkBack(session);
         });
     } catch (error) {
         console.error(error);
@@ -79,10 +79,20 @@ async function enableTalkBack(session) {
 }
 
 /**
- * Applies the current audio & TalkBack selection to the embed's launch config.
- * The session is NOT auto-started — the user starts it by clicking "Tap to Play". Changing a
- * toggle updates the config via setConfig (which ends any active session), so the next session
- * the user starts picks up the new configuration.
+ * Focuses the embed iframe so the browser routes keyboard events to the device. With the iframe
+ * focused the device's arrow keys, Enter, etc. work immediately &mdash; handy for navigating with
+ * TalkBack without first clicking on the device.
+ */
+function focusDevice() {
+    const iFrame = document.querySelector(appetizeIframeName);
+    if (iFrame) {
+        iFrame.focus();
+    }
+}
+
+/**
+ * Applies the launch config to the embed. Audio output and TalkBack are always enabled.
+ * The session is NOT auto-started — the user starts it by clicking "Tap to Play".
  * @returns {Promise<void>} A promise that resolves when the config is applied.
  */
 async function updateSession() {
@@ -99,8 +109,8 @@ async function updateSession() {
             toast: config.toast,
             orientation: 'portrait',
             record: false,
-            // (Android only) Enables audio playback on the device.
-            audio: selection.audio,
+            // (Android only) Audio playback is always enabled on the device.
+            audio: true,
             // Device volume, a number from 0 to 1.
             volume: config.volume
         };
@@ -123,54 +133,9 @@ async function updateSession() {
     }
 }
 
-/**
- * Observes the audio & TalkBack toggles and restarts the session when they change.
- */
-function observeToggles() {
-    const audioToggle = document.getElementById('audio-toggle');
-    const talkBackToggle = document.getElementById('talkback-toggle');
-
-    audioToggle.addEventListener('change', async () => {
-        selection.audio = audioToggle.checked;
-        await updateSession();
-    });
-
-    talkBackToggle.addEventListener('change', async () => {
-        selection.talkBack = talkBackToggle.checked;
-
-        // TalkBack speaks aloud, so it's only useful with audio enabled.
-        // Turn audio on automatically (and reflect it in the UI) when TalkBack is enabled.
-        if (selection.talkBack && !selection.audio) {
-            selection.audio = true;
-            audioToggle.checked = true;
-        }
-
-        await updateSession();
-    });
-}
-
-/**
- * Wires up the "Open Sample Video" button, opening a sample video on the running session
- * (via session.openUrl) so there's something audible to play. The click doubles as the user
- * gesture browsers require before audio can play.
- */
-function observeSampleVideo() {
-    const openVideoButton = document.getElementById('open-video-btn');
-
-    openVideoButton.addEventListener('click', async () => {
-        if (!window.session) {
-            console.log('No active session to open the sample video on.');
-            return;
-        }
-        await window.session.openUrl(config.sampleVideoUrl);
-    });
-}
-
 // On Page Load
 
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
-    observeToggles();
-    observeSampleVideo();
     await updateSession();
 });

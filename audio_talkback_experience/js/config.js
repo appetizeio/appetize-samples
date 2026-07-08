@@ -7,11 +7,6 @@ const config = {
     defaultPlatform: "android", // Audio output & TalkBack are Android only features.
     volume: 1,          // Device volume. A number from 0 to 1 (defaults to 0.5 if omitted).
 
-    // A sample video opened on the device (via session.openUrl) when the user clicks
-    // "Open Sample Video". Handy for producing sound to verify audio works — `audio: true`
-    // only enables output, it doesn't create a sound source.
-    sampleVideoUrl: "https://vimeo.com/347119375",
-
     // TalkBack is Google's screen reader for Android. The following adb shell commands
     // grant the permissions TalkBack requires and enable the accessibility service.
     // Each entry is the command exactly as it would be passed to `adb shell`; they are run

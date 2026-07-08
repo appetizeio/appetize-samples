@@ -110,26 +110,74 @@ h2,
     margin-bottom: 1rem;
 }
 
-.device-controls {
+/* Keyboard hint — an animated keycap cluster that shows the experience is keyboard-driven */
+
+.kbd-hint {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    align-items: flex-end;
-    padding-left: 2rem;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
-.control-group {
+.kbd-cluster {
+    flex: 0 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 2.4rem);
+    grid-template-rows: repeat(2, 2.4rem);
+    gap: 0.4rem;
+    grid-template-areas:
+        ".    up    ."
+        "left down  right";
+}
+
+.kbd-up    { grid-area: up; }
+.kbd-left  { grid-area: left; }
+.kbd-down  { grid-area: down; }
+.kbd-right { grid-area: right; }
+
+.kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--bs-font-sans-serif);
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--bs-primary);
+    background: var(--bs-foreground);
+    border: 1px solid #e2e6ee;
+    border-radius: 0.55rem;
+    box-shadow: 0 2px 0 #d3d9e4, 0 4px 8px rgba(4, 12, 31, 0.10);
+    user-select: none;
+}
+
+.kbd-cluster .kbd {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.kbd-inline {
+    padding: 0.05rem 0.5rem;
+    font-size: 0.8rem;
+    vertical-align: baseline;
+    box-shadow: 0 1px 0 #d3d9e4, 0 2px 4px rgba(4, 12, 31, 0.08);
+}
+
+.kbd-hint-copy {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.25rem;
 }
 
-.control-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+.kbd-hint-lead {
+    font-weight: 700;
+    color: var(--h2-color);
+    font-size: 1.05rem;
+}
+
+.kbd-hint-sub {
     color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 #appActions {

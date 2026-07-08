@@ -37,12 +37,6 @@ function updateConfigApps() {
     if (optionalAndroidPublicKey) {
         config.app.android.publicKey = optionalAndroidPublicKey;
     }
-
-    // Optionally override the sample video, e.g. ?sampleVideoUrl=https://vimeo.com/347119375
-    const optionalSampleVideoUrl = queryParams.get('sampleVideoUrl');
-    if (optionalSampleVideoUrl) {
-        config.sampleVideoUrl = optionalSampleVideoUrl;
-    }
 }
 
 document.addEventListener('DOMContentLoaded', updateLogoFromQueryParam);
