@@ -13,10 +13,11 @@ via the start-time `adbShellCommand` config flag, so the system has finished boo
 the accessibility service is enabled.
 
 Audio and TalkBack are always enabled &mdash; there are no toggles to configure. The session is
-not auto-started &mdash; the embed shows "Tap to Play" and the user starts it when ready. As soon
-as the session starts the embed iframe is focused (via `iframe.focus()`), so the device's arrow
-keys, Enter, etc. are routed to the device out of the box &mdash; the user can navigate with the
-keyboard (and TalkBack) without first clicking on the device.
+not auto-started &mdash; the embed shows "Tap to Play" and the user starts it when ready. Once the
+device is running, clicking it gives it keyboard focus, so the physical arrow keys, Enter, etc.
+navigate the app and TalkBack announces each element. The page shows short on-screen instructions
+explaining this &mdash; we let the device handle keyboard input natively rather than intercepting
+keys on the page.
 
 ## :hammer: Getting Started
 
@@ -63,17 +64,13 @@ const config = {
 };
 ```
 
-### Focusing the device on session start
+### Navigating with the keyboard
 
-Keyboard input only reaches the device once the embed iframe has focus. As soon as the
-session starts the page focuses the iframe so the arrow keys work immediately:
-
-```js
-client.on("session", async session => {
-    document.querySelector("#appetize").focus();
-    // ...
-});
-```
+Keyboard input only reaches the device once the embed (a cross-origin iframe) has focus, which
+happens when the user clicks the device. Rather than trying to force focus from the page &mdash;
+which fights the browser and the embed &mdash; the page shows short instructions telling the user
+to click the phone and then use the arrow keys and `Enter`. Once the device has focus the physical
+keys are forwarded to it natively and TalkBack announces each focused element.
 
 ### Optionally passing an Android public key
 

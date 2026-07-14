@@ -95,6 +95,12 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+/* The body is focused programmatically (tabindex="-1") so key events reach the page;
+   don't show a focus outline for it. */
+body:focus {
+    outline: none;
+}
+
 p {
     margin-top: 0;
     margin-bottom: 1rem;
@@ -110,30 +116,31 @@ h2,
     margin-bottom: 1rem;
 }
 
-/* Keyboard hint — an animated keycap cluster that shows the experience is keyboard-driven */
+/* Step-by-step instructions for navigating the device with the keyboard. */
 
-.kbd-hint {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    margin-top: 2rem;
+.kbd-steps {
+    margin: 1.5rem 0 0;
+    padding-left: 3.25rem;
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.9;
 }
 
-.kbd-cluster {
-    flex: 0 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 2.4rem);
-    grid-template-rows: repeat(2, 2.4rem);
-    gap: 0.4rem;
-    grid-template-areas:
-        ".    up    ."
-        "left down  right";
+.kbd-steps li {
+    padding-left: 0.35rem;
 }
 
-.kbd-up    { grid-area: up; }
-.kbd-left  { grid-area: left; }
-.kbd-down  { grid-area: down; }
-.kbd-right { grid-area: right; }
+.kbd-steps li::marker {
+    color: var(--bs-primary);
+    font-weight: 700;
+}
+
+.kbd-note {
+    margin-top: 0.75rem;
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+}
 
 .kbd {
     display: inline-flex;
@@ -141,43 +148,21 @@ h2,
     justify-content: center;
     font-family: var(--bs-font-sans-serif);
     font-weight: 600;
-    font-size: 1.1rem;
     color: var(--bs-primary);
     background: var(--bs-foreground);
     border: 1px solid #e2e6ee;
-    border-radius: 0.55rem;
-    box-shadow: 0 2px 0 #d3d9e4, 0 4px 8px rgba(4, 12, 31, 0.10);
+    border-radius: 0.4rem;
     user-select: none;
 }
 
-.kbd-cluster .kbd {
-    width: 2.4rem;
-    height: 2.4rem;
-}
-
+/* Inline keycaps used within the instruction text. */
 .kbd-inline {
-    padding: 0.05rem 0.5rem;
-    font-size: 0.8rem;
-    vertical-align: baseline;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    padding: 0 0.4rem;
+    font-size: 0.85rem;
+    vertical-align: middle;
     box-shadow: 0 1px 0 #d3d9e4, 0 2px 4px rgba(4, 12, 31, 0.08);
-}
-
-.kbd-hint-copy {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.kbd-hint-lead {
-    font-weight: 700;
-    color: var(--h2-color);
-    font-size: 1.05rem;
-}
-
-.kbd-hint-sub {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
 }
 
 #appActions {
