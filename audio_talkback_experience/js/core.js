@@ -39,16 +39,19 @@ async function initClient(sessionConfig) {
                 window.session = null;
             });
 
-            // Focus the embed iframe so keyboard input (e.g. the arrow keys) is routed to the
-            // device without the user having to click it first. Focusing at "session" alone is
-            // too early — the player isn't interactive yet — so we (re)focus once the first
-            // frame arrives and again once the device is fully ready.
-            session.on("firstFrameReceived", focusDevice);
-
             // TalkBack is always enabled at runtime, once the device is ready.
             await enableTalkBack(session);
-            focusDevice();
+
+            // Now that the device is ready, focus the page so key presses are captured and
+            // forwarded to the device (see observeKeyboard / focusPage). This must run *after*
+            // the device is ready — during startup the embed keeps reclaiming focus, so an
+            // earlier focus wouldn't stick.
+            focusPage();
         });
+
+        // Start the session automatically (rather than waiting for a "Tap to Play" click).
+        console.log('starting session…');
+        await window.client.startSession();
     } catch (error) {
         console.error(error);
     }
@@ -82,23 +85,51 @@ async function enableTalkBack(session) {
 }
 
 /**
- * Focuses the embed iframe so the browser routes keyboard events to the device. With the iframe
- * focused the device's arrow keys, Enter, etc. work immediately &mdash; handy for navigating with
- * TalkBack without first clicking on the device.
+ * Navigation keys we forward from the page to the device. `session.keypress` maps each of these
+ * to the matching device key, so a TalkBack user can move around with the keyboard.
  */
-function focusDevice() {
-    const iFrame = document.querySelector(appetizeIframeName);
-    if (!iFrame) {
-        return;
-    }
-    // Defer to the next frame so focus lands after the embed's own focus handling has run,
-    // otherwise it can be stolen back and the arrow keys won't reach the device.
-    requestAnimationFrame(() => iFrame.focus({ preventScroll: true }));
+const forwardedKeys = new Set([
+    'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Enter', 'Tab', 'Backspace'
+]);
+
+/**
+ * Forwards keyboard navigation to the device. The embed runs in a cross-origin iframe, so key
+ * events only reach the device once something inside that iframe has focus. Instead of relying on
+ * that, we listen for key presses on this page and relay them to the device via `session.keypress`.
+ *
+ * Note: `session.keypress` uses the action recorder under the hood, so it requires the session's
+ * `record` option to be enabled. It currently works because that defaults to `true`.
+ */
+function observeKeyboard() {
+    window.addEventListener('keydown', async (event) => {
+        if (!window.session || !forwardedKeys.has(event.key)) {
+            return;
+        }
+        // Prevent the arrow keys from scrolling the page / Tab from moving page focus.
+        event.preventDefault();
+        try {
+            await window.session.keypress(event.key, { shift: event.shiftKey });
+        } catch (error) {
+            console.warn(`Failed to forward key "${event.key}" to the device`, error);
+        }
+    });
 }
 
 /**
- * Applies the launch config to the embed. Audio output and TalkBack are always enabled.
- * The session is NOT auto-started — the user starts it by clicking "Tap to Play".
+ * Gives this page keyboard focus so the listener in observeKeyboard fires without the user
+ * clicking first. The body isn't focusable by default, so we make it focusable and focus it.
+ */
+function focusPage() {
+    if (!document.body) {
+        return;
+    }
+    document.body.setAttribute('tabindex', '-1');
+    document.body.focus({ preventScroll: true });
+}
+
+/**
+ * Applies the launch config to the embed and starts a session. Audio output and TalkBack are
+ * always enabled, and the session auto-starts (see initClient).
  * @returns {Promise<void>} A promise that resolves when the config is applied.
  */
 async function updateSession() {
@@ -114,7 +145,6 @@ async function updateSession() {
             scale: config.scale,
             toast: config.toast,
             orientation: 'portrait',
-            record: false,
             // (Android only) Audio playback is always enabled on the device.
             audio: true,
             // Device volume, a number from 0 to 1.
@@ -127,8 +157,7 @@ async function updateSession() {
         console.log(sessionConfig);
 
         if (!window.client) {
-            // Initialise the client with the config but don't start a session — the embed
-            // shows "Tap to Play" and the user starts the session when they're ready.
+            // Initialise the client and auto-start the session (see initClient).
             await initClient(sessionConfig);
         } else {
             // Update the config for the next session the user starts (ends any active session).
@@ -143,5 +172,6 @@ async function updateSession() {
 
 document.addEventListener("DOMContentLoaded", async function () {
     initAnimations();
+    observeKeyboard();
     await updateSession();
 });
